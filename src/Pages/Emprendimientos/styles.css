@@ -1,0 +1,97 @@
+.cont-emprendi-page {
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    margin-top: 80px;
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),url('../../Images/prop4_landing.webp');
+    background-size: cover; /* Hace que la imagen cubra todo el contenedor */    
+    background-position: center;  /* Centra la imagen */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+}
+
+/* .cont-home-propsDestacadas {
+    width: 1350px;
+    height: auto;
+    margin-bottom: 20px;
+    background-color: rgb(158, 159, 159);
+} */
+
+.cont-titulo-y-props-venta {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.cont-titulo-emp {
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.titulo-props-emprendimientos {
+    width: 80%;
+    color: white;
+    font-size: 25px;
+    font-weight: 500;
+    text-align: center;
+    margin-top: 20px;
+    padding: 10px;
+    border-bottom: 1px solid white;
+}
+
+.cont-emp-page{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+
+/* responsive */
+/* Tablets (pantallas hasta 1024px) */
+@media (max-width: 1300px) {
+    .cont-emp-page {
+        flex-direction: column;
+        align-items: center;
+        padding: 20px 10px;
+        margin-top: 60px;
+        height: auto;
+        /* importante: dejá que crezca según contenido */
+    }
+    .cont-titulo-y-props-venta {
+        width: 90%;
+    }
+
+    .titulo-props-emprendimientos {
+        font-size: 18px;
+        width: 100%;
+        padding: 8px;
+    }
+
+    .cont-titulo-emp {
+        width: 100%;
+    }
+
+    .cont-home-propsDestacadas {
+        width: 100%;
+        height: auto;
+        padding: 10px;
+        background-color: rgba(158, 159, 159, 0.9);
+    }
+}
+
+/* Celulares grandes (pantallas hasta 768px) */
+@media (max-width: 1000px) {
+
+    .titulo-props-emprendimientos {
+        font-size: 16px;
+        padding: 6px;
+        border-bottom: none;
+    }
+
+    .cont-home-propsDestacadas {
+        padding: 8px;
+    }
+}

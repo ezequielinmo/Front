@@ -1,0 +1,92 @@
+.like-button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    outline: none;
+}
+
+.icon-container {
+    position: relative;
+    display: inline-block;
+}
+
+.seleccionado {
+    color: blueviolet;
+    z-index: 2;
+    position: relative;
+}
+
+.explosion {
+    position: absolute;
+    top: 50px;
+    left: 10px;
+    width: 80px;
+    height: 80px;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.rayito {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: blueviolet;
+    border-radius: 50%;
+    opacity: 0;
+    animation: boom 0.5s ease-out forwards;
+}
+
+@keyframes boom {
+    0% {
+        transform: scale(1) translate(0, 0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1) translate(var(--x), var(--y));
+        opacity: 0;
+    }
+}
+
+.r1 {
+    --x: 0px;
+    --y: -40px;
+}
+
+.r2 {
+    --x: 28px;
+    --y: -28px;
+}
+
+.r3 {
+    --x: 40px;
+    --y: 0px;
+}
+
+.r4 {
+    --x: 28px;
+    --y: 28px;
+}
+
+.r5 {
+    --x: 0px;
+    --y: 40px;
+}
+
+.r6 {
+    --x: -28px;
+    --y: 28px;
+}
+
+.r7 {
+    --x: -40px;
+    --y: 0px;
+}
+
+.r8 {
+    --x: -28px;
+    --y: -28px;
+}

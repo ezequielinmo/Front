@@ -1,0 +1,25 @@
+.contModalVideo{
+    width: 90%;
+    height: 620px;
+    position: absolute;
+    top: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    background-color: black;
+    z-index: 1000;
+}
+
+.cont-btn-cierra-modalVideo{
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+/* respoonsive */
+@media screen and (max-width: 550px){
+    .contModalVideo{
+        width: 95%;
+        height: 500px;
+        z-index: 1000;
+    }
+}

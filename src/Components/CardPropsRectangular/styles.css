@@ -1,0 +1,100 @@
+.propRect {
+    color: black;
+    /* background-color: #f3f5bbc3; */
+}
+
+.cont-propTitulo {
+    width: 100%;
+    height: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* background-color: #f4f6b7f5; */
+}
+
+.cont-info-2-card-props,
+.cont-info-3-card-props,
+.cont-info-4-card-props {
+    width: 100%;
+    padding: 5px 10px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.cont-info-2-card-props {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 35px;
+}
+.cont-operacion{
+    position: absolute;
+    top: -20px;
+    left: 0px;
+}
+.card-propTitulo {
+    width: 100%;
+    margin: 0;
+    margin-left: 10px;
+}
+
+.cont-preciocard-prop {
+    width: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.precio-card {
+    color: black;
+}
+
+.cont-card-prop-deirecc {
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-prop-ubicacion {
+    margin-left: 10px;
+}
+
+.cont-info-3-card-props {
+    width: 100%;
+    height: 150px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+.p-card-props-descrip {
+    width: 95%;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    /* Cantidad de líneas permitidas */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+}
+.cont-info-4-card-props{
+    height: 50px;
+    background-color: #f4f6b7f5;
+}
+.p-info-prop-card {
+    margin: 0;
+    font-size: 12px;
+}
+
+.div-info-3 {
+    width: 25%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+

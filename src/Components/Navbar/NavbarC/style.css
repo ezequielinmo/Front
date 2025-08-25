@@ -1,0 +1,44 @@
+.cont-navbar-C{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.ul-navbarInf{
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.ul-navbarInf > li{
+    list-style: none;
+    font-size: 18px;    
+    color: black;
+}
+.navlink-navbarInf{
+    text-decoration: none;
+    color: black;
+}
+.cont-fav-contadorFav{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.contadorFav{
+    position: relative;
+    top: -15px;
+    font-size: 13px;
+}
+
+/* responsive */
+@media screen and (max-width: 950px) {
+    .ul-navbarInf > li{
+    font-size: 16px;
+}
+}
+@media screen and (max-width: 730px) {
+    .cont-navbar-C{
+        display: none;
+    }
+}

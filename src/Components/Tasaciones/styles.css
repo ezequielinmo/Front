@@ -1,0 +1,17 @@
+.cont-gral-tasaciones{
+    width: 100%;
+    min-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+}
+.titulo-tasaciones{
+    margin-top: 95px;
+}
+.item-tasacion {
+    display: flex;
+    flex-direction: column; /* apila h3 arriba y flecha abajo */
+    align-items: center;
+    margin: 20px 0;
+}

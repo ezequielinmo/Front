@@ -1,0 +1,17 @@
+.favorite-button {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  outline: none;
+  color: var(--color-negro-logo);
+  background-color: transparent;
+}
+
+.favorited{
+  color: red;
+}

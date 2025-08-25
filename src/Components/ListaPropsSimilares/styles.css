@@ -1,0 +1,133 @@
+.wrapper-similares {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  /* ESTO ES CLAVE */
+  align-items: center;
+  padding: 10px 0;
+  background-color: rgb(251, 249, 249);
+}
+
+.contListaPsimilares {
+  width: 90%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border-radius: 10px;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 10px;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+.contListaPsimilares::-webkit-scrollbar {
+  height: 8px;
+}
+
+.contListaPsimilares::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+}
+
+.carrusel-con-puntos {
+  display: flex;
+  width: 90%;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.cont-cardChicaImagenGrande {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+}
+
+.flecha {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  cursor: pointer;
+  padding: 8px 12px;
+  font-size: 18px;
+  z-index: 2;
+  border-radius: 4px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.flecha.izquierda {
+  left: 0;
+}
+
+.flecha.derecha {
+  right: 0;
+}
+
+/* para los puntitos tipo carrusel */
+.dots-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  gap: 8px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #bbb;
+  transition: background-color 0.3s ease;
+}
+
+.dot.active {
+  background-color: #333;
+}
+
+/* Móvil */
+@media (max-width: 600px) {
+  .contListaPsimilares {
+    gap: 0;
+    padding: 0;
+  }
+
+  .cont-card {
+    width: 100vw;
+  }
+
+  .flecha {
+    display: none;
+  }
+
+  .contListaPsimilares::-webkit-scrollbar {
+    display: none;
+  }
+
+  .carrusel-con-puntos {
+    flex-direction: row;
+  }
+
+  .dots-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    gap: 8px;
+  }
+
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #ccc;
+    transition: background-color 0.3s ease;
+  }
+
+  .dot.active {
+    background-color: #333;
+  }
+}

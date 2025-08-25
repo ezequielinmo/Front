@@ -1,0 +1,212 @@
+.cont-filtrosSelect {
+    width: 100%;
+    min-height: 140px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+}
+
+.subCont-filtrosSelect {
+    width: 100%;
+    height: 140px;
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    padding: 0 10px;
+}
+
+.cont-filtro-tipoOperacion {
+    height: 40%;
+}
+
+.focoCompra {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 150px;
+    height: 100%;
+    font-size: 18px;
+    border: none;
+    color: black;
+    background-color: rgb(209, 208, 208);
+}
+
+/* div selects */
+.cont-selects {
+    width: 100%;
+    height: 60%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 5px;
+    background-color: rgb(209, 208, 208);
+}
+
+.cont-op-tipoP,
+.cont-amb-destacadas {
+    width: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.select-tipoProp {
+    width: 200px;
+    height: 50px;
+    text-align: center;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    margin-left: 10px;
+    color: black; /* color palabra selects */
+    background-color: white;
+}
+
+/* precios */
+.cont-filtro-precioMaxMin {
+    position: relative;
+    width: 400px;
+    height: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid white;
+    padding: 20px 10px 10px;
+    border-radius: 5px;
+    background-color: white;
+}
+
+.cont-filtro-precioMaxMin label {
+    position: absolute;
+    top: -10px;
+    left: 10px;
+    background: white;
+    /* Asegura que el texto no se mezcle con el fondo */
+    padding: 0 5px;
+    font-size: 14px;
+    color: black;
+}
+
+.input-precioMin {
+    width: 130px;
+    font-size: 14px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid rgb(152, 152, 152);
+    background-color: rgb(223, 223, 224);
+}
+
+.btn-aplicar-precio {
+    background-color: var(--fondo-navbar);
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-aplicar-precio:hover {
+    background-color: #0056b3;
+}
+
+/* responsive */
+@media screen and (max-width: 1200px) {
+    .cont-filtrosSelect {
+        width: 90%;
+        margin-bottom: 20px;
+    }
+
+    .cont-selects {
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: start;
+        align-items: center;
+    }
+
+    .select-tipoProp {
+        margin: 10px;
+    }
+}
+@media screen and (max-width: 860px) {
+    .cont-filtrosSelect {
+        width: 95%;
+        height: auto;
+        margin-top: 30px;
+        margin-bottom: 20px;
+    }
+
+    .subCont-filtrosSelect {
+        width: 100%;
+        height: 140px;
+        flex-direction: column;
+        display: flex;
+        justify-content: center;
+        align-items: start;
+        padding: 0 10px;
+    }
+
+    .cont-filtro-precioMaxMin {
+        margin-left: 10px;
+        margin-bottom: 10px;
+    }
+    .select-tipoProp {
+        width: 200px;
+        height: 40px;
+        text-align: center;
+        font-size: 15px;
+    }
+
+    .cont-destacadas {
+        width: 175px;
+        height: 38px;
+        border-radius: 5px;
+        margin-left: 10px;
+    }
+}
+@media screen and (max-width: 834px) {
+    .cont-filtrosSelect {
+        width: 500px;
+    }
+}
+@media screen and (max-width: 500px) {
+    .cont-filtrosSelect {
+        width: 95%;
+        height: auto;
+        margin-top: 120px;
+        margin-bottom: 100px;
+    }
+    .cont-op-tipoP,
+    .cont-amb-destacadas,
+    .cont-filtro-precioMaxMin{
+        width: 100%;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .cont-destacadas{
+        width: 180px;
+        margin-right: 10px;
+    }
+    .p-destacadas{
+        font-size: 15px;
+    }
+    .cont-primario-precio{
+        width: 100%;
+        height: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 10px;
+        margin-right: 10px;
+        margin-bottom: 10px;
+    }
+    .cont-filtro-precioMaxMin{
+        width: 180px;
+        height: auto;
+    }
+}

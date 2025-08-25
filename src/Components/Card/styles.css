@@ -1,0 +1,218 @@
+.contCardHome {
+    position: relative;
+    width: 350px;
+    height: 520px;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    font-family: roboto;
+    text-align: center;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2); /* sombra derecha e inferior */
+}
+
+/* manejo espacio img */
+.card-image {
+    width: 100%;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    /* Asegura que la imagen no se desborde del contenedor */
+}
+
+.card-img {
+    width: 100%;
+    /* Se ajusta al 100% del ancho del contenedor */
+    height: auto;
+    /* Mantiene la proporción de la imagen */
+    transition: transform 0.3s ease;
+}
+.cont-operacion-card {
+    width: 100%;
+    height: 40px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.titulo-card{
+    margin-left: 10px;
+}
+/* estilos msj detalle */
+.detail {
+    position: absolute;
+    top: 0px;
+    left: 50;
+    width: 100%;
+    height: 300px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.detail.show {
+    display: flex;
+    opacity: 1;
+}
+
+.palabra-abre-detalle {
+    font-size: 25px;
+    font-weight: 200;
+}
+
+/* espacio titulo */
+
+.titulo-card {
+    font-size: 28px;
+    font-weight: 200;
+    color: #fff;
+}
+
+.navLink-car {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* manejo de info1 */
+/* de acá le doy color a todas las palabras contenidas */
+.card-info1 {
+    width: 95%;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* clave para separar arriba y abajo */
+    align-items: start;
+    color: var(--color-fuente);
+}
+
+.cont-titulo-publicacion-card {
+    width: 100%;
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+}
+.cont-titulo-card{
+    width: 100%;
+    height: 45px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+/* titulo card */
+.tituloPublicacion {
+    font-size: 20px;
+    font-weight: 600;
+    text-align: start;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.cont-direcc-icono-card {
+    width: 100%;
+    height: 35px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+.direcc-card {
+    font-size: 17px;
+    font-weight: 100;
+    color: rgb(88, 88, 88);
+}
+
+.cont-precio-fav {
+    width: 100%;
+    height: 45px;
+    display: flex;
+}
+
+.cont-precio {
+    width: 80%;
+    height: 100%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+.precio-card {
+    font-size: 22px;
+    font-weight: 500;
+    color: black;
+}
+
+.cont-fav {
+    width: 20%;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+/* manejo de info2 */
+.card-info2 {
+    width: 95%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: 1px solid var(--color-fuente);
+}
+
+.div-info2 {
+    width: 100%;
+    margin-top: 5px;
+}
+
+.info2,
+.icono-info-2 {
+    margin: 3px;
+    font-size: 15px;
+    color: var(--color-fuente);
+}
+
+.icono-info-2 {
+    width: 20px;
+    height: 20px;
+}
+
+/* responsive */
+@media screen and (max-width: 600px) {
+    .contCardHome {
+        width: 100%;
+    }
+    .card-title {
+        height: auto;
+    }
+
+    .precio {
+        margin-left: 10px;
+        font-size: 23px;
+        font-weight: 500;
+    }
+
+    .cont-fav {
+        display: flex;
+        justify-content: end;
+        align-items: center;
+    }
+
+    .div-info2 {
+        margin-top: 8px;
+        margin-bottom: 3px;
+    }
+}

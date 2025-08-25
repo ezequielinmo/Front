@@ -1,0 +1,51 @@
+.cont-principal-cardP {
+    position: relative;
+    width: 240px;
+    height: 250px;
+    padding: 16px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.cont-principal-cardP.hovered {
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    transform: scale(1.02);
+    cursor: pointer;
+}
+
+.cont-img-persona {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 12px;
+}
+
+.img-persona-card {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+}
+
+.cont-inf-persona {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.nombre-persona {
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin: 0;
+}
+
+.texto-persona {
+    font-size: 0.95rem;
+    color: #ddd;
+    margin: 0;
+}

@@ -1,0 +1,48 @@
+.cont-home{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.cont-home-propsDestacadas{
+    width: 80%;
+    min-height: 100vh;
+}
+.cont-home-Emprendimientos{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(229, 229, 227);
+}
+.cont-titulo-emp{
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+.cont-h1-listaEmp{
+    width: 50%;
+    display: flex;
+    justify-content: star;
+    align-items: center;
+}
+.cont-btn-verTodas-listaEmp{
+    width: 50%;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+.cont-lista-emp-home{
+    display: flex;
+    justify-content: center;
+}
+
+/* responsive */
+@media screen and (max-width: 600px) {
+    .cont-home{
+        display: none;
+    }
+}

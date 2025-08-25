@@ -1,0 +1,32 @@
+/* estilos flecha que señala hacia abajo compuesta por dos palitos blancos con movimiento hacia arriba y abjo */
+.cont-flecha-home-tasaciones {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.flecha-home-tasaciones {
+    display: flex;
+    align-items: center;
+    animation: bounce 2s infinite;
+}
+.linea-tasaciones {
+    width: 2px;
+    height: 20px;
+    margin-left: 12px;
+    background-color: black;
+}
+.linea1-tasaciones {
+    transform: rotate(-50deg);
+}
+.linea2-tasaciones {
+    transform: rotate(50deg);
+}
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}

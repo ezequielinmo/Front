@@ -1,0 +1,30 @@
+:root {
+    --fondo-page: white;
+    --fondo-navbar: #f3f78e; /* mismo q el del logo */
+    --color-fuente: black;
+    --gris-fondo: white;
+}
+
+.App {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* ocupa toda la altura de la pantalla */
+}
+
+.cont-main {
+    flex: 1;
+}
+
+.page {
+    width: 100%;
+    min-height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    background-color: var(--fondo-page);
+}
+
+/* quitar barra de scroll horizontal */ /* NO SE xq aparece */
+html {
+    overflow-x: hidden;
+} 

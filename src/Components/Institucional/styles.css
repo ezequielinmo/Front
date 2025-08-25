@@ -1,0 +1,31 @@
+.cont-principal-institucional {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('../../Images/fondo-trama.svg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+.cont-institucional {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+}
+.titulo-inst{
+    margin-top: 100px;
+    color: var(--fondo-navbar);
+}
+.img-institucional {
+    height: 30rem;
+}
+.texto-institucional{
+    color: white;
+}

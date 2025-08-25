@@ -1,0 +1,44 @@
+.cont-principal-cardP {
+    width: 250px;
+    /* o 100% si es responsive */
+    height: 300px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    background-color: white;
+}
+
+.cont-img-persona {
+    width: 100%;
+    height: 200px;
+    /* altura fija para mantener proporción */
+}
+
+.img-persona-card {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /*evita deformación y llena el espacio */
+    display: block;
+}
+
+
+.cont-inf-persona {
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.nombre-persona {
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin: 0;
+}
+
+.texto-persona {
+    font-size: 0.95rem;
+    color: #666;
+    margin: 0;
+}

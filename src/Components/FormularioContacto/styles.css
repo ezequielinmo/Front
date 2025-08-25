@@ -1,0 +1,136 @@
+.div-cont-form {
+    width: 400px;
+    height: 548px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    margin-top: 24px;
+    color: black;
+    background-color: #fff;
+}
+.form-logo{
+    width: 90%;
+    height: 50px;
+    margin-top: 3px;
+}
+.form__group {
+    position: relative;
+    padding: 20px 0 0;
+    width: 90%;
+    margin-top: 20px;
+}
+.form__field {
+    font-family: inherit;
+    width: 100%;
+    border: none;
+    border-bottom: 2px solid #6b6b6b;
+    outline: 0;
+    font-size: 17px;
+    color: black;
+    padding: 7px 0;
+    background: transparent;
+    transition: border-color 0.2s;
+}
+.form__field::placeholder {
+    color: transparent;
+}
+.form__field:placeholder-shown~.form__label {
+    font-size: 17px;
+    cursor: text;
+    top: 20px;
+}
+.form__label {
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s;
+    font-size: 17px;
+    color: #0d0d0d;
+    pointer-events: none;
+}
+.form__field:focus {
+    padding-bottom: 6px;
+    font-weight: 700;
+    border-width: 3px;
+    border-image: linear-gradient(to right, #EEC68E, #212021);
+    border-image-slice: 1;
+}
+.form__field:focus~.form__label {
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s;
+    font-size: 17px;
+    color: #070707;
+    font-weight: 700;
+}
+/* reset input */
+.form__field:required,
+.form__field:invalid {
+    box-shadow: none;
+}
+.textarea-form-contacto{
+    overflow: hidden; /* Evita el scroll */
+    resize: none;     /* Evita que el usuario cambie el tamaño manualmente */
+    min-height: 50px; /* Altura mínima para que no colapse el área de texto */
+    width: 100%; 
+    font-size: 18px;
+}
+.btn-enviar-contacto{
+    width: 90%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0 10px 0;
+}
+.cont-btn-form{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.btn-form,
+.btn-form-whatsApp {
+    width: 49%;
+    height: auto;
+    font-size: 20px;
+    padding: 5px;
+    border-radius: 10px;
+    color: var(--primary-color);
+    background-color: var(--color-negro-logo);
+}
+.cont-btn-form-whatsApp{
+    width: 100%;
+    display: flex;
+    margin-top: 5px;
+}
+.btn-form-whatsApp{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    font-size: 20px;
+}
+
+/* responsive */
+@media screen and (max-width: 1100px) {
+    .div-cont-form {
+    width: 100%;
+    height: 500px;
+    border-radius: 20px;
+    margin-top: 24px;
+}
+}
+@media screen and (max-width: 600px) {
+    .cont-formulario {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: auto;
+    }
+}

@@ -1,0 +1,141 @@
+.card-horizontal {
+    width: 100%;
+    height: 250px;
+    display: flex;
+    flex-direction: row;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 1rem 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+    background-color: #f3f2f2;
+}
+
+.card-horizontal:hover {
+    transform: scale(1.01);
+}
+
+.card-horizontal-img-container {
+    flex: 1;
+    max-width: 400px;
+    height: 100%; /* importante */
+    overflow: hidden;
+}
+
+.img-wrapper {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+
+.card-horizontal-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center; /* centrado del recorte */
+    display: block;
+}
+
+
+.detail-hover {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.detail-hover p {
+    text-align: center;
+    color: white;
+    font-size: 40px;
+}
+
+.card-horizontal-content {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
+
+.cont-info-1-card-horizontal,
+.cont-info-2-card-horizontal,
+.cont-info-3-card-horizontal {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+}
+
+.card-horizontal-title {
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+.card-horizontal-subtitulo {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin: 0;
+    padding: 10px;
+}
+
+.card-horizontal-ubicacion {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0 10px;
+}
+
+.card-horizontal-ubicacion img {
+    width: 24px;
+    height: 24px;
+    margin: 0;
+}
+
+.card-horizontal-locacion {
+    font-weight: bold;
+    color: rgba(171, 132, 94, 1);
+    margin-bottom: 1rem;
+    padding: 0 10px;
+}
+
+.icono-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 0.9rem;
+}
+.cont-info-3-card-horizontal {
+    height: 250px;
+    background-color: #efecec;
+}
+.p-card-horizontal-descrip-emp {
+    width: 95%;
+    margin-left: 10px;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    /* Cantidad de líneas permitidas */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+@media (max-width: 768px) {
+    .card-horizontal {
+        flex-direction: column;
+    }
+
+    .card-horizontal-img-container {
+        max-width: 100%;
+    }
+
+    .card-horizontal-icons {
+        justify-content: space-around;
+    }
+}

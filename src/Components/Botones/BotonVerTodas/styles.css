@@ -1,0 +1,13 @@
+.link-ver-todas{
+    text-decoration: none;
+    margin: 0;
+}
+.btn-ver-todas{
+    width: 90px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+}

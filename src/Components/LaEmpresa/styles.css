@@ -1,0 +1,101 @@
+.cont-principal-laEmp{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+}
+.cont-secundario-laEmp{
+    position: relative;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 70px;
+}
+/* La capa que oscurece el video */
+.overlay-video-laEmp {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4); /* Cambiá el 0.4 según qué tan oscuro lo querés */
+    z-index: 1;
+}
+.cont-texto-LaEmp{
+    position: absolute;
+    top: 70px;
+    left: 0;
+    z-index: 2;
+}
+.texto-h1-LaEmp,
+.texto-h2-LaEmp,
+.texto-h3-LaEmp{
+    margin: 0;
+    color: white;
+    margin-bottom: 5px;
+}
+.texto-h1-LaEmp{
+    font-size: 45px;
+}
+.texto-h2-LaEmp{
+    font-size: 35px;
+}
+.texto-h3-LaEmp{
+    font-size: 25px;
+}
+/* --- Título con lineas--- */
+.cont-titulos {
+    width: 100%;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.titulo-props-destacadas {
+    font-size: 1.8rem;
+    text-align: center;
+    padding: 0 0.5rem;
+    margin: 0;
+}
+
+.linea-destacadas {
+    width: 400px;
+    height: 1px;
+    background-color: rgb(149, 148, 148);
+}
+
+.cont-LaEmp-Ezequiel{
+    margin-bottom: 50px;
+}
+.cont-LaEmp-Equipo{
+    margin-bottom: 30px;
+}
+/* responsive */
+@media screen and (max-width: 1000px) {
+    .titulo-props-destacadas {
+        font-size: 1rem;
+        text-align: center;
+        padding: 0 0.5rem;
+        margin: 0;
+    }
+
+    .linea-destacadas {
+        width: 300px;
+    }
+}
+
+@media screen and (max-width: 760px) {
+    .linea-destacadas {
+        width: 150px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .linea-destacadas {
+        width: 60px;
+    }
+}
