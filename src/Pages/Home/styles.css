@@ -41,8 +41,9 @@
 }
 
 /* responsive */
-@media screen and (max-width: 600px) {
-    .cont-home{
-        display: none;
-    }
+@media screen and (max-width: 800px) {
+    .cont-home-propsDestacadas{
+    width: 95%;
+    height: auto;
+}
 }

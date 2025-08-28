@@ -51,7 +51,7 @@ function App() {
               <Route path='*' element={<Home />} />
             </Routes>
             {/* btn whatsapp */}
-            {/* <WhatsAppButton /> */}
+            <WhatsAppButton />
           </main>
 
           <footer>

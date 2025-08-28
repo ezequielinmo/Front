@@ -20,7 +20,7 @@ function NavbarB() {
             <div className='cont-navbar-B-items'>
                 <EmailIcon sx={{ fontSize: 15, color: 'black', marginRight: '5px' }} />
                 <a href="mailto: info@ortizlizmar" className='a-email-navSup'>
-                    <p className='p-mail'>info@ezequieljosepropiedades.com</p>
+                    <p className='p-mail'>ezequieljosepropiedades@gmail.com</p>
                 </a>
             </div>
         </div>

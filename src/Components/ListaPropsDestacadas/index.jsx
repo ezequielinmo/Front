@@ -19,10 +19,10 @@ function ListaPropsDestacadas({ allPropsDestacadas, vista }) {
 
     return (
         <div className="cont-lista-props-destacadas">
-            <div className="cont-titulos">
-                <div className="linea-destacadas "></div>
-                <h2 className="titulo-props-destacadas" data-translate>Propiedades destacadas</h2>
-                <div className="linea-destacadas "></div>
+            <div className="cont-titulos-destacadas">
+                <div className="linea-destacadas"></div>
+                <h2 className="titulo-props-destacadas">Propiedades destacadas</h2>
+                <div className="linea-destacadas"></div>
             </div>
             {/* btn ver todas */}
             <div className='cont-btn-verTodas'>

@@ -76,7 +76,7 @@ function Home() {
                 </div>
 
                 {/* Emprendimientos */}
-                <div className='cont-home-Emprendimientos'>
+                {/* <div className='cont-home-Emprendimientos'>
                     <div className='cont-titulo-emp'>
                         <div className='cont-h1-listaEmp'>
                             <h1>Nuestros Emprendimientos</h1>
@@ -88,7 +88,7 @@ function Home() {
                     <div className='cont-lista-emp-home'>
                         <ListaEmprendimientos allEmp={allEmp} />
                     </div>
-                </div>
+                </div> */}
 
                 {/* filtros */}
                 <div className='cont-filtros-props'>

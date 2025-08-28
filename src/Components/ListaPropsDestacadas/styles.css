@@ -3,18 +3,23 @@
     flex-direction: column;
     align-items: center;
     width: 100%;
+    box-sizing: border-box;
 }
-.cont-titulos {
+
+.cont-titulos-destacadas {
     width: 100%;
-    height: 80px;
+    height: auto; /* no fijes altura, deja que el texto se adapte */
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-wrap: wrap; /* permite que el título y líneas se acomoden en móviles */
     gap: 10px;
+    margin-top: 20px;
+    margin-bottom: 10px;
 }
 
 .titulo-props-destacadas {
-    font-size: 1.8rem;
+    font-size: clamp(1.2rem, 2.5vw, 1.8rem); /* escala automática según pantalla */
     text-align: center;
     padding: 0 0.5rem;
     background-color: white;
@@ -22,18 +27,19 @@
 }
 
 .linea-destacadas {
-    width: 300px;
+    flex: 1; /* que se estire dinámicamente */
     height: 1px;
     background-color: rgb(149, 148, 148);
+    min-width: 50px; /* evita que desaparezca en pantallas chicas */
 }
-.cont-btn-verTodas{
-    width: 90%;
-    height: 20px;
+
+.cont-btn-verTodas {
+    width: 100%;
     display: flex;
-    justify-content: end;
-    align-items: center;
-    margin: 0;
+    justify-content: flex-end;
+    margin: 0.5rem 0;
 }
+
 .carrusel-botones {
     display: flex;
     align-items: center;
@@ -47,7 +53,7 @@
     font-size: 2rem;
     padding: 0.5rem 1rem;
     cursor: pointer;
-    z-index: 1;
+    z-index: 2;
     transition: background 0.2s;
 }
 
@@ -57,15 +63,22 @@
 
 .carrusel-container {
     display: flex;
-    justify-content: center;
     align-items: center;
     overflow-x: auto;
     scroll-behavior: smooth;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
-    gap: 1.5rem;
+    gap: 1rem;
     padding: 1rem 0;
     width: 100%;
+}
+
+.carrusel-item {
+    flex: 0 0 auto;
+    min-width: 300px;
+    max-width: 90%; /* limita en móviles */
+    scroll-snap-align: start;
+    transition: transform 0.3s ease;
 }
 
 .carrusel-container::-webkit-scrollbar {
@@ -77,28 +90,19 @@
     border-radius: 3px;
 }
 
-.carrusel-item {
-    flex: 0 0 auto;
-    min-width: 280px;
-    scroll-snap-align: start;
-    transition: transform 0.3s ease;
-}
-
-@media (max-width: 768px) {
+/* Móviles */
+@media screen and (max-width: 800px) {
+    
     .titulo-props-destacadas {
-        font-size: 1.4rem;
-    }
-
-    .linea {
-        max-width: 100px;
+        font-size: 1rem; /* más chico en celus */
     }
 
     .carrusel-item {
-        min-width: 80%;
+        min-width: 85%; /* ocupa casi todo el ancho */
     }
 
     .boton-carrusel {
-        font-size: 1.5rem;
-        padding: 0.3rem 0.6rem;
-    }
+    font-size: 1rem;
+    padding: 0.5rem 0.5rem;
+}
 }
