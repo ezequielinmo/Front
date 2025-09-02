@@ -18,29 +18,31 @@ function ListaPropsDestacadas({ allPropsDestacadas, vista }) {
     };
 
     return (
-        <div className="cont-lista-props-destacadas">
-            <div className="cont-titulos-destacadas">
-                <div className="linea-destacadas"></div>
-                <h2 className="titulo-props-destacadas">Propiedades destacadas</h2>
-                <div className="linea-destacadas"></div>
-            </div>
-            {/* btn ver todas */}
-            <div className='cont-btn-verTodas'>
-                <BotonVerTodas />
-            </div>
-            {/* carrusel */}
-            <div className="carrusel-botones">
-                <button className="boton-carrusel" onClick={() => scroll('left')}>&#10094;</button>
-
-                <div className="carrusel-container" ref={scrollRef}>
-                    {allPropsDestacadas?.map((prop) => (
-                        <div className="carrusel-item" key={prop.id}>
-                            <Card {...prop} vista={vista} />
-                        </div>
-                    ))}
+        <div className='cont-home-propsDestacadas'>
+            <div className="cont-lista-props-destacadas">
+                <div className="cont-titulos-destacadas">
+                    <div className="linea-destacadas"></div>
+                    <h2 className="titulo-props-destacadas">Propiedades destacadas</h2>
+                    <div className="linea-destacadas"></div>
                 </div>
+                {/* btn ver todas */}
+                <div className='cont-btn-verTodas'>
+                    <BotonVerTodas />
+                </div>
+                {/* carrusel */}
+                <div className="carrusel-botones">
+                    <button className="boton-carrusel" onClick={() => scroll('left')}>&#10094;</button>
 
-                <button className="boton-carrusel" onClick={() => scroll('right')}>&#10095;</button>
+                    <div className="carrusel-container" ref={scrollRef}>
+                        {allPropsDestacadas?.map((prop) => (
+                            <div className="carrusel-item" key={prop.id}>
+                                <Card {...prop} vista={vista} />
+                            </div>
+                        ))}
+                    </div>
+
+                    <button className="boton-carrusel" onClick={() => scroll('right')}>&#10095;</button>
+                </div>
             </div>
         </div>
     );

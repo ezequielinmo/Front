@@ -5,11 +5,6 @@
     align-items: center;
 }
 
-.cont-home-propsDestacadas {
-    width: 80%;
-    min-height: 100vh;
-}
-
 .cont-home-Emprendimientos {
     width: 100%;
     height: auto;
@@ -41,8 +36,5 @@
 
 /* responsive */
 @media screen and (max-width: 800px) {
-    .cont-home-propsDestacadas {
-        width: 95%;
-        height: auto;
-    }
+    
 }

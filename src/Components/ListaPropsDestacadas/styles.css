@@ -1,25 +1,33 @@
+.cont-home-propsDestacadas {
+    width: 80%;
+    min-height: 100vh;
+}
+
 .cont-lista-props-destacadas {
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%;
     box-sizing: border-box;
 }
 
 .cont-titulos-destacadas {
     width: 100%;
-    height: auto; /* no fijes altura, deja que el texto se adapte */
+    height: auto;
+    /* no fijes altura, deja que el texto se adapte */
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-wrap: wrap; /* permite que el título y líneas se acomoden en móviles */
+    flex-wrap: wrap;
+    /* permite que el título y líneas se acomoden en móviles */
     gap: 10px;
     margin-top: 20px;
     margin-bottom: 10px;
 }
 
 .titulo-props-destacadas {
-    font-size: clamp(1.2rem, 2.5vw, 1.8rem); /* escala automática según pantalla */
+    font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+    /* escala automática según pantalla */
     text-align: center;
     padding: 0 0.5rem;
     background-color: white;
@@ -27,10 +35,12 @@
 }
 
 .linea-destacadas {
-    flex: 1; /* que se estire dinámicamente */
+    flex: 1;
+    /* que se estire dinámicamente */
     height: 1px;
     background-color: rgb(149, 148, 148);
-    min-width: 50px; /* evita que desaparezca en pantallas chicas */
+    min-width: 50px;
+    /* evita que desaparezca en pantallas chicas */
 }
 
 .cont-btn-verTodas {
@@ -76,7 +86,8 @@
 .carrusel-item {
     flex: 0 0 auto;
     min-width: 300px;
-    max-width: 90%; /* limita en móviles */
+    max-width: 90%;
+    /* limita en móviles */
     scroll-snap-align: start;
     transition: transform 0.3s ease;
 }
@@ -91,18 +102,22 @@
 }
 
 /* Móviles */
-@media screen and (max-width: 800px) {
-    
-    .titulo-props-destacadas {
-        font-size: 1rem; /* más chico en celus */
+@media screen and (max-width: 500px) {
+    .cont-home-propsDestacadas {
+        width: 95%;
+        min-height: 100vh;
     }
 
-    .carrusel-item {
-        min-width: 85%; /* ocupa casi todo el ancho */
+    .cont-lista-props-destacadas {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        box-sizing: border-box;
     }
 
     .boton-carrusel {
-    font-size: 1rem;
-    padding: 0.5rem 0.5rem;
-}
+        font-size: 1rem;
+        padding: 0.5rem 0.5rem;
+    }
 }

@@ -2,24 +2,14 @@ import React from 'react';
 import Card from '../Card';
 import NoHayProps from '../NoHayProps';
 import Paginacion from '../../Components/Paginacion';
-import MapaPropiedades from '../../Components/MapProps';
 import './styles.css';
 
-function ListaPropiedades({ 
-    allProps, vista, onClickListaProps, onClickMapaProps,currentPage,
-    setCurrentPage, totalPropiedades, propiedadesPorPagina, listaProps, vistaMapa, allPropsMap 
+function ListaPropiedades({
+    allProps, vista,  currentPage, setCurrentPage, 
+    totalPropiedades, propiedadesPorPagina,
 }) {
     return (
         <div className='contGralListaP'>
-            <div className='cont-titulo-listaProps'>
-                <div className='cont-h1-listaProps'>
-                    <h1>Nuestras Propiedades</h1>
-                </div>
-                <div className='cont-btns-listaProps'>
-                    <button onClick={onClickListaProps}>Lista</button>
-                    <button onClick={onClickMapaProps}>Mapa</button>
-                </div>
-            </div>
             <div className='contListaP'>
                 {
                     allProps && allProps.length > 0 ? (
@@ -99,13 +89,6 @@ function ListaPropiedades({
                     />
                 )
             }
-
-            {
-                        listaProps === false && vistaMapa === true &&
-                        <>
-                            <MapaPropiedades propiedades={allPropsMap} />
-                        </>
-                    }
         </div>
     );
 }

@@ -85,9 +85,7 @@ function Home() {
                 />
 
                 {/* Destacadas */}
-                <div className='cont-home-propsDestacadas'>
-                    <ListaPropsDestacadas allPropsDestacadas={allPropsDestacadas} vista={"ambas"} id='listaProps' />
-                </div>
+                <ListaPropsDestacadas allPropsDestacadas={allPropsDestacadas} vista={"ambas"} id='listaProps' />
 
                 {/* Emprendimientos */}
                 <div className='cont-home-Emprendimientos'>
@@ -106,14 +104,21 @@ function Home() {
 
                 {/* Lista props */}
                 <div className='cont-home-propsDestacadas'>
+                    <div className='cont-titulo-listaProps'>
+                        <div className='cont-h1-listaProps'>
+                            <h1>Nuestras Propiedades</h1>
+                        </div>
+                        <div className='cont-btns-listaProps'>
+                            <button onClick={onClickListaProps}>Lista</button>
+                            <button onClick={onClickMapaProps}>Mapa</button>
+                        </div>
+                    </div>
                     {
                         listaProps === true && vistaMapa === false &&
                         <>
                             <ListaPropiedades
                                 allProps={allProps}
                                 vista={"ambas"}
-                                onClickListaProps={onClickListaProps}
-                                onClickMapaProps={onClickMapaProps}
                                 currentPage={currentPage}
                                 onPageChange={setCurrentPage}
                                 totalPropiedades={totalPropiedades}
@@ -125,11 +130,7 @@ function Home() {
                     {
                         listaProps === false && vistaMapa === true &&
                         <>
-                            <MapaPropiedades 
-                                propiedades={allPropsMap} 
-                                onClickListaProps={onClickListaProps}
-                                onClickMapaProps={onClickMapaProps}
-                            />
+                            <MapaPropiedades propiedades={allPropsMap} />
                         </>
                     }
 

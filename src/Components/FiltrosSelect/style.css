@@ -65,7 +65,8 @@
     font-size: 18px;
     border: none;
     border-radius: 5px;
-    color: black; /* color palabra selects */
+    color: black;
+    /* color palabra selects */
     background-color: white;
 }
 
@@ -118,7 +119,7 @@
 }
 
 /* muestra barrio seleccionado */
-.barrios-seleccionados{
+.barrios-seleccionados {
     width: 100%;
     height: 25%;
     display: flex;
@@ -127,7 +128,8 @@
     margin-left: 10px;
     gap: 3px;
 }
-.barrio-item{
+
+.barrio-item {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -136,107 +138,119 @@
     padding: 3px;
     background-color: white;
 }
-.btn-eliminar-barrio{
+
+.btn-eliminar-barrio {
     border: none;
     border-radius: 5px;
     font-size: 10px;
     background-color: white;
 }
+
 /* responsive */
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1300px) {
     .cont-filtrosSelect {
         width: 90%;
-        margin-bottom: 20px;
-    }
-
-    .cont-selects {
-        width: 100%;
         height: auto;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: start;
-        align-items: center;
-    }
-
-    .select-tipoProp {
-        margin: 10px;
-    }
-}
-@media screen and (max-width: 860px) {
-    .cont-filtrosSelect {
-        width: 95%;
-        height: auto;
-        margin-top: 30px;
         margin-bottom: 20px;
     }
 
     .subCont-filtrosSelect {
         width: 100%;
-        height: 140px;
+        height: 75%;
         flex-direction: column;
         display: flex;
         justify-content: center;
         align-items: start;
-        padding: 0 10px;
     }
 
-    .cont-filtro-precioMaxMin {
-        margin-left: 10px;
-        margin-bottom: 10px;
+    .cont-filtro-titulo {
+        width: 100%;
+        height: 30px;
+        display: flex;
+        justify-content: start;
+        align-items: center;
     }
+
+    .cont-selects-filtros {
+        width: 100%;
+        height: 80%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .cont-op-tipoP,
+    .cont-tipo-prop,
+    .cont-amb-barrio,
+    .cont-amb {
+        padding: 5px 0;
+    }
+
     .select-tipoProp {
-        width: 200px;
         height: 40px;
-        text-align: center;
         font-size: 15px;
     }
 
-    .cont-destacadas {
-        width: 175px;
-        height: 38px;
-        border-radius: 5px;
-        margin-left: 10px;
+    /* precios */
+    .cont-primario-precio {
+        margin-top: 10px;
+        margin-bottom: 10px;
     }
 }
-@media screen and (max-width: 834px) {
-    .cont-filtrosSelect {
-        width: 500px;
-    }
-}
+
 @media screen and (max-width: 500px) {
     .cont-filtrosSelect {
         width: 95%;
         height: auto;
-        margin-top: 120px;
-        margin-bottom: 100px;
+        margin-top: 50px;
+        margin-bottom: 50px;
     }
-    .cont-op-tipoP,
-    .cont-amb-destacadas,
-    .cont-filtro-precioMaxMin{
-        width: 100%;
+
+    .subCont-filtrosSelect {
+        display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
     }
-    .cont-destacadas{
-        width: 180px;
-        margin-right: 10px;
+
+    .cont-op-tipoP,
+    .cont-tipo-prop,
+    .cont-amb-barrio,
+    .cont-amb {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
-    .p-destacadas{
-        font-size: 15px;
-    }
-    .cont-primario-precio{
+
+    .cont-primario-precio {
         width: 100%;
         height: auto;
         display: flex;
         justify-content: center;
         align-items: center;
         margin-top: 10px;
-        margin-right: 10px;
         margin-bottom: 10px;
     }
-    .cont-filtro-precioMaxMin{
-        width: 180px;
+
+    .cont-filtro-precioMaxMin {
+        width: 98%;
         height: auto;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .cont-filtro-precioMaxMin {
+        width: 98%;
+        height: auto;
+        flex-direction: column;
+    }
+
+    .barrios-seleccionados {
+        width: 100%;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
     }
 }
