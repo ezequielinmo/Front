@@ -1,8 +1,39 @@
 .cont-lista-emprendimientos {
-    width: 80%;
-    height: auto;
+    width: 80%; 
     display: flex;
-    flex-direction: column;
     justify-content: center;
+    flex-wrap: wrap; /* importante si usás cards */
+    gap: 20px; /* separación entre cards */
+}
+.cont-h1-listaEmp {
+    width: 50%;
+    display: flex;
+    justify-content: star;
     align-items: center;
+}
+
+.cont-btn-verTodas-listaEmp {
+    width: 50%;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+@media screen and (max-width: 1000px) {
+    .cont-h1-listaEmp {
+    width: 70%;
+}
+    .h1-titulo-emp {
+        font-size: 18px;
+        margin-left: 3px;
+    }
+}
+@media screen and (max-width: 500px) {
+    .cont-h1-listaEmp {
+    width: 80%;
+}
+    .h1-titulo-emp {
+        font-size: 15px;
+        margin-left: 3px;
+    }
 }

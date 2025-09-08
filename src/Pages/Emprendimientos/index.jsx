@@ -23,22 +23,20 @@ function Emprendimientos() {
     }, [dispatch]);
 
     return (
-        <div className='cont-emprendi-page'>
+        <div className='cont-emp-page'>
             {
                 loading ? (
                     <Loading />
                 ) : (
-                    <div className='cont-titulo-y-props-venta'>
-                        <div className='cont-titulo-emp'>
+                    <div className='cont-titulo-y-listaEmp'>
+                        <div className='cont-titulo-emp-page'>
                             <p className='titulo-props-emprendimientos' >Emprendimientos y oportunidades de negocios</p>
                         </div>
-                        {/* Destacadas */}
-                        <div className='cont-emp-page'>
+                        
+                        <div className='cont-listaEmp'>
                             <ListaEmprendimientos allEmp={allEmp} />
                         </div>
                     </div>
-
-
                 )
             }
         </div>

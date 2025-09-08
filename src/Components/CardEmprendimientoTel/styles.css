@@ -1,0 +1,62 @@
+.cont-card-empTel{
+    width: 80%;
+    min-height: 230px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    /* background-color: aliceblue; */
+}
+.card-info1-empTel {
+    width: 100%;
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    color: var(--color-fuente);
+    background-color: var(--fondo-navbar);
+}
+
+.cont-titulo-publicacion-card-Emp{
+    width: 100%;
+    padding: 0 10px;
+}
+
+.card-info2-empTel {
+    width: 100%;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* clave para separar arriba y abajo */
+    align-items: start;
+    color: var(--color-fuente);
+    background-color: var(--fondo-navbar);
+}
+
+.descripcion-cardEmpTel {
+    padding: 10px;
+
+    /* evita desbordes */
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    /* para recortar en múltiples líneas */
+    display: -webkit-box;
+    -webkit-line-clamp: 5; /* 👉 cantidad de líneas visibles */
+    -webkit-box-orient: vertical;
+
+    /* opcional: mejora legibilidad */
+    line-height: 1.4em;
+    max-height: calc(1.4em * 5); /* asegura que el contenedor no crezca */
+}
+
+/* responsive */
+@media screen and (max-width: 1000px){
+    .cont-card-empTel{
+    width: 80%;
+    min-height: 230px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    /* background-color: aliceblue; */
+    }
+}

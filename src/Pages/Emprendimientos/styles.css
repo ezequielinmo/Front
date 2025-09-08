@@ -1,31 +1,27 @@
-.cont-emprendi-page {
+.cont-emp-page {
+    width: 100%;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
-    align-items: start;
-    margin-top: 80px;
+    align-items: center;
     background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),url('../../Images/prop4_landing.webp');
     background-size: cover; /* Hace que la imagen cubra todo el contenedor */    
     background-position: center;  /* Centra la imagen */
     background-repeat: no-repeat; /* Evita que la imagen se repita */
 }
 
-/* .cont-home-propsDestacadas {
-    width: 1350px;
-    height: auto;
-    margin-bottom: 20px;
-    background-color: rgb(158, 159, 159);
-} */
-
-.cont-titulo-y-props-venta {
-    width: 90%;
+.cont-titulo-y-listaEmp {
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-top: 100px;
 }
 
-.cont-titulo-emp {
+.cont-titulo-emp-page {
     width: 80%;
+    height: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -42,12 +38,12 @@
     border-bottom: 1px solid white;
 }
 
-.cont-emp-page{
+.cont-listaEmp{
     width: 100%;
     display: flex;
     justify-content: center;
+    align-items: center;
 }
-
 
 /* responsive */
 /* Tablets (pantallas hasta 1024px) */
@@ -55,8 +51,7 @@
     .cont-emp-page {
         flex-direction: column;
         align-items: center;
-        padding: 20px 10px;
-        margin-top: 60px;
+        margin-top: 10px;
         height: auto;
         /* importante: dejá que crezca según contenido */
     }
@@ -88,4 +83,16 @@
     .cont-home-propsDestacadas {
         padding: 8px;
     }
+
+    .cont-titulo-emp-page {
+    width: 80%;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+.titulo-props-emprendimientos{
+    margin: 0;
+}
 }

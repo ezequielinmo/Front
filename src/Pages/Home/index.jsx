@@ -94,18 +94,18 @@ function Home() {
                             <h1>Nuestros Emprendimientos</h1>
                         </div>
                         <div className='cont-btn-verTodas-listaEmp'>
-                            <BotonVerTodas />
+                            <BotonVerTodas url={'/emprendimientos'}/>
                         </div>
                     </div>
-                    <div className='cont-lista-emp-home'>
-                        <ListaEmprendimientos allEmp={allEmp} />
-                    </div>
+                    {/* lista Emp */}
+                    <ListaEmprendimientos allEmp={allEmp} />
                 </div>
+                
 
                 {/* Lista props */}
-                <div className='cont-home-propsDestacadas'>
-                    <div className='cont-titulo-listaProps'>
-                        <div className='cont-h1-listaProps'>
+                <div className='cont-home-props'>
+                    <div className='cont-titulo-emp'>
+                        <div className='cont-h1-listaEmp'>
                             <h1>Nuestras Propiedades</h1>
                         </div>
                         <div className='cont-btns-listaProps'>
@@ -137,7 +137,7 @@ function Home() {
                 </div>
 
                 {/* Institucional */}
-                <Institucional />
+                {/* <Institucional /> */}
             </div>
         )
     )

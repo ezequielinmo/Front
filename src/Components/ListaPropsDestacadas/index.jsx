@@ -27,7 +27,7 @@ function ListaPropsDestacadas({ allPropsDestacadas, vista }) {
                 </div>
                 {/* btn ver todas */}
                 <div className='cont-btn-verTodas'>
-                    <BotonVerTodas />
+                    <BotonVerTodas url={'/verDestacadas'}/>
                 </div>
                 {/* carrusel */}
                 <div className="carrusel-botones">

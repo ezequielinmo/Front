@@ -3,10 +3,10 @@
     height: auto;
     display: flex;
     justify-content: center;
-    align-items: center;
-    /* background-image: url('../../Images/noHayProps.jpg');
+    align-items: start;
+    background-image: url('../../Images/noHayProps.jpg');
     background-size: cover; 
-    background-position: center; */
+    background-position: center;
     border-radius: 10px;
 }
 .cont-texto-noProps{

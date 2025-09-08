@@ -6,7 +6,7 @@ function NoHayProps() {
     return (
         <div className='cont-noHayProps'>
             <div className='cont-texto-noProps'>
-                <h1 data-translate>No hay propiedades para mostrar</h1>
+                <h1 data-translate>Por el momento no hay propiedades para mostrar</h1>
             </div>
         </div>
     )
