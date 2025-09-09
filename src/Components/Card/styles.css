@@ -191,9 +191,9 @@
 
 /* responsive */
 @media screen and (max-width: 600px) {
-    .contCardHome {
-        width: 100%;
-    }
+    /* .contCardHome {
+        width: 80%;
+    } */
     .card-title {
         height: auto;
     }
@@ -213,5 +213,11 @@
     .div-info2 {
         margin-top: 8px;
         margin-bottom: 3px;
+    }
+}
+
+@media screen and (max-width: 350px) {
+    .contCardHome {
+        width: 90%;
     }
 }

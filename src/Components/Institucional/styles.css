@@ -1,6 +1,6 @@
 .cont-principal-institucional {
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -13,19 +13,42 @@
 
 .cont-institucional {
     width: 100%;
-    height: 100%;
+    height: auto;
     display: flex;
     flex-direction: column;
     justify-content: start;
     align-items: center;
 }
-.titulo-inst{
-    margin-top: 100px;
+
+.titulo-inst {
     color: var(--fondo-navbar);
 }
+
 .img-institucional {
     height: 30rem;
 }
-.texto-institucional{
+
+.texto-institucional {
     color: white;
+}
+
+/* responsive */
+@media screen and (max-width: 950px) {
+    .texto-institucional {
+        width: 80%;
+        text-align: center;
+        padding: 10px 0;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .img-institucional {
+        height: 20rem;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .img-institucional {
+        height: 15rem;
+    }
 }

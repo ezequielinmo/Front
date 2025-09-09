@@ -89,31 +89,30 @@ function Home() {
 
                 {/* Emprendimientos */}
                 <div className='cont-home-Emprendimientos'>
-                    <div className='cont-titulo-emp'>
+                    <div className='cont-titulo-y-lista-emp'>
                         <div className='cont-h1-listaEmp'>
                             <h1>Nuestros Emprendimientos</h1>
                         </div>
                         <div className='cont-btn-verTodas-listaEmp'>
                             <BotonVerTodas url={'/emprendimientos'}/>
                         </div>
-                    </div>
-                    {/* lista Emp */}
-                    <ListaEmprendimientos allEmp={allEmp} />
+                    </div>                    
+                    {/* <ListaEmprendimientos allEmp={allEmp} /> */}
                 </div>
                 
 
                 {/* Lista props */}
                 <div className='cont-home-props'>
-                    <div className='cont-titulo-emp'>
+                    <div className='cont-titulo-y-lista-emp'>
                         <div className='cont-h1-listaEmp'>
-                            <h1>Nuestras Propiedades</h1>
+                            <h1>Nuestros Propiedades</h1>
                         </div>
                         <div className='cont-btns-listaProps'>
                             <button onClick={onClickListaProps}>Lista</button>
                             <button onClick={onClickMapaProps}>Mapa</button>
                         </div>
                     </div>
-                    {
+                    {/* {
                         listaProps === true && vistaMapa === false &&
                         <>
                             <ListaPropiedades
@@ -132,12 +131,11 @@ function Home() {
                         <>
                             <MapaPropiedades propiedades={allPropsMap} />
                         </>
-                    }
-
+                    } */}
                 </div>
 
                 {/* Institucional */}
-                {/* <Institucional /> */}
+                <Institucional />
             </div>
         )
     )
