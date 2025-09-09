@@ -29,6 +29,9 @@
     }
 }
 @media screen and (max-width: 500px) {
+    .cont-lista-emprendimientos {
+    width: 100%; 
+}
     .cont-h1-listaEmp {
     width: 80%;
 }

@@ -97,7 +97,7 @@ function Home() {
                             <BotonVerTodas url={'/emprendimientos'}/>
                         </div>
                     </div>                    
-                    {/* <ListaEmprendimientos allEmp={allEmp} /> */}
+                    <ListaEmprendimientos allEmp={allEmp} />
                 </div>
                 
 
@@ -112,7 +112,7 @@ function Home() {
                             <button onClick={onClickMapaProps}>Mapa</button>
                         </div>
                     </div>
-                    {/* {
+                    {
                         listaProps === true && vistaMapa === false &&
                         <>
                             <ListaPropiedades
@@ -131,7 +131,7 @@ function Home() {
                         <>
                             <MapaPropiedades propiedades={allPropsMap} />
                         </>
-                    } */}
+                    } 
                 </div>
 
                 {/* Institucional */}
