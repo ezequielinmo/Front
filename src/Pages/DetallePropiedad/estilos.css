@@ -135,8 +135,8 @@
     justify-content: space-around;
     align-items: start;
     margin-bottom: 40px;
-    /* background-color: grey; */
     border-radius: 10px;
+    background-color: #bebdbda4;
 }
 .cont-imagenes {
     position: relative;
@@ -201,6 +201,16 @@
     padding: 15px;
     width: 90%;
     border-bottom: 1px solid black;
+}
+.cont-caract-item{
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.span-tilde-verde{
+    color: #20b358;
+    margin-right: 3px;
 }
 .p-col-key,
 .p-col-value {
@@ -299,6 +309,67 @@
     font-size: 20px;
     font-weight: 600;
 }
+
+/* estilos botones comp */
+.cont-share-print {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.btn-share,
+.btn-print {
+    background-color: #25d366; /* verde para WhatsApp */
+    color: white;
+    padding: 8px 14px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-print {
+    background-color: #444; /* gris oscuro para imprimir */
+}
+
+.btn-share:hover {
+    background-color: #20b358;
+}
+
+.btn-print:hover {
+    background-color: #222;
+}
+
+/* Configuración para impresión en A4 */
+@media print {
+    @page {
+        size: A4 portrait; /* o landscape */
+        margin: 20mm;
+    }
+
+    body * {
+        visibility: hidden;
+    }
+
+    .cont-imgs-info, .cont-imgs-info * {
+        visibility: visible;
+    }
+
+    .cont-imgs-info {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+    }
+
+    /* ocultar botones en impresión */
+    .cont-share-print {
+        display: none;
+    }
+}
+
+
+
 /* responsive */
 @media screen and (max-width: 1250px) {
     .info-1 {
@@ -317,7 +388,9 @@
         width: 80%;
         height: auto;
     }
-
+    .cont-caract-detalle{
+        width: 80%;
+    }
     .cont-form-contacto {
         width: 80%;
         height: auto;
@@ -346,7 +419,9 @@
         width: 95%;
         height: 80px;
     }
-
+    .cont-fondo-trama{
+        height: 675px;
+    }
     .cont-btn_Y_tituilo-precio {
         width: 100%;
         height: auto;
@@ -405,6 +480,7 @@
     .p-col-value {
         font-size: 18px;
     }
+
 }
 
 @media screen and (max-width: 730px) {

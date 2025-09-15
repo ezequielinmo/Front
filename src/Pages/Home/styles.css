@@ -78,4 +78,9 @@
     .cont-btn-verTodas-listaEmp {
         width: 20%;
     }
+
+    /* lista props */
+    .cont-titulo-y-lista-emp {
+        width: 90%;
+    }
 }

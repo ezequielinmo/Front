@@ -1,10 +1,11 @@
-.cont-card-empTel{
+.cont-card-empTel {
     width: 80%;
     min-height: 230px;
     border-radius: 10px;
     margin-bottom: 20px;
     /* background-color: aliceblue; */
 }
+
 .card-info1-empTel {
     width: 100%;
     height: 80px;
@@ -16,7 +17,7 @@
     background-color: var(--fondo-navbar);
 }
 
-.cont-titulo-publicacion-card-Emp{
+.cont-titulo-publicacion-card-Emp {
     width: 100%;
     padding: 0 10px;
 }
@@ -42,21 +43,28 @@
 
     /* para recortar en múltiples líneas */
     display: -webkit-box;
-    -webkit-line-clamp: 5; /* 👉 cantidad de líneas visibles */
+    -webkit-line-clamp: 5;
+    /* 👉 cantidad de líneas visibles */
     -webkit-box-orient: vertical;
 
     /* opcional: mejora legibilidad */
     line-height: 1.4em;
-    max-height: calc(1.4em * 5); /* asegura que el contenedor no crezca */
+    max-height: calc(1.4em * 5);
+    /* asegura que el contenedor no crezca */
 }
 
 /* responsive */
-@media screen and (max-width: 1000px){
-    .cont-card-empTel{
-    width: 80%;
-    min-height: 230px;
-    border-radius: 10px;
-    margin-bottom: 20px;
-    /* background-color: aliceblue; */
+@media screen and (max-width: 1000px) {
+    .cont-card-empTel {
+        width: 80%;
+        min-height: 230px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        /* background-color: aliceblue; */
+    }
+}
+@media screen and (max-width: 500px) {
+    .cont-card-empTel {
+        width: 90%;
     }
 }
