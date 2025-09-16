@@ -20,9 +20,9 @@ function DetalleProp() {
     const { id } = useParams();  //let id = props.match.params.id 
     const propiedad = useSelector(state => state.propiedad);
     //obt el tipo de moneda
-    const moneda =  propiedad?.operacion?.[0]?.precios?.[0]?.moneda; 
+    const moneda = propiedad?.operacion?.[0]?.precios?.[0]?.moneda;
     //otengo el precio de la prop
-    const precio =  propiedad?.operacion?.[0]?.precios?.[0]?.precio;
+    const precio = propiedad?.operacion?.[0]?.precios?.[0]?.precio;
     //obtengo el tipo de propiedad
     const tipoProp = propiedad?.tipo?.nombre;
     //busco q operaciones vienen
@@ -160,82 +160,69 @@ function DetalleProp() {
                                 <div className='cont-caract-detalle'>
                                     <p className='titulo-caract-prop'>Detalle Propiedad</p>
                                     <div className='cont-caract-prop'>
-                                        <div className='cont-caract-item'>
-                                            <div className='cont-p-caract'>
-                                                <span className='span-tilde-verde'>✔</span>
-                                                <p className='p-col-key' data-translate>Ambientes:</p>
-                                                <p className='p-col-value'>{propiedad.ambientes}</p>
-                                            </div>
-                                            <div className='cont-p-caract'>
-                                                <span className='span-tilde-verde'>✔</span>
-                                                <p className='p-col-key' data-translate>Dormitorios:</p>
-                                                <p className='p-col-value'>{propiedad.dormitorios}</p>
-                                            </div>
+                                        <div className='cont-p-caract'>
+                                            <span className='span-tilde-verde'>✔</span>
+                                            <p className='p-col-key' data-translate>Valor:</p>
+                                            <p className='p-col-value' data-translate>
+                                                {moneda}
+                                                {precio}
+                                            </p>
                                         </div>
 
-                                        <div className='cont-caract-item'>
-                                            <div className='cont-p-caract'>
-                                                <span className='span-tilde-verde'>✔</span>
-                                                <p className='p-col-key' data-translate>Baños:</p>
-                                                <p className='p-col-value'>{propiedad.baños}</p>
-                                            </div>
-                                            <div className='cont-p-caract'>
-                                                <span className='span-tilde-verde'>✔</span>
-                                                <p className='p-col-key' data-translate>Tipo Op:</p>
-                                                {
-                                                    propiedad.operacion?.map((o, i) => {
-                                                        return (
-                                                            <div key={o.operacion_id}>
-                                                                <p className='p-col-value' data-translate>{propiedad.operacion[i]?.operacion}</p>
-                                                            </div>
-                                                        )
-                                                    })
-                                                }
-                                            </div>
+                                        <div className='cont-p-caract'>
+                                            <span className='span-tilde-verde'>✔</span>
+                                            <p className='p-col-key' data-translate>Tipo Op:</p>
+                                            <p className='p-col-value'>
+                                                {venta?.operacion ? venta?.operacion : alquiler?.operacion}
+                                            </p>
                                         </div>
 
-                                        <div className='cont-caract-item'>
-                                            <div className='cont-p-caract'>
-                                                <span className='span-tilde-verde'>✔</span>
-                                                <p className='p-col-key' data-translate>Tipo:</p>
-                                                <p className='p-col-value' data-translate>{propiedad.tipo?.nombre}</p>
-                                            </div>
-                                            <div className='cont-p-caract'>
-                                                <span className='span-tilde-verde'>✔</span>
-                                                <p className='p-col-key' data-translate>Sup. Total:</p>
-                                                <p className='p-col-value'>{propiedad.supTotal}{propiedad.unidadMedida}</p>
-                                            </div>
+                                        <div className='cont-p-caract'>
+                                            <span className='span-tilde-verde'>✔</span>
+                                            <p className='p-col-key' data-translate>Tipo:</p>
+                                            <p className='p-col-value' data-translate>{propiedad.tipo?.nombre}</p>
                                         </div>
 
-                                        <div className='cont-caract-item'>
-                                            <div className='cont-p-caract'>
-                                                <span className='span-tilde-verde'>✔</span>
-                                                <p className='p-col-key' data-translate>Valor:</p>
-                                                <p className='p-col-value' data-translate>
-                                                    {moneda}
-                                                    {precio}
-                                                </p>
-                                            </div>
-                                            <div className='cont-p-caract'>
-                                                <span className='span-tilde-verde'>✔</span>
-                                                <p className='p-col-key' data-translate>Tipo Op:</p>
-                                                <p className='p-col-value'>
-                                                    {venta?.operacion ? venta?.operacion : alquiler?.operacion}
-                                                </p>
-                                            </div>
+                                        <div className='cont-p-caract'>
+                                            <span className='span-tilde-verde'>✔</span>
+                                            <p className='p-col-key' data-translate>Ambientes:</p>
+                                            <p className='p-col-value'>{propiedad.ambientes}</p>
                                         </div>
 
-                                        <div className='cont-caract-item'>
-                                            <div className='cont-p-caract'>
-                                                <span className='span-tilde-verde'>✔</span>
-                                                <p className='p-col-key' data-translate>Barrio:</p>
-                                                <p className='p-col-value' data-translate>{barrio}</p>
-                                            </div>
-                                            <div className='cont-p-caract'>
-                                                <span className='span-tilde-verde'>✔</span>
-                                                <p className='p-col-key' data-translate>Expensas:</p>
-                                                <p className='p-col-value'>{propiedad.expensas}</p>
-                                            </div>
+                                        <div className='cont-p-caract'>
+                                            <span className='span-tilde-verde'>✔</span>
+                                            <p className='p-col-key' data-translate>Dormitorios:</p>
+                                            <p className='p-col-value'>{propiedad.dormitorios}</p>
+                                        </div>
+
+                                        <div className='cont-p-caract'>
+                                            <span className='span-tilde-verde'>✔</span>
+                                            <p className='p-col-key' data-translate>Baños:</p>
+                                            <p className='p-col-value'>{propiedad.baños}</p>
+                                        </div>
+
+                                        <div className='cont-p-caract'>
+                                            <span className='span-tilde-verde'>✔</span>
+                                            <p className='p-col-key' data-translate>Dirección:</p>
+                                            <p className='p-col-value'>{propiedad.direccionF}</p>
+                                        </div>
+
+                                        <div className='cont-p-caract'>
+                                            <span className='span-tilde-verde'>✔</span>
+                                            <p className='p-col-key' data-translate>Sup. Total:</p>
+                                            <p className='p-col-value'>{propiedad.supTotal}{propiedad.unidadMedida}</p>
+                                        </div>
+
+                                        <div className='cont-p-caract'>
+                                            <span className='span-tilde-verde'>✔</span>
+                                            <p className='p-col-key' data-translate>Barrio:</p>
+                                            <p className='p-col-value' data-translate>{barrio}</p>
+                                        </div>
+
+                                        <div className='cont-p-caract'>
+                                            <span className='span-tilde-verde'>✔</span>
+                                            <p className='p-col-key' data-translate>Expensas:</p>
+                                            <p className='p-col-value'>{propiedad.expensas}</p>
                                         </div>
                                     </div>
                                 </div>

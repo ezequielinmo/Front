@@ -5,7 +5,6 @@
     justify-content: center;
     align-items: center;
     margin-top: 70px;
-    background-color: rgb(228, 238, 248);
 }
 .cont-lista-propsVentas{
     width: 100%;
@@ -17,8 +16,9 @@
 .cont-filtros-props-ventas{
     width: 80%;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-wrap: wrap;
+    justify-content: start;
     align-items: center;
     margin-top: 20px;
+    background-color: aqua;
 }
