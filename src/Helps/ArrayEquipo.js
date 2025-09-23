@@ -10,7 +10,7 @@ const ezequiel = {
 const ArrayEquipo = [
     
     {
-        imgPersona: ImgFran, nombre: 'Fran Gay Izzo', texto: 'Comercial', 
+        imgPersona: ImgFran, nombre: 'Fran Izzo', texto: 'Ventas', 
     },
     {
         imgPersona: ImgCintia, nombre: 'Cintia', texto: 'Administración', 

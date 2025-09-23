@@ -88,7 +88,7 @@ function Home() {
                 <ListaPropsDestacadas allPropsDestacadas={allPropsDestacadas} vista={"ambas"} id='listaProps' />
 
                 {/* Emprendimientos */}
-                {/* <div className='cont-home-Emprendimientos'>
+                <div className='cont-home-Emprendimientos'>
                     <div className='cont-titulo-y-lista-emp'>
                         <div className='cont-h1-listaEmp'>
                             <h1>Nuestros Emprendimientos</h1>
@@ -98,7 +98,7 @@ function Home() {
                         </div>
                     </div>                    
                     <ListaEmprendimientos allEmp={allEmp} />
-                </div> */}
+                </div>
                 
 
                 {/* Lista props */}
@@ -128,9 +128,9 @@ function Home() {
                     }
                     {
                         listaProps === false && vistaMapa === true &&
-                        <>
+                        <div className='cont-mapa-props-home'>
                             <MapaPropiedades propiedades={allPropsMap} />
-                        </>
+                        </div>
                     }
                 </div>
 

@@ -67,7 +67,7 @@ function MenuHamburguesa() {
                         <Link to='/favoritos' className={'navlink-navbarInf'} data-translate>Favoritos</Link>
                     </li>
                     <li onClick={toggleMenu}>
-                        <Link to='/nosotros' ref={el => menuItemsRef.current[5] = el} data-translate>Quienes Somos</Link>
+                        <Link to='/nosotros' ref={el => menuItemsRef.current[5] = el} data-translate>La Empresa</Link>
                     </li>
                     <li onClick={toggleMenu}>
                         <Link to='/contacto' ref={el => menuItemsRef.current[6] = el} data-translate>Contacto</Link>

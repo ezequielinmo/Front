@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getProps } from '../../Redux/Actions';
 import FiltrosSelect from '../../Components/FiltrosSelect';
 import ListaPropiedades from '../../Components/ListaPropiedades';
-import Paginacion from '../../Components/Paginacion';
 import MapaPropiedades from '../../Components/MapProps';
 import Loading from '../../Components/Loading';
 
@@ -55,7 +54,7 @@ function PropsVenta() {
 
     return (
         <div className='cont-page-ventas'>
-            <h1 className='titulo-busqueda'>Propiedades en venta</h1>
+            <h1 className='titulo-busqueda'>Propiedades en alquiler</h1>
             {
                 loading ? (
                     <Loading />

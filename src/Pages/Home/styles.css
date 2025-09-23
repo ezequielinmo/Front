@@ -50,6 +50,12 @@
     background-color: white;
 }
 
+/* cont mapa */
+.cont-mapa-props-home{
+    width: 80%;
+    margin-bottom: 30px;
+}
+
 /* responsive */
 @media screen and (max-width: 1000px) {
     .cont-h1-listaEmp {
@@ -83,4 +89,10 @@
     .cont-titulo-y-lista-emp {
         width: 90%;
     }
+
+    /* mapa */
+    .cont-mapa-props-home{
+        width: 95%;
+        margin-bottom: 30px;
+}
 }

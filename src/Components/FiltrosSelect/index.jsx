@@ -123,8 +123,8 @@ function FiltrosSelect({
                     <div className="cont-amb-barrio">
                         <select onChange={onChangeBarrio} className="select-tipoProp">
                             <option>Barrio</option>
-                            {barrios.map(barrio => (
-                                <option key={barrios} value={barrio}>{barrio}</option>
+                            {barrios.map((barrio, index) => (
+                                <option key={index} value={barrio}>{barrio}</option>
                             ))}
                         </select>
                     </div>

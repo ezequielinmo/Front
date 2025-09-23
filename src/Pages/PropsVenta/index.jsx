@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getProps } from '../../Redux/Actions';
 import FiltrosSelect from '../../Components/FiltrosSelect';
 import ListaPropiedades from '../../Components/ListaPropiedades';
-import Paginacion from '../../Components/Paginacion';
 import MapaPropiedades from '../../Components/MapProps';
 import Loading from '../../Components/Loading';
 import './styles.css';
@@ -22,7 +21,7 @@ function PropsVenta() {
     const [precioMin, setPrecioMin] = useState();
     const [precioMax, setPrecioMax] = useState();
     const [listaProps, setListaProps] = useState(true);
-        const [vistaMapa, setVistaMapa] = useState(false);
+    const [vistaMapa, setVistaMapa] = useState(false);
     //estados para paginación
     const [currentPage, setCurrentPage] = useState(1);
     const propiedadesPorPagina = 12;
@@ -74,37 +73,37 @@ function PropsVenta() {
                             setPrecioMax={setPrecioMax}
                         />
                         {/* Lista props */}
-                <div className='cont-home-props'>
-                    <div className='cont-titulo-y-lista-emp'>
-                        <div className='cont-h1-listaEmp'>
-                            <h1>Nuestros Propiedades</h1>
+                        <div className='cont-home-props'>
+                            <div className='cont-titulo-y-lista-emp'>
+                                <div className='cont-h1-listaEmp'>
+                                    <h1>Nuestros Propiedades</h1>
+                                </div>
+                                <div className='cont-btns-listaProps'>
+                                    <button onClick={onClickListaProps}>Lista</button>
+                                    <button onClick={onClickMapaProps}>Mapa</button>
+                                </div>
+                            </div>
+                            {
+                                listaProps === true && vistaMapa === false &&
+                                <>
+                                    <ListaPropiedades
+                                        allProps={allProps}
+                                        vista={"ambas"}
+                                        currentPage={currentPage}
+                                        onPageChange={setCurrentPage}
+                                        totalPropiedades={totalPropiedades}
+                                        propiedadesPorPagina={propiedadesPorPagina}
+                                        id='listaProps'
+                                    />
+                                </>
+                            }
+                            {
+                                listaProps === false && vistaMapa === true &&
+                                <>
+                                    <MapaPropiedades propiedades={allPropsMap} />
+                                </>
+                            }
                         </div>
-                        <div className='cont-btns-listaProps'>
-                            <button onClick={onClickListaProps}>Lista</button>
-                            <button onClick={onClickMapaProps}>Mapa</button>
-                        </div>
-                    </div>
-                    {
-                        listaProps === true && vistaMapa === false &&
-                        <>
-                            <ListaPropiedades
-                                allProps={allProps}
-                                vista={"ambas"}
-                                currentPage={currentPage}
-                                onPageChange={setCurrentPage}
-                                totalPropiedades={totalPropiedades}
-                                propiedadesPorPagina={propiedadesPorPagina}
-                                id='listaProps'
-                            />
-                        </>
-                    }
-                    {
-                        listaProps === false && vistaMapa === true &&
-                        <>
-                            <MapaPropiedades propiedades={allPropsMap} />
-                        </>
-                    }
-                </div>
                     </div>
                 )
             }
