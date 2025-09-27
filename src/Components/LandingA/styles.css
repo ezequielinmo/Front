@@ -118,7 +118,45 @@
     border-radius: 20px;
 }
 
-/* animación */
+/* filtros */
+.cont-filtros-landing {
+    width: 90%;
+    position: absolute;
+    bottom: 80px; /* arriba de la flecha */
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(-50%, 20px); /* arranca un poco más abajo */
+    transition: all 1s ease;
+}
+
+/* cuando se activa */
+.cont-filtros-landing.show {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translate(-50%, 0);
+    animation: fadeBounce 1s ease forwards;
+}
+
+/* animación creativa */
+@keyframes fadeBounce {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, 30px) scale(0.95);
+    }
+    60% {
+        opacity: 1;
+        transform: translate(-50%, -5px) scale(1.02);
+    }
+    100% {
+        transform: translate(-50%, 0) scale(1);
+    }
+}
+
 
 /* estilos flecha que señala hacia abajo compuesta por dos palitos blancos con movimiento hacia arriba y abjo */
 .cont-flecha-home {

@@ -6,7 +6,6 @@ import LandigA from '../../Components/LandingA';
 import ListaPropiedades from '../../Components/ListaPropiedades'
 import ListaPropsDestacadas from '../../Components/ListaPropsDestacadas';
 import ListaEmprendimientos from '../../Components/ListaEmprendimientos';
-import FiltrosSelect from '../../Components/FiltrosSelect';
 //import Paginacion from '../../Components/Paginacion';
 import Institucional from '../../Components/Institucional';
 import MapaPropiedades from '../../Components/MapProps';
@@ -22,8 +21,8 @@ function Home() {
     const allEmp = useSelector(state => state.emprendimientos);
     const totalPropiedades = useSelector(state => state.totPropiedades);
     //estados para las propiedades
-    const [operacion, setOperacion] = useState('');
-    const [tipoPropiedad, setTipoPropiedad] = useState('Todas');
+    const [operacion, setOperacion] = useState(''); console.log("operacion: ", operacion)
+    const [tipoPropiedad, setTipoPropiedad] = useState([]);
     const [ambientes, setAmbientes] = useState(); //en el back lo convierto a int
     const [barrios, setBarrios] = useState([]);
     const [precioMin, setPrecioMin] = useState();
@@ -70,11 +69,8 @@ function Home() {
             <Loading />
         ) : (
             <div className='cont-home'>
-                <LandigA />
-
-                {/* filtros */}
-                <FiltrosSelect
-                    verTipoOperacion='true'
+                {/* Landing A */}
+                <LandigA
                     setCurrentPage={setCurrentPage}
                     setOperacion={setOperacion}
                     setTipoPropiedad={setTipoPropiedad}
@@ -99,10 +95,9 @@ function Home() {
                     </div>                    
                     <ListaEmprendimientos allEmp={allEmp} />
                 </div>
-                
 
                 {/* Lista props */}
-                <div className='cont-home-props'>
+                <div className='cont-home-props' id='listaProps'>
                     <div className='cont-titulo-y-lista-emp'>
                         <div className='cont-h1-listaEmp'>
                             <h1>Nuestros Propiedades</h1>
@@ -122,7 +117,6 @@ function Home() {
                                 onPageChange={setCurrentPage}
                                 totalPropiedades={totalPropiedades}
                                 propiedadesPorPagina={propiedadesPorPagina}
-                                id='listaProps'
                             />
                         </>
                     }

@@ -10,10 +10,17 @@
     text-align: center;
     border-radius: 10px;
     background-color: #fff;
-    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2); /* sombra derecha e inferior */
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
 }
 
 /* manejo espacio img */
+.card-image-container {
+    position: relative;
+    width: 100%;
+    height: 250px;
+}
+
 .card-image {
     width: 100%;
     height: 250px;
@@ -23,47 +30,75 @@
     overflow: hidden;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
+    position: relative;
 }
 
 .card-img {
     width: 100%;
     height: 100%;
+    object-fit: cover;
     transition: transform 0.3s ease;
 }
-.cont-operacion-card {
+
+/* botones del carrusel */
+.arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.4);
+    border: none;
+    color: white;
+    padding: 4px;
+    cursor: pointer;
+    z-index: 2;
+    border-radius: 50%;
+}
+
+.arrow-left {
+    left: 10px;
+}
+
+.arrow-right {
+    right: 10px;
+}
+
+/* parte inferior con info + link */
+.cont-info-link {
+    position: relative;
     width: 100%;
-    height: 40px;
+    height: 230px;
+    /* resto de la card */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+}
+
+/* overlay detalle en parte inferior */
+.detail {
     position: absolute;
     top: 0;
     left: 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.titulo-card{
-    margin-left: 10px;
-}
-/* estilos msj detalle */
-.detail {
-    position: absolute;
-    top: 0px;
-    left: 50;
     width: 100%;
-    height: 250px;
-    display: none;
+    height: 100%;
+    /* ocupa toda la mitad inferior */
+    display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
     opacity: 0;
     transition: opacity 0.3s ease;
     background-color: rgba(0, 0, 0, 0.7);
     color: #fff;
+    pointer-events: none;
 }
 
-.detail.show {
-    display: flex;
+.cont-info-link:hover .detail {
     opacity: 1;
 }
 
@@ -72,29 +107,13 @@
     font-weight: 200;
 }
 
-/* espacio titulo */
-
-.titulo-card {
-    font-size: 28px;
-    font-weight: 200;
-    color: #fff;
-}
-
-.navLink-car {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 /* manejo de info1 */
-/* de acá le doy color a todas las palabras contenidas */
 .card-info1 {
     width: 95%;
     height: 150px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* clave para separar arriba y abajo */
+    justify-content: space-between;
     align-items: start;
     color: var(--color-fuente);
 }
@@ -107,14 +126,15 @@
     justify-content: start;
     align-items: start;
 }
-.cont-titulo-card{
+
+.cont-titulo-card {
     width: 100%;
     height: 45px;
     display: flex;
     justify-content: start;
     align-items: center;
 }
-/* titulo card */
+
 .tituloPublicacion {
     font-size: 20px;
     font-weight: 600;
@@ -131,6 +151,7 @@
     justify-content: start;
     align-items: center;
 }
+
 .direcc-card {
     font-size: 17px;
     font-weight: 100;
@@ -150,6 +171,7 @@
     justify-content: start;
     align-items: center;
 }
+
 .precio-card {
     font-size: 22px;
     font-weight: 500;
@@ -191,23 +213,12 @@
 
 /* responsive */
 @media screen and (max-width: 600px) {
-    /* .contCardHome {
-        width: 80%;
-    } */
-    .card-title {
-        height: auto;
+    .contCardHome {
+        width: 95%;
     }
 
-    .precio {
-        margin-left: 10px;
-        font-size: 23px;
-        font-weight: 500;
-    }
-
-    .cont-fav {
-        display: flex;
-        justify-content: end;
-        align-items: center;
+    .precio-card {
+        font-size: 20px;
     }
 
     .div-info2 {

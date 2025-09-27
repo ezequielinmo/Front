@@ -9,10 +9,12 @@ function FiltrosSelect({
     setAmbientes,
     setPrecioMin,
     setPrecioMax,
+    setCurrentPage,
+    scrollToLista
 }) {
     const operacion = ['Todas', 'Venta', 'Alquiler', 'Emprendimiento'];
     const tipoProp = [
-        'Todas', 'Departamento', 'Casa', 'PH', 'Local',
+        'Departamento', 'Casa', 'PH', 'Local',
         'Oficina', 'Cochera', 'Terreno', 'Galpón',
     ];
     const ambientes = ['1', '2', '3', '4', 'mas'];
@@ -63,14 +65,22 @@ function FiltrosSelect({
         "Varese"
     ];
 
+    //estados locales
+    const [tipoPropSeleccionada, setTipoPropSeleccionada] = useState([]);
     const [localMin, setLocalMin] = useState('');
     const [localMax, setLocalMax] = useState('');
     const [barriosSeleccionados, setBarriosSeleccionados] = useState([]);
 
     const onChangeTipoOp = (e) => setOperacion(e.target.value);
-    const onChangeTipoProp = (e) => setTipoPropiedad(e.target.value);
+    const onChangeTipoProp = (e) => {
+        const value = e.target.value;
+        if (value !== "TipoProp" && !tipoPropSeleccionada.includes(value)) {
+            const propsSeleccionadas = [...tipoPropSeleccionada, value];
+            setTipoPropSeleccionada(propsSeleccionadas);
+            setTipoPropiedad(propsSeleccionadas);
+        }
+    };
     const onChangeAmb = (e) => setAmbientes(e.target.value);
-
     const onChangeBarrio = (e) => {
         const value = e.target.value;
         if (value !== "Barrio" && !barriosSeleccionados.includes(value)) {
@@ -80,22 +90,30 @@ function FiltrosSelect({
         }
     };
 
+    const eliminarTipoPropSel = (tipoP) => {
+        const nuevosTipoProp = tipoPropSeleccionada.filter(p => p !== tipoP);
+        setTipoPropSeleccionada(nuevosTipoProp);
+        setTipoPropiedad(nuevosTipoProp);
+    }
     const eliminarBarrio = (barrio) => {
         const nuevosBarrios = barriosSeleccionados.filter(b => b !== barrio);
         setBarriosSeleccionados(nuevosBarrios);
         setBarrios(nuevosBarrios);
     };
 
+    // FiltrosSelect.jsx
     const aplicarRangoPrecios = () => {
         setPrecioMin(localMin);
         setPrecioMax(localMax);
+        if (setCurrentPage) setCurrentPage(1); // 👈 reset a la primera página
+        if (scrollToLista) scrollToLista();    // 👈 hace scroll al listado
     };
 
     return (
-        <div className="cont-filtrosSelect">
+        <div className={verTipoOperacion ? "cont-filtrosSelect" : "cont-filtrosSelect-Venta"}>
             <div className="subCont-filtrosSelect">
-                <div className="cont-filtro-titulo">
-                    <p className='titulo-filtros'>Filtros</p>
+                <div className={verTipoOperacion ? "cont-filtro-titulo" : "cont-filtro-titulo-Venta"}>
+                    <p className={verTipoOperacion ? "titulo-filtros" : "titulo-filtros-Venta"}>Filtros</p>
                 </div>
                 <div className="cont-selects-filtros">
                     {/* tipo op */}
@@ -161,12 +179,29 @@ function FiltrosSelect({
                                 className="btn-aplicar-precio"
                                 onClick={aplicarRangoPrecios}
                             >
-                                Aplicar
+                                Aplicar Filtros
                             </button>
                         </div>
                     </div>
                 </div>
             </div>
+
+            {/* Mostrar tipoProp seleccionadas */}
+            {tipoPropSeleccionada.length > 0 && (
+                <div className="barrios-seleccionados">
+                    {tipoPropSeleccionada.map(p => (
+                        <div key={p} className="barrio-item">
+                            <span>{p}</span>
+                            <button
+                                onClick={() => eliminarTipoPropSel(p)}
+                                className="btn-eliminar-barrio"
+                            >
+                                ✕
+                            </button>
+                        </div>
+                    ))}
+                </div>
+            )}
             {/* Mostrar barrios seleccionados */}
             {barriosSeleccionados.length > 0 && (
                 <div className="barrios-seleccionados">

@@ -6,6 +6,7 @@ import ListaPropiedades from '../../Components/ListaPropiedades';
 import MapaPropiedades from '../../Components/MapProps';
 import Loading from '../../Components/Loading';
 
+
 function PropsVenta() {
 
     const loading = useSelector(state => state.loading);
@@ -14,7 +15,7 @@ function PropsVenta() {
     const allPropsMap = useSelector(state => state.propsMap);
     //estados para las propiedades
     const [operacion, setOperacion] = useState('Alquiler');
-    const [tipoPropiedad, setTipoPropiedad] = useState('Todas');
+    const [tipoPropiedad, setTipoPropiedad] = useState([]);
     const [barrios, setBarrios] = useState([]);
     const [ambientes, setAmbientes] = useState(); //en el back lo convierto a int
     const [precioMin, setPrecioMin] = useState();
@@ -54,7 +55,7 @@ function PropsVenta() {
 
     return (
         <div className='cont-page-ventas'>
-            <h1 className='titulo-busqueda'>Propiedades en alquiler</h1>
+            <h1 className='titulo-busqueda'>Propiedades en venta</h1>
             {
                 loading ? (
                     <Loading />
@@ -62,7 +63,7 @@ function PropsVenta() {
                     <div className='cont-lista-propsVentas'>
                         {/* filtros */}
                         <FiltrosSelect
-                            verTipoOperacion='false'
+                            verTipoOperacion={false}
                             setCurrentPage={setCurrentPage}
                             setOperacion={setOperacion}
                             setTipoPropiedad={setTipoPropiedad}
@@ -98,9 +99,9 @@ function PropsVenta() {
                             }
                             {
                                 listaProps === false && vistaMapa === true &&
-                                <>
+                                <div className='cont-map-Venta'>
                                     <MapaPropiedades propiedades={allPropsMap} />
-                                </>
+                                </div>
                             }
                         </div>
                     </div>

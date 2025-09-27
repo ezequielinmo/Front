@@ -1,6 +1,24 @@
 .cont-filtrosSelect {
+    width: 85%;
+    max-width: 1100px;
+    padding: 20px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 1s ease forwards;
+    animation-delay: 3s; /* aparece 3s después */
+}
+/* estilos contenedor gral para las vistas de Venta y Alquiler */
+.cont-filtrosSelect-Venta{
     width: 80%;
-    height: 120px;
+    min-height: 120px;
+    height: auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -8,247 +26,192 @@
     margin-top: 10px;
     padding: 8px;
     border-radius: 5px;
-    background-color: rgb(209, 208, 208);
+    background-color: rgb(80, 80, 80);
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .subCont-filtrosSelect {
     width: 100%;
-    height: 75%;
-    flex-direction: column;
-    display: flex;
-    justify-content: center;
-    align-items: start;
-}
-
-.cont-filtro-titulo {
-    width: 100%;
-    height: 30%;
-    display: flex;
-    justify-content: start;
-    align-items: center;
-}
-
-.titulo-filtros {
-    width: 100%;
     height: 100%;
     display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.cont-filtro-titulo,
+.cont-filtro-titulo-Venta {
+    width: 100%;
+    text-align: left;
+}
+/* para vistas Ventas y Alq */
+.cont-filtro-titulo-Venta {
+    height: 45px;
+    display: flex;
     justify-content: start;
     align-items: center;
-    font-size: 25px;
-    border: none;
-    color: black;
-    margin-left: 5px;
+    color: white;
 }
-
-/* div selects */
+.titulo-filtros {
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: #fff;
+    letter-spacing: 1px;
+}
+/* para vistas Ventas y Alq */
+.titulo-filtros-Venta {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+/* selects */
 .cont-selects-filtros {
     width: 100%;
-    height: 70%;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.cont-op-tipoP,
-.cont-tipo-prop,
-.cont-amb-barrio,
-.cont-amb {
-    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
     justify-content: center;
-    align-items: center;
 }
 
 .select-tipoProp {
-    width: 190px;
-    height: 50px;
-    text-align: center;
-    font-size: 18px;
+    flex: 1 1 200px;
+    min-width: 180px;
+    padding: 12px;
     border: none;
-    border-radius: 5px;
-    color: black;
-    /* color palabra selects */
-    background-color: white;
+    border-radius: 12px;
+    font-size: 16px;
+    background: rgba(255, 255, 255, 0.85);
+    color: #333;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    transition: all 0.3s ease;
+}
+
+.select-tipoProp:hover,
+.select-tipoProp:focus {
+    background: #fff;
+    outline: none;
+    transform: scale(1.03);
 }
 
 /* precios */
 .cont-filtro-precioMaxMin {
-    position: relative;
-    width: 400px;
-    height: 18px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    border: 1px solid white;
-    padding: 20px 10px 10px;
-    border-radius: 5px;
-    background-color: white;
+    gap: 10px;
+    padding: 5px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.9);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .cont-filtro-precioMaxMin label {
-    position: absolute;
-    top: -10px;
-    left: 10px;
-    background: white;
-    /* Asegura que el texto no se mezcle con el fondo */
-    padding: 0 5px;
     font-size: 14px;
-    color: black;
+    font-weight: 600;
+    color: #444;
 }
 
 .input-precioMin {
-    width: 130px;
+    width: 110px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background: #f7f7f7;
     font-size: 14px;
-    padding: 5px;
-    border-radius: 5px;
-    border: 1px solid rgb(152, 152, 152);
-    background-color: rgb(223, 223, 224);
+    transition: border-color 0.3s;
 }
 
+.input-precioMin:focus {
+    border-color: #0077ff;
+    outline: none;
+    background: #fff;
+}
+
+/* botón aplicar */
 .btn-aplicar-precio {
-    background-color: black;
+    background: linear-gradient(135deg, #0077ff, #00bfff);
     color: white;
     border: none;
-    padding: 6px 12px;
-    border-radius: 4px;
+    padding: 8px 16px;
+    border-radius: 10px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    font-weight: 600;
+    transition: all 0.3s ease;
 }
 
 .btn-aplicar-precio:hover {
-    background-color: #0056b3;
+    background: linear-gradient(135deg, #0056b3, #0088cc);
+    transform: translateY(-2px);
 }
 
-/* muestra barrio seleccionado */
+/* barrios seleccionados */
 .barrios-seleccionados {
-    width: 100%;
-    height: 25%;
     display: flex;
-    justify-content: start;
-    align-items: center;
-    margin-left: 10px;
-    gap: 3px;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
 }
 
 .barrio-item {
     display: flex;
-    justify-content: center;
     align-items: center;
-    border-radius: 5px;
-    margin-top: 3px;
-    padding: 3px;
-    background-color: white;
+    background: rgba(37, 37, 37, 0.333);
+    border: 1px solid #0077ff;
+    border-radius: 20px;
+    padding: 5px 12px;
+    font-size: 14px;
+    color: #0077ff;
+    font-weight: 500;
+    gap: 6px;
+    transition: background 0.3s;
+    color: white;
+}
+
+.barrio-item:hover {
+    background: rgba(0, 119, 255, 0.2);
 }
 
 .btn-eliminar-barrio {
     border: none;
-    border-radius: 5px;
-    font-size: 10px;
-    background-color: white;
+    background: transparent;
+    color: #ff4d4d;
+    font-size: 14px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.btn-eliminar-barrio:hover {
+    transform: scale(1.2);
 }
 
 /* responsive */
-@media screen and (max-width: 1300px) {
+@media screen and (max-width: 768px) {
     .cont-filtrosSelect {
-        width: 90%;
-        height: auto;
-        margin-bottom: 20px;
-    }
-
-    .subCont-filtrosSelect {
-        width: 100%;
-        height: 75%;
-        flex-direction: column;
-        display: flex;
-        justify-content: center;
-        align-items: start;
-    }
-
-    .cont-filtro-titulo {
-        width: 100%;
-        height: 30px;
-        display: flex;
-        justify-content: start;
-        align-items: center;
+        width: 95%;
+        padding: 15px;
     }
 
     .cont-selects-filtros {
-        width: 100%;
-        height: 80%;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    .cont-op-tipoP,
-    .cont-tipo-prop,
-    .cont-amb-barrio,
-    .cont-amb {
-        padding: 5px 0;
+        flex-direction: column;
+        align-items: stretch;
     }
 
     .select-tipoProp {
-        height: 40px;
-        font-size: 15px;
-    }
-
-    /* precios */
-    .cont-primario-precio {
-        margin-top: 10px;
-        margin-bottom: 10px;
-    }
-}
-
-@media screen and (max-width: 500px) {
-    .cont-filtrosSelect {
-        width: 95%;
-        height: auto;
-    }
-
-    .subCont-filtrosSelect {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .cont-op-tipoP,
-    .cont-tipo-prop,
-    .cont-amb-barrio,
-    .cont-amb {
         width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .cont-primario-precio {
-        width: 100%;
-        height: auto;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-top: 10px;
-        margin-bottom: 10px;
     }
 
     .cont-filtro-precioMaxMin {
-        width: 98%;
-        height: auto;
-    }
-}
-
-@media screen and (max-width: 450px) {
-    .cont-filtro-precioMaxMin {
-        width: 98%;
-        height: auto;
         flex-direction: column;
+        gap: 8px;
     }
 
-    .barrios-seleccionados {
+    .input-precioMin {
         width: 100%;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
     }
 }

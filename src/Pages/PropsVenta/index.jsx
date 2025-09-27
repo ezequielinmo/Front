@@ -15,7 +15,7 @@ function PropsVenta() {
     const allPropsMap = useSelector(state => state.propsMap);
     //estados para las propiedades
     const [operacion, setOperacion] = useState('Venta');
-    const [tipoPropiedad, setTipoPropiedad] = useState('Todas');
+    const [tipoPropiedad, setTipoPropiedad] = useState([]);
     const [barrios, setBarrios] = useState([]);
     const [ambientes, setAmbientes] = useState(); //en el back lo convierto a int
     const [precioMin, setPrecioMin] = useState();
@@ -63,7 +63,7 @@ function PropsVenta() {
                     <div className='cont-lista-propsVentas'>
                         {/* filtros */}
                         <FiltrosSelect
-                            verTipoOperacion='false'
+                            verTipoOperacion={false}
                             setCurrentPage={setCurrentPage}
                             setOperacion={setOperacion}
                             setTipoPropiedad={setTipoPropiedad}
@@ -99,9 +99,9 @@ function PropsVenta() {
                             }
                             {
                                 listaProps === false && vistaMapa === true &&
-                                <>
+                                <div className='cont-map-Venta'>
                                     <MapaPropiedades propiedades={allPropsMap} />
-                                </>
+                                </div>
                             }
                         </div>
                     </div>
