@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getProperty, resetProperty } from '../../Redux/Actions';
 import { InmobiliariaContext } from '../../Context';
 import { capitalizar, formatMoney } from '../../Helps';
+import ReactPlayer from "react-player";
 import Carrusel from '../../Components/Carrusel';
 import MapProp from '../../Components/MapaProp';
 import ModalVideo from '../../Components/ModalVideo';
@@ -236,6 +237,21 @@ function DetalleProp() {
                                     dangerouslySetInnerHTML={{ __html: formatearDescripcion(propiedad.descripcion) }}
                                 />
                             </div>
+
+                            {/* VIDEO */}
+                            {propiedad?.videos?.length > 1 && (
+                                <div className='cont-map-detalle'>
+                                    <p className='p-titulo-mapa' data-translate>Video de la propiedad</p>
+                                    <div className='cont-mapa-detalle'>
+                                        <ReactPlayer
+                                            url={propiedad.videos[0]}
+                                            controls
+                                            width="100%"
+                                            height="360px"
+                                        />
+                                    </div>
+                                </div>
+                            )}
 
                             {/* google map */}
                             <div className='cont-map-detalle'>

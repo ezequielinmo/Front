@@ -5,7 +5,7 @@ import Paginacion from '../../Components/Paginacion';
 import './styles.css';
 
 function ListaPropiedades({
-    allProps, vista,  currentPage, setCurrentPage, 
+    allProps, vista,  currentPage, onPageChange, 
     totalPropiedades, propiedadesPorPagina,
 }) {
     return (
@@ -83,7 +83,7 @@ function ListaPropiedades({
                     <Paginacion
                         allProps={allProps}
                         currentPage={currentPage}
-                        onPageChange={setCurrentPage}
+                        onPageChange={onPageChange}
                         totalPropiedades={totalPropiedades}
                         propiedadesPorPagina={propiedadesPorPagina}
                     />
