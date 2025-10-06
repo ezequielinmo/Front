@@ -38,7 +38,7 @@ function DetalleProp() {
         navigate(-1);
     };
 
-    //Función para compartir la propiedad
+    // 🟢 Función para compartir la propiedad
     const handleShare = async () => {
         const url = window.location.href;
         const title = propiedad?.tituloPublicacion || "Propiedad disponible";
@@ -57,7 +57,7 @@ function DetalleProp() {
         }
     };
 
-    //Formatear descripción
+    // 🟣 Formatear descripción
     function formatearDescripcion(texto) {
         if (!texto || typeof texto !== 'string') return '';
         const partes = texto.split(/(?<=[.:])\s*/);
