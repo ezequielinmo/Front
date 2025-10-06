@@ -27,7 +27,7 @@ function Home() {
     const [barrios, setBarrios] = useState([]);
     const [precioMin, setPrecioMin] = useState();
     const [precioMax, setPrecioMax] = useState();
-    const [destacadas, setDestacadas] = useState(false);
+    const [destacadas, /* setDestacadas */] = useState(false);
     const [listaProps, setListaProps] = useState(true);
     const [vistaMapa, setVistaMapa] = useState(false);
 

@@ -66,6 +66,7 @@ function ListaPropiedades({
                                     cantCocheras={p.cantCocheras}
                                     supTotal={p.supTotal}
                                     tipo={p.tipo}
+                                    destacadaEnWeb={p.destacadaEnWeb}
                                     vista={vista}
                                 />
                             </div>

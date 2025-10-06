@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import IconoUbicacion from '../../Images/Iconos/iconoUbicacion.png';
 import './styles.css';
 
-function CardEmprendimiento({ id, imagenes, direccionF, locacion, tituloPublicacion, tipo, descripcion }) {
+function CardEmprendimiento({ id, imagenes, direccionF, locacion, tituloPublicacion, fechaEntrega, descripcion }) {
     const [showDetail, setShowDetail] = useState(false);
 
     return (
@@ -33,6 +33,8 @@ function CardEmprendimiento({ id, imagenes, direccionF, locacion, tituloPublicac
                     </div>
 
                     <p className="card-horizontal-locacion">{locacion}</p>
+
+                    <p className="card-horizontal-locacion fechaEntrega">Fecha de entrega: {fechaEntrega}</p>
                 </div>
                 
                 {/* descripción */}

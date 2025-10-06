@@ -55,7 +55,7 @@ function PropsVenta() {
 
     return (
         <div className='cont-page-ventas'>
-            <h1 className='titulo-busqueda'>Propiedades en venta</h1>
+            <h1 className='titulo-busqueda'>Propiedades en Venta</h1>
             {
                 loading ? (
                     <Loading />

@@ -27,6 +27,7 @@ function Card({
     supDescubierta,
     unidadMedida,
     tipo,
+    destacadaEnWeb,
     vista
 }) {
     const venta = operacion.find(op => op.operacion === "Venta");
@@ -62,6 +63,13 @@ function Card({
                         </>
                     )}
                 </div>
+                {/* fueguito en destacadas */}
+                {/* {
+                    destacadaEnWeb &&
+                    <div className='cont-operacion'>
+                    <p >🔥</p>
+                </div>
+                } */}
             </div>
 
             {/* parte inferior con info + link */}
@@ -115,7 +123,7 @@ function Card({
                                 </p>
                             )}
                         </div>
-
+                        {/* btn me gusta y fav */}
                         <div className="cont-fav">
                             <MeGusta id={id} />
                             <Favorito

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProperty, resetProperty } from '../../Redux/Actions';
@@ -11,6 +11,7 @@ import ModalVideo from '../../Components/ModalVideo';
 import RoomIcon from '@mui/icons-material/Room';
 import VideocamIcon from '@mui/icons-material/Videocam';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import ShareIcon from '@mui/icons-material/Share';
 import Loading from '../../Components/Loading';
 import ListaPropsSimilares from '../../Components/ListaPropsSimilares';
 import './estilos.css';
@@ -18,31 +19,47 @@ import './estilos.css';
 function DetalleProp() {
 
     const loading = useSelector(state => state.loading);
-    const { id } = useParams();  //let id = props.match.params.id 
+    const { id } = useParams();
     const propiedad = useSelector(state => state.propiedad);
-    //obt el tipo de moneda
     const moneda = propiedad?.operacion?.[0]?.precios?.[0]?.moneda;
-    //otengo el precio de la prop
     const precio = propiedad?.operacion?.[0]?.precios?.[0]?.precio;
-    //obtengo el tipo de propiedad
     const tipoProp = propiedad?.tipo?.nombre;
-    //busco q operaciones vienen
     const venta = propiedad?.operacion?.find(op => op?.operacion === "Venta");
     const alquiler = propiedad?.operacion?.find(op => op?.operacion === "Alquiler");
-    //obtngo barrio
     const barrio = propiedad?.ubicacion?.barrio;
+
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const contexto = useContext(InmobiliariaContext);
 
-    const handleClickAtras = (e) => {
+    const [copiado, setCopiado] = useState(false);
+
+    const handleClickAtras = () => {
         navigate(-1);
     };
 
-    // Función para reemplazar puntos por saltos de línea
+    // 🟢 Función para compartir la propiedad
+    const handleShare = async () => {
+        const url = window.location.href;
+        const title = propiedad?.tituloPublicacion || "Propiedad disponible";
+        const text = `Mirá esta propiedad en Mendive Inmobiliaria: ${title}`;
+
+        if (navigator.share) {
+            try {
+                await navigator.share({ title, text, url });
+            } catch (error) {
+                console.log("Compartir cancelado o falló:", error);
+            }
+        } else {
+            navigator.clipboard.writeText(url);
+            setCopiado(true);
+            setTimeout(() => setCopiado(false), 2000);
+        }
+    };
+
+    // 🟣 Formatear descripción
     function formatearDescripcion(texto) {
         if (!texto || typeof texto !== 'string') return '';
-
         const partes = texto.split(/(?<=[.:])\s*/);
         const resultado = [];
         let enLista = false;
@@ -64,36 +81,30 @@ function DetalleProp() {
         return resultado.join('');
     }
 
-    //efecto para iniciar la Pag desd la parte SUPERIOR
     useEffect(() => {
-        // Desplaza la página hacia la parte superior cuando el componente se monta
         window.scrollTo(0, 0);
-    }, []); // El array vacío asegura que se ejecute solo al montar el componente
+    }, []);
 
     useEffect(() => {
         dispatch(getProperty(id));
-
-        return () => { dispatch(resetProperty()); }
+        return () => { dispatch(resetProperty()); };
     }, [dispatch, id]);
-
 
     return (
         <>
             {
                 loading ? (
-                    <>
-                        <Loading />
-                    </>
+                    <Loading />
                 ) : (
                     <div className='contGralDetalle'>
-                        {/* <div className='cont-fondo-trama'></div> */} {/* para fondo color o img */}
                         <div className='cont-detail'>
-                            {/* datos principales */}
+
+                            {/* CABECERA */}
                             <div className='info-1'>
                                 <div className='cont-btn_Y_tituilo-precio'>
                                     <div className='cont-btn_Y_tituilo'>
-                                        {/* btn atrás */}
-                                        <div>
+                                        <div className="cont-botones-header-detalle">
+                                            {/* Botón atrás */}
                                             <button
                                                 type='button'
                                                 onClick={handleClickAtras}
@@ -101,8 +112,22 @@ function DetalleProp() {
                                             >
                                                 <ArrowBackIcon />
                                             </button>
+
+                                            {/* Botón compartir */}
+                                            <button
+                                                type='button'
+                                                onClick={handleShare}
+                                                className='btn-compartir'
+                                            >
+                                                <ShareIcon />
+                                            </button>
+
+                                            {copiado && (
+                                                <span className="msg-copiado">¡Enlace copiado!</span>
+                                            )}
                                         </div>
-                                        {/* Titulo prop */}
+
+                                        {/* Título */}
                                         <div className='cont-titulo-detalle'>
                                             <p className='detalle-titulo-prop' data-translate>
                                                 {capitalizar(propiedad.tituloPublicacion)}
@@ -111,35 +136,34 @@ function DetalleProp() {
                                     </div>
                                 </div>
 
+                                {/* Dirección y precio */}
                                 <div className='cont-btns-direccion'>
-                                    {/* dirección */}
                                     <div className='cont-titulo-icono-direcc'>
                                         <RoomIcon sx={{ color: 'grey', marginLeft: '40px' }} />
                                         <p className='detalle-titulo-direccion'>
                                             {propiedad.direccion}
                                         </p>
                                     </div>
-                                    {/* precio */}
                                     <div className='cont-precio-detallee'>
                                         {venta && (
-                                            <p className='precio-detalle-prop'>Venta: {venta.precios[0].moneda}{formatMoney(venta.precios[0].precio)}</p>
+                                            <p className='precio-detalle-prop'>
+                                                Venta: {venta.precios[0].moneda}{formatMoney(venta.precios[0].precio)}
+                                            </p>
                                         )}
                                         {alquiler && (
-                                            <p className='precio-detalle-prop'>Alquiler: {alquiler.precios[0].moneda}{formatMoney(alquiler.precios[0].precio)}</p>
+                                            <p className='precio-detalle-prop'>
+                                                Alquiler: {alquiler.precios[0].moneda}{formatMoney(alquiler.precios[0].precio)}
+                                            </p>
                                         )}
                                     </div>
                                 </div>
                             </div>
 
-                            {/* carrusel y formulario */}
+                            {/* IMÁGENES Y DETALLE */}
                             <div className='cont-imgs-info'>
-                                {/* carrusel */}
                                 <div className='cont-imagenes'>
-                                    {/* botones multimedia */}
                                     <div className='cont-multimedia'>
-                                        {/* btn-video */}
-                                        {
-                                            propiedad?.video?.length &&
+                                        {propiedad?.video?.length &&
                                             <button
                                                 onClick={() => contexto.handleIsOpen()}
                                                 className='btn-video'
@@ -151,10 +175,8 @@ function DetalleProp() {
                                     </div>
                                     {
                                         propiedad?.imagenes
-                                            ?
-                                            <Carrusel imagenes={propiedad.imagenes} />
-                                            :
-                                            <p>No img</p>
+                                            ? <Carrusel imagenes={propiedad.imagenes} />
+                                            : <p>No img</p>
                                     }
                                 </div>
 
@@ -163,16 +185,15 @@ function DetalleProp() {
                                     <div className='cont-caract-prop'>
                                         <div className='cont-p-caract'>
                                             <span className='span-tilde-verde'>✔</span>
-                                            <p className='p-col-key' data-translate>Valor:</p>
-                                            <p className='p-col-value' data-translate>
-                                                {moneda}
-                                                {precio}
+                                            <p className='p-col-key'>Valor:</p>
+                                            <p className='p-col-value'>
+                                                {moneda}{precio}
                                             </p>
                                         </div>
 
                                         <div className='cont-p-caract'>
                                             <span className='span-tilde-verde'>✔</span>
-                                            <p className='p-col-key' data-translate>Tipo Op:</p>
+                                            <p className='p-col-key'>Tipo Op:</p>
                                             <p className='p-col-value'>
                                                 {venta?.operacion ? venta?.operacion : alquiler?.operacion}
                                             </p>
@@ -180,56 +201,56 @@ function DetalleProp() {
 
                                         <div className='cont-p-caract'>
                                             <span className='span-tilde-verde'>✔</span>
-                                            <p className='p-col-key' data-translate>Tipo:</p>
-                                            <p className='p-col-value' data-translate>{propiedad.tipo?.nombre}</p>
+                                            <p className='p-col-key'>Tipo:</p>
+                                            <p className='p-col-value'>{propiedad.tipo?.nombre}</p>
                                         </div>
 
                                         <div className='cont-p-caract'>
                                             <span className='span-tilde-verde'>✔</span>
-                                            <p className='p-col-key' data-translate>Ambientes:</p>
+                                            <p className='p-col-key'>Ambientes:</p>
                                             <p className='p-col-value'>{propiedad.ambientes}</p>
                                         </div>
 
                                         <div className='cont-p-caract'>
                                             <span className='span-tilde-verde'>✔</span>
-                                            <p className='p-col-key' data-translate>Dormitorios:</p>
+                                            <p className='p-col-key'>Dormitorios:</p>
                                             <p className='p-col-value'>{propiedad.dormitorios}</p>
                                         </div>
 
                                         <div className='cont-p-caract'>
                                             <span className='span-tilde-verde'>✔</span>
-                                            <p className='p-col-key' data-translate>Baños:</p>
+                                            <p className='p-col-key'>Baños:</p>
                                             <p className='p-col-value'>{propiedad.baños}</p>
                                         </div>
 
                                         <div className='cont-p-caract'>
                                             <span className='span-tilde-verde'>✔</span>
-                                            <p className='p-col-key' data-translate>Dirección:</p>
+                                            <p className='p-col-key'>Dirección:</p>
                                             <p className='p-col-value'>{propiedad.direccionF}</p>
                                         </div>
 
                                         <div className='cont-p-caract'>
                                             <span className='span-tilde-verde'>✔</span>
-                                            <p className='p-col-key' data-translate>Sup. Total:</p>
+                                            <p className='p-col-key'>Sup. Total:</p>
                                             <p className='p-col-value'>{propiedad.supTotal}{propiedad.unidadMedida}</p>
                                         </div>
 
                                         <div className='cont-p-caract'>
                                             <span className='span-tilde-verde'>✔</span>
-                                            <p className='p-col-key' data-translate>Barrio:</p>
-                                            <p className='p-col-value' data-translate>{barrio}</p>
+                                            <p className='p-col-key'>Barrio:</p>
+                                            <p className='p-col-value'>{barrio}</p>
                                         </div>
 
                                         <div className='cont-p-caract'>
                                             <span className='span-tilde-verde'>✔</span>
-                                            <p className='p-col-key' data-translate>Expensas:</p>
+                                            <p className='p-col-key'>Expensas:</p>
                                             <p className='p-col-value'>{propiedad.expensas}</p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            {/* descrip */}
+                            {/* DESCRIPCIÓN */}
                             <div className="cont-texto-descrip-detalle">
                                 <p className='titulo-descrip-prop'>Detalle Propiedad</p>
                                 <div
@@ -241,7 +262,7 @@ function DetalleProp() {
                             {/* VIDEO */}
                             {propiedad?.videos?.length > 1 && (
                                 <div className='cont-map-detalle'>
-                                    <p className='p-titulo-mapa' data-translate>Video de la propiedad</p>
+                                    <p className='p-titulo-mapa'>Video de la propiedad</p>
                                     <div className='cont-mapa-detalle'>
                                         <ReactPlayer
                                             url={propiedad.videos[0]}
@@ -253,33 +274,37 @@ function DetalleProp() {
                                 </div>
                             )}
 
-                            {/* google map */}
+                            {/* MAPA */}
                             <div className='cont-map-detalle'>
-                                <p className='p-titulo-mapa' data-translate>Ubicacion Propiedad</p>
+                                <p className='p-titulo-mapa'>Ubicación Propiedad</p>
                                 <div className='cont-mapa-detalle'>
                                     <MapProp lat={propiedad.geoLat} lng={propiedad.geoLong} />
                                 </div>
                             </div>
 
-                            {/* Lista propiedades similares */}
+                            {/* PROPIEDADES SIMILARES */}
                             <div className="cont-lista-props-similares">
-                                <h2 className='titulo-props-similares' data-translate>Propiedades recomendadas para tu busqueda</h2>
+                                <h2 className='titulo-props-similares'>Propiedades recomendadas para tu búsqueda</h2>
                                 <div className="cont-comp-props-similares">
-                                    <ListaPropsSimilares precioProp={precio} tipoProp={tipoProp} vista={"ambas"} idProp={id} />
+                                    <ListaPropsSimilares
+                                        precioProp={precio}
+                                        tipoProp={tipoProp}
+                                        vista={"ambas"}
+                                        idProp={id}
+                                    />
                                 </div>
                             </div>
 
-                            {/* Modal Video */}
-                            {
-                                contexto.isOpenModalVideo &&
-                                <ModalVideo video={propiedad.videos[0]?.player_url} />
+                            {/* MODAL VIDEO */}
+                            {contexto.isOpenModalVideo &&
+                                <ModalVideo video={propiedad.videos?.[0]?.player_url} />
                             }
                         </div>
                     </div>
                 )
             }
         </>
-    )
+    );
 }
 
 export default DetalleProp;

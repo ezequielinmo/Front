@@ -61,7 +61,16 @@
 .arrow-right {
     right: 10px;
 }
-
+.cont-operacion {
+    width: 100%;
+    height: 40px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 /* parte inferior con info + link */
 .cont-info-link {
     position: relative;
