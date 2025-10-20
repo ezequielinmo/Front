@@ -1,27 +1,21 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useContext } from 'react';
+import { InmobiliariaContext } from '../../Context';
 import ListaFavoritos from '../../Components/ListaFavoritos';
 import './styles.css';
 
 function FavoritosPage() {
-    const [fav, setFav] = useState([]);
+    const { favoritos } = useContext(InmobiliariaContext);
 
-    // Desplaza la página hacia la parte superior cuando el componente se monta
+    // Desplaza la página hacia arriba al montar
     useEffect(() => {
         window.scrollTo(0, 0);
-    }, []); // El array vacío asegura que se ejecute solo al montar el componente
-
-    //me traigo los favoritos desde el localStorage
-    useEffect(()=>{
-        let listaFav = JSON.parse(localStorage.getItem('favorites')) || [];
-        setFav(listaFav);
-    },[]);
+    }, []);
 
     return (
         <div className='page-favoritos'>
-            <ListaFavoritos allProps={fav} />            
+            <ListaFavoritos allProps={favoritos} />
         </div>
-    )
-    
+    );
 }
 
 export default FavoritosPage;

@@ -5,28 +5,36 @@
     border-radius: 16px;
     background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(10px);
-    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
     display: flex;
     flex-direction: column;
     gap: 15px;
     opacity: 0;
     transform: translateY(30px);
     animation: fadeInUp 1s ease forwards;
-    animation-delay: 3s; /* aparece 3s después */
+    animation-delay: 3s;
+    /* aparece 3s después */
 }
+
 /* estilos contenedor gral para las vistas de Venta y Alquiler */
-.cont-filtrosSelect-Venta{
-    width: 80%;
-    min-height: 120px;
+.cont-filtrosSelect-Venta {
+    width: 60%;
     height: auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: start;
     margin-top: 10px;
     padding: 8px;
     border-radius: 5px;
-    background-color: rgb(80, 80, 80);
+    background-color: #444444cf;
+}
+
+.cont-selects-filtros-Venta {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 @keyframes fadeInUp {
@@ -49,6 +57,7 @@
     width: 100%;
     text-align: left;
 }
+
 /* para vistas Ventas y Alq */
 .cont-filtro-titulo-Venta {
     height: 45px;
@@ -57,17 +66,21 @@
     align-items: center;
     color: white;
 }
+
 .titulo-filtros {
     font-size: 1.6rem;
     font-weight: 600;
     color: #fff;
     letter-spacing: 1px;
+    margin: 0;
 }
+
 /* para vistas Ventas y Alq */
 .titulo-filtros-Venta {
     font-size: 1.2rem;
     font-weight: 600;
 }
+
 /* selects */
 .cont-selects-filtros {
     width: 100%;
@@ -77,9 +90,31 @@
     justify-content: center;
 }
 
+.cont-items-noPrecio {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* para venta Alq */
+.cont-tipoOp_y_tipoProp-Venta {
+    display: flex;
+    justify-content: center;
+}
+
+.cont-op-tipoP,
+.cont-tipo-prop,
+.cont-amb-barrio,
+.cont-amb {
+    width: 45%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .select-tipoProp {
-    flex: 1 1 200px;
-    min-width: 180px;
+    width: 230px;
     padding: 12px;
     border: none;
     border-radius: 12px;
@@ -87,7 +122,7 @@
     background: rgba(255, 255, 255, 0.85);
     color: #333;
     cursor: pointer;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
     transition: all 0.3s ease;
 }
 
@@ -105,8 +140,8 @@
     gap: 10px;
     padding: 5px;
     border-radius: 12px;
-    background: rgba(255,255,255,0.9);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     flex-wrap: wrap;
     justify-content: center;
 }
@@ -190,28 +225,118 @@
     transform: scale(1.2);
 }
 
-/* responsive */
-@media screen and (max-width: 768px) {
-    .cont-filtrosSelect {
-        width: 95%;
-        padding: 15px;
-    }
+/* Responsive */
 
-    .cont-selects-filtros {
-        flex-direction: column;
-        align-items: stretch;
+@media screen and (max-width: 1100px) {
+
+    .cont-items-noPrecio {
+        width: 80%;
+        display: flex;
+        flex-wrap: wrap;
     }
 
     .select-tipoProp {
-        width: 100%;
+        width: 200px;
+        font-size: 15px;
+        margin-bottom: 5px;
     }
 
-    .cont-filtro-precioMaxMin {
+    /* estilos contenedor gral para las vistas de Venta y Alquiler */
+    .cont-filtrosSelect-Venta {
+        width: 80%;
+        margin-bottom: 20px;
+        /* background-color: var(--fondo-navbar); */
+    }
+}
+
+@media screen and (max-width: 860px) {
+    .cont-filtrosSelect {
+        width: 95%;
+        height: auto;
+        padding: 12px;
+        border-radius: 10px;
+        gap: 10px;
+    }
+
+    .subCont-filtrosSelect {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .cont-selects-filtros {
+        width: 95%;
+        display: flex;
         flex-direction: column;
-        gap: 8px;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .cont-items-noPrecio {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .cont-op-tipoP,
+    .cont-tipo-prop,
+    .cont-amb-barrio,
+    .cont-amb {
+        width: 48%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .select-tipoProp {
+        width: 95%;
+        font-size: 12px;
     }
 
     .input-precioMin {
-        width: 100%;
+        width: 110px;
+        padding: 8px 10px;
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-width: 425px) {
+    .cont-filtro-precioMaxMin {
+        position: relative;
+    }
+
+    .cont-filtro-precioMaxMin>label {
+        position: absolute;
+        top: -8px;
+        left: 10px;
+        padding: 2px 5px;
+        font-size: 12px;
+        border-radius: 5px;
+        background: rgba(255, 255, 255, 0.85);
+    }
+
+    .cont-filtro-precioMaxMin>input {
+        margin-top: 10px;
+    }
+
+    .barrio-item>span {
+        font-size: 12px;
+    }
+
+    /* estilos contenedor gral para las vistas de Venta y Alquiler */
+    .cont-filtrosSelect-Venta {
+        width: 90%;
+        margin-bottom: 20px;
+        /* background-color: var(--fondo-navbar); */
+    }
+
+    .cont-filtro-titulo-Venta{
+        height: 30px;
+    }
+
+    .titulo-filtros-Venta{
+        color: white;
     }
 }

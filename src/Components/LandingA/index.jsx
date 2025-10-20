@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import FiltrosSelect from '../../Components/FiltrosSelect';
 import Video from '../../Images/videoLand.mp4'
 import './styles.css'
+import Flecha from '../FlechaAbajo';
 
 function LandigA({
     setCurrentPage,
@@ -49,10 +50,7 @@ function LandigA({
 
             {/* flecha */}
             <div className='cont-flecha-home'>
-                <div className='flecha-home'>
-                    <div className='linea linea1'></div>
-                    <div className='linea linea2'></div>
-                </div>
+                <Flecha/>
             </div>
         </div>
     )

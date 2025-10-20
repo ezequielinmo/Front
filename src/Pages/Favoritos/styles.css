@@ -1,3 +1,148 @@
 .page-favoritos{
     min-height: 100lvh;
 }
+
+.cont-listaProps-fav {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cont-titulos {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: 0;
+    /* background-color: #dfdede; */
+}
+
+.linea-destacadas {
+    flex: 1;
+    height: 2px;
+    background-color: #ccc;
+    margin: 0 10px;
+}
+
+.titulo-props-destacadas {
+    font-size: 26px;
+    font-weight: 600;
+    color: #333;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+/* ----- Layout general ----- */
+.layout-favoritos {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+/* ----- Barra lateral (solo desktop/tablet) ----- */
+.barra-filtros-fav {
+    width: 230px;
+    height: 100vh;
+    min-width: 200px;
+    background-color: #dfdede;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;    
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    margin-top: 20px;
+}
+
+.bloque-filtro h3 {
+    margin-bottom: 10px;
+    color: #333;
+    font-size: 18px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #eeeded;
+    text-align: center;
+}
+
+.bloque-filtro button {
+    display: block;
+    width: 100%;
+    background: none;
+    border: none;
+    text-align: left;
+    padding: 6px 0;
+    font-size: 15px;
+    color: #555;
+    cursor: pointer;
+    transition: color 0.2s, font-weight 0.2s;
+}
+
+.bloque-filtro button:hover {
+    color: #000;
+}
+
+.bloque-filtro button.activo {
+    color: #000;
+    font-weight: 600;
+}
+
+/* ----- Lista de propiedades ----- */
+.cont-card-lista-props-fav {
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+/* ----- Filtros superiores (solo mobile) ----- */
+.filtros-superiores {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.cont-filtros-fav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.cont-filtros-fav button {
+    padding: 8px 14px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.cont-filtros-fav button:hover {
+    background-color: #eee;
+}
+
+.cont-filtros-fav button.activo {
+    background-color: #333;
+    color: white;
+    border-color: #333;
+}
+
+/* ----- Responsive ----- */
+@media screen and (max-width: 900px) {
+    .layout-favoritos {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .barra-filtros-fav {
+        display: none;
+    }
+
+    .filtros-superiores {
+        display: flex;
+    }
+}

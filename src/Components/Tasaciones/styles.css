@@ -8,17 +8,6 @@
     margin-top: 80px;
 }
 
-.cont-mini-titulo-tasaciones {
-    width: 100%;
-    display: flex;
-    justify-content: start;
-    align-items: start;
-}
-
-.cont-mini-titulo-tasaciones p {
-    margin-left: 50px;
-}
-
 .cont-titulos-tasaciones {
     width: 100%;
     height: 300px;
@@ -28,6 +17,23 @@
     align-items: start;
     background-color: #666;
 }
+
+.cont-mini-titulo-tasaciones {
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    align-items: start;
+}
+
+.titulo-tasaciones {
+    font-size: 30px;
+    font-weight: bold;
+    margin-left: 50px;
+    margin-bottom: 0;
+    color: white;
+}
+
+
 
 .cont-titulo-1-tasaciones {
     width: 100%;
@@ -39,25 +45,23 @@
 
 .cont-titulo-2-tasaciones {
     width: 100%;
-    height: 50%;
+    height: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
 }
 
-.mini-titulo-tasaciones,
 .titulo-1-tasaciones,
-.titulo-2-tasaciones {
-    font-size: 2.2rem;
+.titulo-2-tasaciones,
+.titulo-3-tasaciones {
     font-weight: bold;
     margin-left: 50px;
-    color: #333;
     margin-bottom: 0;
     color: white;
 }
 
-.mini-titulo-tasaciones {
-    font-size: 1rem;
-}
-
-.titulo-2-tasaciones {
+.titulo-3-tasaciones {
     font-size: 2rem;
     font-weight: bold;
 }
@@ -97,5 +101,41 @@
 @media screen and (max-width: 500px) {
     .cont-gral-tasaciones {
         margin-top: 60px;
+    }
+
+    .cont-titulos-tasaciones {
+        width: 100%;
+        height: 200px;
+    }
+
+    .cont-titulo-1-tasaciones {
+        height: 25%;
+        justify-content: start;
+        align-items: center;
+    }
+
+    .titulo-tasaciones {
+        font-size: 25px;
+        margin: 0;
+        margin-left: 20px;
+    }
+
+    .cont-titulo-2-tasaciones {
+        width: 100%;
+        height: 75%;
+        display: flex;
+        justify-content: center;
+        align-items: start;
+    }
+
+    .titulo-2-tasaciones,
+    .titulo-3-tasaciones {
+        font-size: 20px;
+        margin: 0;
+        margin-left: 20px;
+    }
+
+    .titulo-3-tasaciones {
+        margin-top: 10px;
     }
 }

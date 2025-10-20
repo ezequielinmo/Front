@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProps } from '../../Redux/Actions';
 import FiltrosSelect from '../../Components/FiltrosSelect';
+import Flecha from '../../Components/FlechaAbajo';
 import ListaPropiedades from '../../Components/ListaPropiedades';
 import MapaPropiedades from '../../Components/MapProps';
 import Loading from '../../Components/Loading';
-
 
 function PropsVenta() {
 
@@ -55,23 +55,32 @@ function PropsVenta() {
 
     return (
         <div className='cont-page-ventas'>
-            <h1 className='titulo-busqueda'>Propiedades en Alquiler</h1>
             {
                 loading ? (
                     <Loading />
                 ) : (
                     <div className='cont-lista-propsVentas'>
-                        {/* filtros */}
-                        <FiltrosSelect
-                            verTipoOperacion={false}
-                            setCurrentPage={setCurrentPage}
-                            setOperacion={setOperacion}
-                            setTipoPropiedad={setTipoPropiedad}
-                            setBarrios={setBarrios}
-                            setAmbientes={setAmbientes}
-                            setPrecioMin={setPrecioMin}
-                            setPrecioMax={setPrecioMax}
-                        />
+                        <div className='cont-titulo-Y-filtros'>
+                            <div className='cont-Titulos-VentaAlq'>
+                                <h1 className='titulo-venta-h1'>Alquilá la propiedad que estás buscás</h1>
+                                <h4 className='titulo-venta-h4'>Accedé a una oferta bien valuada y seleccionada criteriosamente por nuestro staff.</h4>
+                            </div>
+                            {/* filtros */}
+                            <div className='cont-filtros-ventaAlq'>
+                                <FiltrosSelect
+                                    verTipoOperacion={false}
+                                    setCurrentPage={setCurrentPage}
+                                    setOperacion={setOperacion}
+                                    setTipoPropiedad={setTipoPropiedad}
+                                    setBarrios={setBarrios}
+                                    setAmbientes={setAmbientes}
+                                    setPrecioMin={setPrecioMin}
+                                    setPrecioMax={setPrecioMax}
+                                />
+                            </div>
+                            {/* Flecha */}
+                            <Flecha />
+                        </div>
                         {/* Lista props */}
                         <div className='cont-home-props'>
                             <div className='cont-titulo-y-lista-emp'>

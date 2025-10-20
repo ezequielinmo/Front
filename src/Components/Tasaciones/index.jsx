@@ -14,13 +14,12 @@ function Tasaciones() {
         <div className='cont-gral-tasaciones'>
             <div className='cont-titulos-tasaciones'>
                 <div className='cont-titulo-1-tasaciones'>
-                    <h4 className='mini-titulo-tasaciones'>TASACIONES</h4>
+                    <h4 className='titulo-tasaciones'>TASACIONES</h4>
                 </div>
-                <div className='cont-titulo-1-tasaciones'>
-                    <h1 className='titulo-1-tasaciones'>¿Necesitas saber cuál es el valor de tu propiedad?</h1>
-                </div>
+
                 <div className='cont-titulo-2-tasaciones'>
-                    <h2 className='titulo-2-tasaciones'>Nosotros te ayudamos</h2>
+                    <h1 className='titulo-2-tasaciones'>¿Necesitas saber cuál es el valor de tu propiedad?</h1>
+                    <h2 className='titulo-3-tasaciones'>Nosotros te ayudamos</h2>
                 </div>
             </div>
 
