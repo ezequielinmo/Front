@@ -27,6 +27,11 @@ function DetalleProp() {
     const venta = propiedad?.operacion?.find(op => op?.operacion === "Venta");
     const alquiler = propiedad?.operacion?.find(op => op?.operacion === "Alquiler");
     const barrio = propiedad?.ubicacion?.barrio;
+    // Convierte la URL /embed/ a formato válido para ReactPlayer
+    const videoUrl = propiedad?.videos?.[0]?.player_url
+        ? `${propiedad.videos[0].player_url}?autoplay=0&modestbranding=1&rel=0`
+        : null;
+    console.log("urlVideo: ", videoUrl)
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -38,7 +43,7 @@ function DetalleProp() {
         navigate(-1);
     };
 
-    // 🟢 Función para compartir la propiedad
+    // Función para compartir la propiedad
     const handleShare = async () => {
         const url = window.location.href;
         const title = propiedad?.tituloPublicacion || "Propiedad disponible";
@@ -57,7 +62,7 @@ function DetalleProp() {
         }
     };
 
-    // 🟣 Formatear descripción
+    // Formatear descripción
     function formatearDescripcion(texto) {
         if (!texto || typeof texto !== 'string') return '';
         const partes = texto.split(/(?<=[.:])\s*/);
@@ -98,7 +103,6 @@ function DetalleProp() {
                 ) : (
                     <div className='contGralDetalle'>
                         <div className='cont-detail'>
-
                             {/* CABECERA */}
                             <div className='info-1'>
                                 <div className='cont-btn_Y_tituilo-precio'>
@@ -139,7 +143,7 @@ function DetalleProp() {
                                 {/* Dirección y precio */}
                                 <div className='cont-btns-direccion'>
                                     <div className='cont-titulo-icono-direcc'>
-                                        <RoomIcon sx={{ color: 'grey', marginLeft: '40px' }} />
+                                        <RoomIcon sx={{ color: 'white' }} />
                                         <p className='detalle-titulo-direccion'>
                                             {propiedad.direccion}
                                         </p>
@@ -162,8 +166,9 @@ function DetalleProp() {
                             {/* IMÁGENES Y DETALLE */}
                             <div className='cont-imgs-info'>
                                 <div className='cont-imagenes'>
-                                    <div className='cont-multimedia'>
-                                        {propiedad?.video?.length &&
+                                    {
+                                        propiedad?.videos?.length &&
+                                        <div className='cont-multimedia'>
                                             <button
                                                 onClick={() => contexto.handleIsOpen()}
                                                 className='btn-video'
@@ -171,8 +176,8 @@ function DetalleProp() {
                                                 <VideocamIcon />
                                                 Ver video
                                             </button>
-                                        }
-                                    </div>
+                                        </div>
+                                    }
                                     {
                                         propiedad?.imagenes
                                             ? <Carrusel imagenes={propiedad.imagenes} />
@@ -259,20 +264,26 @@ function DetalleProp() {
                                 />
                             </div>
 
-                            {/* VIDEO */}
-                            {propiedad?.videos?.length > 1 && (
+                            {propiedad?.videos?.length > 0 && (
                                 <div className='cont-map-detalle'>
                                     <p className='p-titulo-mapa'>Video de la propiedad</p>
+                                    <p>{propiedad.videos[0].description}</p>
+
                                     <div className='cont-mapa-detalle'>
-                                        <ReactPlayer
-                                            url={propiedad.videos[0]}
-                                            controls
+                                        <iframe
                                             width="100%"
-                                            height="360px"
-                                        />
+                                            height="360"
+                                            src={`${propiedad.videos[0].player_url}?autoplay=0&rel=0`}
+                                            title="Video de la propiedad"
+                                            frameBorder="0"
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                            allowFullScreen
+                                        ></iframe>
                                     </div>
                                 </div>
                             )}
+
+
 
                             {/* MAPA */}
                             <div className='cont-map-detalle'>

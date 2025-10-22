@@ -44,6 +44,7 @@
     margin-top: 10px;
     margin-bottom: 10px;
     border-radius: 10px;
+    background-color: #444;
 }
 
 .cont-btn_Y_tituilo-precio {
@@ -67,6 +68,8 @@
 
 /* btn volvel */
 .btn-volver {
+    width: 30px;
+    height: 30px;
     border: none;
     color: red;
     background-color: transparent;
@@ -109,7 +112,7 @@
     margin-left: 10px;
     font-size: 28px;
     font-weight: 300;
-    color: black;
+    color: white;
     z-index: 1;
     /* para q qde sobre el fondo gris */
 }
@@ -117,7 +120,7 @@
 .detalle-titulo-direccion {
     margin: 3px;
     font-size: 20px;
-    color: rgb(23, 23, 23);
+    color: white;
 }
 
 .cont-precio-detalle {
@@ -132,6 +135,7 @@
     font-weight: 500;
     margin-right: 20px;
     z-index: 1;
+    color: white;
     /* para q qde sobre el fondo gris */
 }
 
@@ -383,6 +387,8 @@
 }
 
 .btn-compartir {
+    width: 30px;
+    height: 30px;
     background-color: #ffffff;
     border: 2px solid #ccc;
     border-radius: 50%;
@@ -427,9 +433,17 @@
 }
 
 @keyframes fadeOut {
-    0% { opacity: 1; }
-    80% { opacity: 1; }
-    100% { opacity: 0; }
+    0% {
+        opacity: 1;
+    }
+
+    80% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
 }
 
 /* Configuración para impresión en A4 */
@@ -466,8 +480,20 @@
 
 /* responsive */
 @media screen and (max-width: 1250px) {
-    .info-1 {
-        width: 100%;
+    .cont-btn_Y_tituilo-precio,
+    .cont-btn_Y_tituilo {
+        height: auto;
+    }
+
+    .cont-titulo-detalle {
+        height: auto;
+        display: flex;
+        justify-content: center;
+    }
+
+    .detalle-titulo-prop {
+        padding: 0;
+        margin: 0;
     }
 
     .cont-imgs-info {
@@ -511,35 +537,12 @@
 }
 
 @media screen and (max-width: 950px) {
-
-    /* estilos seccion titulo y btn atras, video */
-    .info-1 {
-        width: 95%;
-        height: 80px;
+    .detalle-titulo-prop {
+        font-size: 20px;
     }
 
-    .cont-fondo-trama {
-        height: 675px;
-    }
-
-    .cont-btn_Y_tituilo-precio {
-        width: 100%;
-        height: auto;
-    }
-
-    .cont-btn_Y_tituilo {
-        width: 70%;
-    }
-
-    .cont-titulo-detalle {
-        width: 99%;
-    }
-
-    .cont-precio-detalle {
-        width: 30%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+    .detalle-titulo-direccion {
+        font-size: 17px;
     }
 
     .cont-btns-direccion {
@@ -547,11 +550,6 @@
         display: flex;
         justify-content: start;
         align-items: center;
-    }
-
-    .detalle-titulo-prop,
-    .detalle-titulo-direccion {
-        font-size: 17px;
     }
 
     .cont-descrip {
@@ -603,47 +601,68 @@
 
     .info-1 {
         width: 95%;
-        height: 80px;
-    }
-
-    .cont-btn_Y_tituilo-precio {
-        width: 100%;
         height: auto;
-    }
-
-    .cont-btn_Y_tituilo {
-        width: 70%;
-    }
-
-    .cont-titulo-detalle {
-        width: 99%;
-    }
-
-    .cont-precio-detalle {
-        width: 30%;
         display: flex;
         justify-content: center;
         align-items: center;
     }
 
-    .cont-btns-direccion {
+    .cont-btn_Y_tituilo-precio {
+        width: 100%;
+        height: auto;
+        margin-bottom: 5px;
+    }
+
+    .cont-btn_Y_tituilo {
         width: 100%;
         display: flex;
-        justify-content: start;
+        justify-content: center;
         align-items: center;
     }
 
-    .detalle-titulo-prop,
+    .cont-botones-header-detalle {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+        padding: 3px;
+    }
+
+
+    .cont-titulo-detalle {
+        width: 99%;
+        height: 100%;
+        padding: 3px;
+    }
+
+    .cont-btns-direccion {
+        width: 100%;
+    }
+
+    .cont-titulo-icono-direcc {
+        width: 50%;
+        display: flex;
+        justify-content: start;
+    }
+    .cont-precio-detallee {
+        width: 50%;
+        display: flex;
+        justify-content: end;
+        align-items: center;
+    }
+
+    .detalle-titulo-prop {
+        font-size: 18px;
+    }
+
     .detalle-titulo-direccion {
+        width: 100%;
         font-size: 15px;
     }
 
-    .precio-detalle {
+    .precio-detalle-prop {
         font-size: 15px;
-    }
-
-    .moneda-detalle {
-        font-size: 12px;
     }
 
     /* estilos seccion imagenes */
@@ -667,9 +686,10 @@
         margin-bottom: 15px;
     }
 
-    .cont-caract-prop{
+    .cont-caract-prop {
         margin-bottom: 10px;
     }
+
     /* cont descr  */
     .cont-descrip {
         width: 98%;

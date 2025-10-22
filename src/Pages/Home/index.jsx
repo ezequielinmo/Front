@@ -11,6 +11,7 @@ import Institucional from '../../Components/Institucional';
 import MapaPropiedades from '../../Components/MapProps';
 import BotonVerTodas from '../../Components/Botones/BotonVerTodas';
 import './styles.css';
+import GoogleReviewsWidget from '../../Components/GoogleComentarios';
 
 function Home() {
 
@@ -130,6 +131,9 @@ function Home() {
 
                 {/* Institucional */}
                 <Institucional />
+
+                {/* comentarios Google */}
+                {/* <GoogleReviewsWidget /> */}
             </div>
         )
     )

@@ -9,7 +9,7 @@ const InmobiliariaProvider = ({ children }) => {
   const [nombreUser, setNombreUser] = useState('');
   const [isOpenModalVideo, setisOpenModalVideo] = useState(false);
 
-  // ✅ Inicializa favoritos leyendo directamente de localStorage una sola vez
+  // Inicializa favoritos leyendo directamente de localStorage una sola vez
   const [favoritos, setFavoritos] = useState(() => {
     try {
       const favsGuardados = localStorage.getItem("favorites");
@@ -20,15 +20,15 @@ const InmobiliariaProvider = ({ children }) => {
     }
   });
 
-  // 🧠 Login / Logout
+  // Login / Logout
   const login = () => setIsAuthenticated(true);
   const logout = () => setIsAuthenticated(false);
 
-  // 🎬 Modal video
+  // Modal video
   const handleIsOpen = () => setisOpenModalVideo(true);
   const handleIsClose = () => setisOpenModalVideo(false);
 
-  // 🧍‍♂️ Cargar usuario si hay uno guardado
+  // Cargar usuario si hay uno guardado
   useEffect(() => {
     const userLogin = userData();
     if (userLogin) {
@@ -38,7 +38,7 @@ const InmobiliariaProvider = ({ children }) => {
     }
   }, []);
 
-  // 💾 Guardar favoritos en localStorage cada vez que cambian
+  // Guardar favoritos en localStorage cada vez que cambian
   useEffect(() => {
     try {
       localStorage.setItem("favorites", JSON.stringify(favoritos));
@@ -47,7 +47,7 @@ const InmobiliariaProvider = ({ children }) => {
     }
   }, [favoritos]);
 
-  // ❤️ Agregar o quitar favoritos
+  // Agregar o quitar favoritos
   const toggleFavorito = (prop) => {
     setFavoritos((prev) => {
       const existe = prev.find((f) => f.id === prop.id);
