@@ -61,7 +61,7 @@
     .contGralListaP,
     .cont-card-listaProps,
     .contListaP{
-        width: 100%;
+        width: 98%;
         display: flex;
         justify-content: center;
         align-items: center;

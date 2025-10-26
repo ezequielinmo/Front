@@ -12,7 +12,7 @@ function CardEmprendimientoTel({ id, imagenes, direccionF, locacion, tituloPubli
     return (
         <div className='cont-card-empTel'>
             {/* img + animacion + abre detalle */}
-            <NavLink to={`/detalle/${id}`} className='navLink-card'>
+            <NavLink to={`/detalleEmp/${id}`} className='navLink-card'>
                 <div
                     onMouseEnter={() => setShowDetail(true)}
                     onMouseLeave={() => setShowDetail(false)}

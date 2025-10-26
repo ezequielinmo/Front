@@ -1,5 +1,6 @@
 .contModalVideo{
     width: 90%;
+    max-width: 1200px;
     height: 620px;
     position: absolute;
     top: 80px;

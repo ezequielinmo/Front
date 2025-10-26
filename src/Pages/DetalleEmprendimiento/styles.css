@@ -1,0 +1,10 @@
+.fondoEmp{
+    width: 90%;
+    max-width: 1200px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    background-color: #444;
+}

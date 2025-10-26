@@ -10,8 +10,9 @@ import ListaEmprendimientos from '../../Components/ListaEmprendimientos';
 import Institucional from '../../Components/Institucional';
 import MapaPropiedades from '../../Components/MapProps';
 import BotonVerTodas from '../../Components/Botones/BotonVerTodas';
-import './styles.css';
 import GoogleReviewsWidget from '../../Components/GoogleComentarios';
+import './styles.css';
+
 
 function Home() {
 
@@ -133,7 +134,7 @@ function Home() {
                 <Institucional />
 
                 {/* comentarios Google */}
-                {/* <GoogleReviewsWidget /> */}
+                <GoogleReviewsWidget />
             </div>
         )
     )

@@ -3,7 +3,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getEmprendimiento, resetEmprendimientos } from '../../Redux/Actions';
 import { InmobiliariaContext } from '../../Context';
-import { capitalizar } from '../../Helps';
 import ReactPlayer from "react-player";
 import Carrusel from '../../Components/Carrusel';
 import MapProp from '../../Components/MapaProp';
@@ -13,6 +12,7 @@ import VideocamIcon from '@mui/icons-material/Videocam';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ShareIcon from '@mui/icons-material/Share';
 import Loading from '../../Components/Loading';
+import './styles.css';
 
 function DetalleProp() {
 
@@ -20,8 +20,8 @@ function DetalleProp() {
     const { id } = useParams();  //let id = props.match.params.id 
     const emprendimiento = useSelector(state => state.emprendimiento);
     const navigate = useNavigate();
-    const dispatch = useDispatch();    
-    const contexto = useContext(InmobiliariaContext); 
+    const dispatch = useDispatch();
+    const contexto = useContext(InmobiliariaContext);
 
     const [copiado, setCopiado] = useState(false);
 
@@ -120,7 +120,7 @@ function DetalleProp() {
                                         {/* Título */}
                                         <div className='cont-titulo-detalle'>
                                             <p className='detalle-titulo-prop' data-translate>
-                                                {capitalizar(emprendimiento.tituloPublicacion)}
+                                                {emprendimiento.tituloPublicacion}
                                             </p>
                                         </div>
                                     </div>
@@ -138,15 +138,26 @@ function DetalleProp() {
                             </div>
 
                             {/* IMÁGENES Y DETALLE */}
-                            <div className='cont-imgs-info'>
+                            <div className='fondoEmp'>
                                 <div className='cont-imagenes'>
-                                    
-                                    {
-                                        emprendimiento?.imagenes
-                                            ? <Carrusel imagenes={emprendimiento.imagenes} />
-                                            : <p>No img</p>
-                                    }
-                                </div>
+                                {
+                                    emprendimiento?.videos?.length &&
+                                    <div className='cont-multimedia'>
+                                        <button
+                                            onClick={() => contexto.handleIsOpen()}
+                                            className='btn-video'
+                                        >
+                                            <VideocamIcon />
+                                            Ver video
+                                        </button>
+                                    </div>
+                                }
+                                {
+                                    emprendimiento?.imagenes
+                                        ? <Carrusel imagenes={emprendimiento.imagenes} />
+                                        : <p>No img</p>
+                                }
+                            </div>
                             </div>
 
                             {/* DESCRIPCIÓN */}
