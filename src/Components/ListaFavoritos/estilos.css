@@ -52,7 +52,7 @@
     background-color: rgba(189, 189, 189, 0.87);
 }
 .cont-filtros-fav button {
-    width: 110px;
+    width: 120px;
     display: flex;
     justify-content: center;
     align-items: center;    
@@ -95,5 +95,19 @@
         font-weight: 500;
         font-size: 14px;
         margin-top: 3px;
+    }
+}
+
+@media screen and (max-width: 600px){
+    .cont-card-Fav-listaProps{
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 400px){
+    .cont-card-Fav-listaProps{
+        width: 98%;
+        display: flex;
+        justify-content: center;
     }
 }

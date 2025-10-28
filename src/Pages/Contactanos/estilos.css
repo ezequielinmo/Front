@@ -1,6 +1,7 @@
 .contGralFormulario {
     width: 100%;
-    height: 100lvh;
+    min-height: 90vh;
+    height: auto;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -67,33 +68,37 @@
 }
 
 
-@media screen and (max-width: 600px){
-    .contGralFormulario{
-        height: auto;
-    }
-    .cont-formulario-page {
-        width: 80%;
-        
+@media screen and (max-width: 1000px){
+    .cont-info-ofi-Y-formulario {
+        width: 90%;
     }
 }
-@media screen and (max-width: 450px){
+@media screen and (max-width: 550px){
     .cont-formulario-page {
         width: 95%;
     }
     .cont-info-ofi{
-        width: 100%;
+        width: 90%;
+        height: auto;
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
     }
     .cont-dataOficina{
+        width: 90%;
         display: flex;
         justify-content: start;
     }
+
     .cont-info-ofi-Y-formulario{
         width: 100%;
         height: auto;
         display: flex;
         flex-direction: column;
+    }
+
+    .cont-formulario-page {
+        width: 90%;
     }
 }

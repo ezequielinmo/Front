@@ -125,16 +125,17 @@ function ListaFavoritos({ allProps = [] }) {
                                 <Card
                                     id={p.id}
                                     direccionF={p.direccionF}
-                                    operacion={p.operacion || []}
-                                    imagenes={p.imagenes || []}
-                                    tituloPublicacion={p.tituloPublicacion || ''}
-                                    ambientes={p.ambientes || 0}
-                                    dormitorios={p.dormitorios || 0}
+                                    operacion={p.operacion}
+                                    imagenes={p.imagenes}
+                                    tituloPublicacion={p.tituloPublicacion}
+                                    ambientes={p.ambientes}
+                                    dormitorios={p.dormitorios}
                                     unidadMedida={p.unidadMedida}
-                                    cantCocheras={p.cantCocheras || 0}
-                                    supTotal={p.supTotal || 0}
+                                    cantCocheras={p.cantCocheras}
+                                    supTotal={p.supTotal}
                                     tipo={p.tipo}
                                     destacadaEnWeb={p.destacadaEnWeb}
+                                    vista={"ambas"}
                                 />
                             </div>
                         ))

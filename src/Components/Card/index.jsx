@@ -31,7 +31,7 @@ function Card({
     destacadaEnWeb,
     vista
 }) {
-    const venta = operacion.find(op => op.operacion === "Venta");
+    const venta = operacion.find(op => op.operacion === "Venta"); console.log("op: ", operacion)
     const alquiler = operacion.find(op => op.operacion === "Alquiler");
 
     const [indexImg, setIndexImg] = useState(0);

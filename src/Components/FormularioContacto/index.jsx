@@ -5,14 +5,14 @@ const FormularioContacto = ({ tituloPublicacion, codigoReferencia }) => {
     const [nombre, setNombre] = useState('');
     const [telefono, setTelefono] = useState('');
     const [email, setEmail] = useState('');
-    const numeroTelefonoAsignado = "2236162426";
+    const numeroTelefonoAsignado = "2235554552";
     // Iniciamos el mensaje vacío
     const [mensaje, setMensaje] = useState('');
 
     //funcion envio de email [cambiar API TOKKO]
     const sendTokkoApi = async (nombre, email, telefono, mensaje) => {
 
-        const apiKey = "a6efcfe6f82e84f8ee86b16c705206f2461fd369"; //api de tokko
+        const apiKey = "1fa6028de7df18808d1d4c40f7e48e51f79d31a3"; //api de tokko
         const url = `https://tokkobroker.com/api/v1/webcontact/?key=${apiKey}`
         
         const payload = {        

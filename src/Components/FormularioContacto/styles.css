@@ -99,21 +99,9 @@
     font-size: 20px;
     padding: 5px;
     border-radius: 10px;
+    cursor: pointer;
     color: var(--primary-color);
     background-color: var(--color-negro-logo);
-}
-.cont-btn-form-whatsApp{
-    width: 100%;
-    display: flex;
-    margin-top: 5px;
-}
-.btn-form-whatsApp{
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: auto;
-    font-size: 20px;
 }
 
 /* responsive */

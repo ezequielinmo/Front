@@ -60,11 +60,14 @@
 @media screen and (max-width: 600px) {
     .contGralListaP,
     .cont-card-listaProps,
-    .contListaP{
+    .contListaP,
+    .cont-mapa-props-home{
         width: 98%;
         display: flex;
         justify-content: center;
         align-items: center;
     }
-
+    .cont-mapa-props-home {
+        background-color: aqua;
+    }
 }

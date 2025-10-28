@@ -122,5 +122,7 @@
         margin: 0;
         font-size: 15px;
     }
-
+    .cont-map-Venta {
+        width: 98%;
+    }
 }
