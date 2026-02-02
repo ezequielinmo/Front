@@ -1,50 +1,50 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { getProperty, resetProperty } from '../../Redux/Actions';
-import { InmobiliariaContext } from '../../Context';
-import { capitalizar, formatMoney } from '../../Helps';
-import ReactPlayer from "react-player";
-import Carrusel from '../../Components/Carrusel';
-import MapProp from '../../Components/MapaProp';
-import ModalVideo from '../../Components/ModalVideo';
-import RoomIcon from '@mui/icons-material/Room';
-import VideocamIcon from '@mui/icons-material/Videocam';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import ShareIcon from '@mui/icons-material/Share';
-import Loading from '../../Components/Loading';
-import ListaPropsSimilares from '../../Components/ListaPropsSimilares';
-import './estilos.css';
+import React, { useContext, useEffect, useMemo, useState, useCallback } from "react";
+import { useNavigate, useParams, useLocation, } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getProperty, resetProperty } from "../../Redux/Actions";
+import { InmobiliariaContext } from "../../Context";
+import { capitalizar, formatMoney } from "../../Helps";
+import {  } from "react-router-dom";
+import Carrusel from "../../Components/Carrusel";
+import MapProp from "../../Components/MapaProp";
+import ModalVideo from "../../Components/ModalVideo";
+import RoomIcon from "@mui/icons-material/Room";
+import VideocamIcon from "@mui/icons-material/Videocam";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import ShareIcon from "@mui/icons-material/Share";
+import Loading from "../../Components/Loading";
+import ListaPropsSimilares from "../../Components/ListaPropsSimilares";
+import "./styles.css";
 
 function DetalleProp() {
-
-    const loading = useSelector(state => state.loading);
+    const loading = useSelector((state) => state.loading);
     const { id } = useParams();
-    const propiedad = useSelector(state => state.propiedad);
-    const moneda = propiedad?.operacion?.[0]?.precios?.[0]?.moneda;
-    const precio = propiedad?.operacion?.[0]?.precios?.[0]?.precio;
-    const tipoProp = propiedad?.tipo?.nombre;
-    const venta = propiedad?.operacion?.find(op => op?.operacion === "Venta");
-    const alquiler = propiedad?.operacion?.find(op => op?.operacion === "Alquiler");
-    const barrio = propiedad?.ubicacion?.barrio;
-    // Convierte la URL /embed/ a formato válido para ReactPlayer
-    const videoUrl = propiedad?.videos?.[0]?.player_url
-        ? `${propiedad.videos[0].player_url}?autoplay=0&modestbranding=1&rel=0`
-        : null;
-    console.log("urlVideo: ", videoUrl)
+    const propiedad = useSelector((state) => state.propiedad);
 
-    const navigate = useNavigate();
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const location = useLocation();
     const contexto = useContext(InmobiliariaContext);
 
     const [copiado, setCopiado] = useState(false);
 
-    const handleClickAtras = () => {
-        navigate(-1);
-    };
+    const venta = useMemo(
+        () => propiedad?.operacion?.find((op) => op?.operacion === "Venta"),
+        [propiedad]
+    );
+    const alquiler = useMemo(
+        () => propiedad?.operacion?.find((op) => op?.operacion === "Alquiler"),
+        [propiedad]
+    );
 
-    // Función para compartir la propiedad
-    const handleShare = async () => {
+    const precioVenta = venta?.precios?.[0];
+    const precioAlq = alquiler?.precios?.[0];
+
+    const precioRef = propiedad?.operacion?.[0]?.precios?.[0];
+    const tipoProp = propiedad?.tipo?.nombre;
+    const barrio = propiedad?.ubicacion?.barrio;
+
+    const handleShare = useCallback(async () => {
         const url = window.location.href;
         const title = propiedad?.tituloPublicacion || "Propiedad disponible";
         const text = `Mirá esta propiedad en Mendive Inmobiliaria: ${title}`;
@@ -53,13 +53,32 @@ function DetalleProp() {
             try {
                 await navigator.share({ title, text, url });
             } catch (error) {
-                console.log("Compartir cancelado o falló:", error);
+                // usuario canceló o falló
             }
         } else {
-            navigator.clipboard.writeText(url);
+            await navigator.clipboard.writeText(url);
             setCopiado(true);
-            setTimeout(() => setCopiado(false), 2000);
+            setTimeout(() => setCopiado(false), 1800);
         }
+    }, [propiedad]);
+
+    // ✅ Volver SIN perder filtros: si venís desde listado con search, volvemos ahí
+    const handleClickAtras = () => {
+        const backTo = location.state?.backTo;
+
+        if (backTo) {
+            navigate(backTo);
+            return;
+        }
+
+        // fallback: si hay historial real, volvemos
+        if (window.history.length > 1) {
+            navigate(-1);
+            return;
+        }
+
+        // fallback final: ruta del listado
+        navigate("/propiedades");
     };
 
 
@@ -69,231 +88,185 @@ function DetalleProp() {
 
     useEffect(() => {
         dispatch(getProperty(id));
-        return () => { dispatch(resetProperty()); };
+        return () => dispatch(resetProperty());
     }, [dispatch, id]);
 
+    const facts = useMemo(() => {
+        if (!propiedad) return [];
+        return [
+            { k: "Tipo", v: propiedad?.tipo?.nombre },
+            { k: "Operación", v: venta?.operacion || alquiler?.operacion },
+            { k: "Ambientes", v: propiedad?.ambientes },
+            { k: "Dormitorios", v: propiedad?.dormitorios },
+            { k: "Baños", v: propiedad?.baños },
+            { k: "Sup. total", v: propiedad?.supTotal ? `${propiedad.supTotal}${propiedad.unidadMedida || ""}` : null },
+            { k: "Barrio", v: barrio },
+            { k: "Expensas", v: propiedad?.expensas },
+            { k: "Dirección", v: propiedad?.direccionF || propiedad?.direccion },
+        ].filter((x) => x.v !== null && x.v !== undefined && String(x.v).trim() !== "");
+    }, [propiedad, venta, alquiler, barrio]);
+
+    if (loading) return <Loading />;
+
     return (
-        <>
-            {
-                loading ? (
-                    <Loading />
-                ) : (
-                    <div className='contGralDetalle'>
-                        <div className='cont-detail'>
-                            {/* CABECERA */}
-                            <div className='info-1'>
-                                <div className='cont-btn_Y_tituilo-precio'>
-                                    <div className='cont-btn_Y_tituilo'>
-                                        <div className="cont-botones-header-detalle">
-                                            {/* Botón atrás */}
-                                            <button
-                                                type='button'
-                                                onClick={handleClickAtras}
-                                                className='btn-volver'
-                                            >
-                                                <ArrowBackIcon />
-                                            </button>
+        <div className="dp-page">
+            {/* Header / Hero mini */}
+            <header className="dp-header">
+                <div className="dp-header__left">
+                    <button type="button" className="dp-iconBtn" onClick={handleClickAtras} aria-label="Volver">
+                        <ArrowBackIcon />
+                    </button>
 
-                                            {/* Botón compartir */}
-                                            <button
-                                                type='button'
-                                                onClick={handleShare}
-                                                className='btn-compartir'
-                                            >
-                                                <ShareIcon />
-                                            </button>
-
-                                            {copiado && (
-                                                <span className="msg-copiado">¡Enlace copiado!</span>
-                                            )}
-                                        </div>
-
-                                        {/* Título */}
-                                        <div className='cont-titulo-detalle'>
-                                            <p className='detalle-titulo-prop' data-translate>
-                                                {capitalizar(propiedad.tituloPublicacion)}
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                {/* Dirección y precio */}
-                                <div className='cont-btns-direccion'>
-                                    <div className='cont-titulo-icono-direcc'>
-                                        <RoomIcon sx={{ color: 'white' }} />
-                                        <p className='detalle-titulo-direccion'>
-                                            {propiedad.direccion}
-                                        </p>
-                                    </div>
-                                    <div className='cont-precio-detallee'>
-                                        {venta && (
-                                            <p className='precio-detalle-prop'>
-                                                Venta: {venta.precios[0].moneda}{formatMoney(venta.precios[0].precio)}
-                                            </p>
-                                        )}
-                                        {alquiler && (
-                                            <p className='precio-detalle-prop'>
-                                                Alquiler: {alquiler.precios[0].moneda}{formatMoney(alquiler.precios[0].precio)}
-                                            </p>
-                                        )}
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* IMÁGENES Y DETALLE */}
-                            <div className='cont-imgs-info'>
-                                <div className='cont-imagenes'>
-                                    {
-                                        propiedad?.videos?.length &&
-                                        <div className='cont-multimedia'>
-                                            <button
-                                                onClick={() => contexto.handleIsOpen()}
-                                                className='btn-video'
-                                            >
-                                                <VideocamIcon />
-                                                Ver video
-                                            </button>
-                                        </div>
-                                    }
-                                    {
-                                        propiedad?.imagenes
-                                            ? <Carrusel imagenes={propiedad.imagenes} />
-                                            : <p>No img</p>
-                                    }
-                                </div>
-
-                                <div className='cont-caract-detalle'>
-                                    <p className='titulo-caract-prop'>Detalle Propiedad</p>
-                                    <div className='cont-caract-prop'>
-                                        <div className='cont-p-caract'>
-                                            <span className='span-tilde-verde'>✔</span>
-                                            <p className='p-col-key'>Valor:</p>
-                                            <p className='p-col-value'>
-                                                {moneda}{precio}
-                                            </p>
-                                        </div>
-
-                                        <div className='cont-p-caract'>
-                                            <span className='span-tilde-verde'>✔</span>
-                                            <p className='p-col-key'>Tipo Op:</p>
-                                            <p className='p-col-value'>
-                                                {venta?.operacion ? venta?.operacion : alquiler?.operacion}
-                                            </p>
-                                        </div>
-
-                                        <div className='cont-p-caract'>
-                                            <span className='span-tilde-verde'>✔</span>
-                                            <p className='p-col-key'>Tipo:</p>
-                                            <p className='p-col-value'>{propiedad.tipo?.nombre}</p>
-                                        </div>
-
-                                        <div className='cont-p-caract'>
-                                            <span className='span-tilde-verde'>✔</span>
-                                            <p className='p-col-key'>Ambientes:</p>
-                                            <p className='p-col-value'>{propiedad.ambientes}</p>
-                                        </div>
-
-                                        <div className='cont-p-caract'>
-                                            <span className='span-tilde-verde'>✔</span>
-                                            <p className='p-col-key'>Dormitorios:</p>
-                                            <p className='p-col-value'>{propiedad.dormitorios}</p>
-                                        </div>
-
-                                        <div className='cont-p-caract'>
-                                            <span className='span-tilde-verde'>✔</span>
-                                            <p className='p-col-key'>Baños:</p>
-                                            <p className='p-col-value'>{propiedad.baños}</p>
-                                        </div>
-
-                                        <div className='cont-p-caract'>
-                                            <span className='span-tilde-verde'>✔</span>
-                                            <p className='p-col-key'>Dirección:</p>
-                                            <p className='p-col-value'>{propiedad.direccionF}</p>
-                                        </div>
-
-                                        <div className='cont-p-caract'>
-                                            <span className='span-tilde-verde'>✔</span>
-                                            <p className='p-col-key'>Sup. Total:</p>
-                                            <p className='p-col-value'>{propiedad.supTotal}{propiedad.unidadMedida}</p>
-                                        </div>
-
-                                        <div className='cont-p-caract'>
-                                            <span className='span-tilde-verde'>✔</span>
-                                            <p className='p-col-key'>Barrio:</p>
-                                            <p className='p-col-value'>{barrio}</p>
-                                        </div>
-
-                                        <div className='cont-p-caract'>
-                                            <span className='span-tilde-verde'>✔</span>
-                                            <p className='p-col-key'>Expensas:</p>
-                                            <p className='p-col-value'>{propiedad.expensas}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* DESCRIPCIÓN */}
-                            <div className="cont-texto-descrip-detalle">
-                                <p className='titulo-descrip-prop'>Descripción Propiedad</p>
-                                <div className='linea-titulo-descrip'></div>
-                                <div
-                                    className="subCont-texto-descrip-detalle"
-                                    dangerouslySetInnerHTML={{ __html: propiedad.descripcion }}
-                                />
-                            </div>
-
-                            {/* Video */}
-                            {propiedad?.videos?.length > 0 && (
-                                <div className='cont-video-detalle'>
-                                    <p className='p-titulo-mapa'>Video de la propiedad</p>
-                                    <div className='linea-entre-titulos-video'>
-                                        <p className='p-descrip-video'>{propiedad.videos[0].description}</p>
-                                    </div>
-
-                                    <div className='cont-mapa-detalle'>
-                                        <iframe
-                                            width="100%"
-                                            height="360"
-                                            src={`${propiedad.videos[0].player_url}?autoplay=0&rel=0`}
-                                            title="Video de la propiedad"
-                                            frameBorder="0"
-                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                            allowFullScreen
-                                        ></iframe>
-                                    </div>
-                                </div>
-                            )}
-
-                            {/* MAPA */}
-                            <div className='cont-map-detalle'>
-                                <p className='p-titulo-mapa'>Ubicación Propiedad</p>
-                                <div className='cont-mapa-detalle'>
-                                    <MapProp lat={propiedad.geoLat} lng={propiedad.geoLong} />
-                                </div>
-                            </div>
-
-                            {/* PROPIEDADES SIMILARES */}
-                            <div className="cont-lista-props-similares">
-                                <h2 className='titulo-props-similares'>Propiedades recomendadas para tu búsqueda</h2>
-                                <div className="cont-comp-props-similares">
-                                    <ListaPropsSimilares
-                                        precioProp={precio}
-                                        tipoProp={tipoProp}
-                                        vista={"ambas"}
-                                        idProp={id}
-                                    />
-                                </div>
-                            </div>
-
-                            {/* MODAL VIDEO */}
-                            {contexto.isOpenModalVideo &&
-                                <ModalVideo video={propiedad.videos?.[0]?.player_url} />
-                            }
+                    <div className="dp-titleWrap">
+                        <h1 className="dp-title">{capitalizar(propiedad?.tituloPublicacion || "")}</h1>
+                        <div className="dp-subtitle">
+                            <RoomIcon sx={{ fontSize: 18 }} />
+                            <span>{propiedad?.direccion}</span>
                         </div>
                     </div>
-                )
-            }
-        </>
+                </div>
+
+                <div className="dp-header__right">
+                    {precioVenta && (
+                        <div className="dp-price">
+                            <span className="dp-price__label">Venta</span>
+                            <span className="dp-price__value">
+                                {precioVenta.moneda}
+                                {formatMoney(precioVenta.precio)}
+                            </span>
+                        </div>
+                    )}
+                    {precioAlq && (
+                        <div className="dp-price">
+                            <span className="dp-price__label">Alquiler</span>
+                            <span className="dp-price__value">
+                                {precioAlq.moneda}
+                                {formatMoney(precioAlq.precio)}
+                            </span>
+                        </div>
+                    )}
+
+                    <div className="dp-actions">
+                        <button type="button" className="dp-iconBtn" onClick={handleShare} aria-label="Compartir">
+                            <ShareIcon />
+                        </button>
+                        {copiado && <span className="dp-toast">¡Enlace copiado!</span>}
+                    </div>
+                </div>
+            </header>
+
+            {/* Main grid */}
+            <main className="dp-container">
+                <section className="dp-grid">
+                    {/* Left: media */}
+                    <div className="dp-mediaCard">
+                        {propiedad?.videos?.length > 0 && (
+                            <div className="dp-mediaTop">
+                                <button
+                                    type="button"
+                                    className="dp-videoBtn"
+                                    onClick={() => contexto.handleIsOpen()}
+                                >
+                                    <VideocamIcon sx={{ fontSize: 18 }} />
+                                    Ver video
+                                </button>
+                            </div>
+                        )}
+
+
+                        <div className="dp-carousel">
+                            {propiedad?.imagenes?.length ? (
+                                <Carrusel imagenes={propiedad.imagenes} />
+                            ) : (
+                                <div className="dp-empty">Sin imágenes</div>
+                            )}
+                        </div>
+                    </div>
+
+                    {/* Right: sticky details */}
+                    <aside className="dp-side">
+                        <div className="dp-card dp-card--sticky">
+                            <div className="dp-cardHeader">
+                                <h2 className="dp-cardTitle">Detalle</h2>
+                                {precioRef?.precio && (
+                                    <div className="dp-chipPrice">
+                                        {precioRef.moneda}
+                                        {formatMoney(precioRef.precio)}
+                                    </div>
+                                )}
+                            </div>
+
+                            <div className="dp-facts">
+                                {facts.map((f) => (
+                                    <div key={f.k} className="dp-fact">
+                                        <span className="dp-fact__dot">✔</span>
+                                        <span className="dp-fact__k">{f.k}:</span>
+                                        <span className="dp-fact__v">{f.v}</span>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </aside>
+                </section>
+
+                {/* Descripción */}
+                <section className="dp-section">
+                    <h3 className="dp-sectionTitle">Descripción</h3>
+                    <div className="dp-sectionCard dp-richText"
+                        dangerouslySetInnerHTML={{ __html: propiedad?.descripcion || "" }}
+                    />
+                </section>
+
+                {/* Video embebido (si querés mostrarlo también fuera del modal) */}
+                {propiedad?.videos?.length > 0 && (
+                    <section className="dp-section">
+                        <h3 className="dp-sectionTitle">Video</h3>
+                        <div className="dp-sectionCard">
+                            {propiedad?.videos?.[0]?.description && (
+                                <p className="dp-muted">{propiedad.videos[0].description}</p>
+                            )}
+                            <div className="dp-videoFrame">
+                                <iframe
+                                    width="100%"
+                                    height="420"
+                                    src={`${propiedad.videos[0].player_url}?autoplay=0&rel=0`}
+                                    title="Video de la propiedad"
+                                    frameBorder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowFullScreen
+                                />
+                            </div>
+                        </div>
+                    </section>
+                )}
+
+                {/* Mapa */}
+                <section className="dp-section">
+                    <h3 className="dp-sectionTitle">Ubicación</h3>
+                    <div className="dp-sectionCard dp-mapCard">
+                        <MapProp lat={propiedad?.geoLat} lng={propiedad?.geoLong} />
+                    </div>
+                </section>
+
+                {/* Similares */}
+                <section className="dp-section">
+                    <h3 className="dp-sectionTitle">Recomendadas para tu búsqueda</h3>
+                    <div className="dp-sectionCard">
+                        <ListaPropsSimilares
+                            precioProp={precioRef?.precio}
+                            tipoProp={tipoProp}
+                            vista={"ambas"}
+                            idProp={id}
+                        />
+                    </div>
+                </section>
+            </main>
+
+            {/* Modal video */}
+            {contexto.isOpenModalVideo && (
+                <ModalVideo video={propiedad?.videos?.[0]?.player_url} />
+            )}
+        </div>
     );
 }
 

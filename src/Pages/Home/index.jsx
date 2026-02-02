@@ -3,15 +3,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getProps, getPropsDestacadas, getPropsMap, getEmprendimientos } from '../../Redux/Actions';
 import Loading from '../../Components/Loading';
 import LandigA from '../../Components/LandingA';
-import ListaPropiedades from '../../Components/ListaPropiedades'
-import ListaPropsDestacadas from '../../Components/ListaPropsDestacadas';
-import ListaEmprendimientos from '../../Components/ListaEmprendimientos';
-//import Paginacion from '../../Components/Paginacion';
+import LandingB from '../../Components/LandingB';
+import LandingProps from '../../Components/LandingProps';
 import Institucional from '../../Components/Institucional';
-import MapaPropiedades from '../../Components/MapProps';
-import BotonVerTodas from '../../Components/Botones/BotonVerTodas';
+//import MapaPropiedades from '../../Components/MapProps';
+//import BotonVerTodas from '../../Components/Botones/BotonVerTodas';
 import GoogleReviewsWidget from '../../Components/GoogleComentarios';
 import './styles.css';
+
 
 
 function Home() {
@@ -23,7 +22,7 @@ function Home() {
     const allEmp = useSelector(state => state.emprendimientos);
     const totalPropiedades = useSelector(state => state.totPropiedades);
     //estados para las propiedades
-    const [operacion, setOperacion] = useState(''); console.log("operacion: ", operacion)
+    const [operacion, setOperacion] = useState(''); 
     const [tipoPropiedad, setTipoPropiedad] = useState([]);
     const [ambientes, setAmbientes] = useState(); //en el back lo convierto a int
     const [barrios, setBarrios] = useState([]);
@@ -82,55 +81,15 @@ function Home() {
                     setPrecioMax={setPrecioMax}
                 />
 
-                {/* Destacadas */}
-                <ListaPropsDestacadas allPropsDestacadas={allPropsDestacadas} vista={"ambas"} id='listaProps' />
-
-                {/* Emprendimientos */}
-                <div className='cont-home-Emprendimientos'>
-                    <div className='cont-titulo-y-lista-emp'>
-                        <div className='cont-h1-listaEmp'>
-                            <h1>Nuestros Emprendimientos</h1>
-                        </div>
-                        <div className='cont-btn-verTodas-listaEmp'>
-                            <BotonVerTodas url={'/emprendimientos'}/>
-                        </div>
-                    </div>                    
-                    <ListaEmprendimientos allEmp={allEmp} />
+                {/* Propiedades */}
+                <div className='section-props'>
+                    <LandingProps allProps={allProps}/>
                 </div>
 
-                {/* Lista props */}
-                <div className='cont-home-props' id='listaProps'>
-                    <div className='cont-titulo-y-lista-emp'>
-                        <div className='cont-h1-listaEmp'>
-                            <h1>Nuestros Propiedades</h1>
-                        </div>
-                        <div className='cont-btns-listaProps'>
-                            <button onClick={onClickListaProps}>Lista</button>
-                            <button onClick={onClickMapaProps}>Mapa</button>
-                        </div>
-                    </div>
-                    {
-                        listaProps === true && vistaMapa === false &&
-                        <>
-                            <ListaPropiedades
-                                allProps={allProps}
-                                vista={"ambas"}
-                                currentPage={currentPage}
-                                onPageChange={setCurrentPage}
-                                totalPropiedades={totalPropiedades}
-                                propiedadesPorPagina={propiedadesPorPagina}
-                            />
-                        </>
-                    }
-                    {
-                        listaProps === false && vistaMapa === true &&
-                        <div className='cont-mapa-props-home'>
-                            <MapaPropiedades propiedades={allPropsMap} />
-                        </div>
-                    }
-                </div>
+                {/* Tasación */}
+                <LandingB />
 
-                {/* Institucional */}
+                {/* Institucional 2*/}
                 <Institucional />
 
                 {/* comentarios Google */}

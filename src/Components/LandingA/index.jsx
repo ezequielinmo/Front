@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import FiltrosSelect from '../../Components/FiltrosSelect';
 import Video from '../../Images/videoLand.mp4'
-import './styles.css'
 import Flecha from '../FlechaAbajo';
+import './styles.css'
 
 function LandigA({
     setCurrentPage,
@@ -19,7 +19,7 @@ function LandigA({
     useEffect(() => {
         const timer = setTimeout(() => {
             setShowFiltros(true);
-        }, 3000); // 3 segundos
+        }, 2000); // 2 segundos
         return () => clearTimeout(timer);
     }, []);
 

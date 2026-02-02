@@ -8,7 +8,6 @@
     align-items: center;
     font-family: roboto;
     text-align: center;
-    border-radius: 10px;
     background-color: #fff;
     box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
     overflow: hidden;
@@ -28,8 +27,6 @@
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
     position: relative;
 }
 

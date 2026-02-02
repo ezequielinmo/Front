@@ -1,7 +1,6 @@
 .cont-card-empTel {
     width: 80%;
     min-height: 230px;
-    border-radius: 10px;
     margin-bottom: 20px;
     /* background-color: aliceblue; */
 }
@@ -36,17 +35,14 @@
 
 .descripcion-cardEmpTel {
     padding: 10px;
-
     /* evita desbordes */
     overflow: hidden;
     text-overflow: ellipsis;
-
     /* para recortar en múltiples líneas */
     display: -webkit-box;
     -webkit-line-clamp: 5;
     /* 👉 cantidad de líneas visibles */
     -webkit-box-orient: vertical;
-
     /* opcional: mejora legibilidad */
     line-height: 1.4em;
     max-height: calc(1.4em * 5);

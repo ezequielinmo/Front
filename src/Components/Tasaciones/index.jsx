@@ -1,5 +1,8 @@
 import React, {useEffect} from 'react';
-import Flecha from '../FlechaAbajo';
+import TrendingUpIcon from '@mui/icons-material/TrendingUp';
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
+import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import "./styles.css";
 
 function Tasaciones() {
@@ -11,60 +14,67 @@ function Tasaciones() {
     }, []);
 
     return (
-        <div className='cont-gral-tasaciones'>
-            <div className='cont-titulos-tasaciones'>
-                <div className='cont-titulo-1-tasaciones'>
-                    <h4 className='titulo-tasaciones'>TASACIONES</h4>
-                </div>
+        <section className="tasaciones-hero">
+            {/* HERO */}
+            <div className="hero-overlay">
+                <h1>
+                    Tasaciones <span>Profesionales</span>
+                </h1>
 
-                <div className='cont-titulo-2-tasaciones'>
-                    <h1 className='titulo-2-tasaciones'>¿Necesitas saber cuál es el valor de tu propiedad?</h1>
-                    <h2 className='titulo-3-tasaciones'>Nosotros te ayudamos</h2>
-                </div>
+                <p>
+                    Conocé el valor real de tu propiedad con nuestro equipo de expertos.
+                    Tasaciones precisas basadas en el mercado actual de Mar del Plata.
+                </p>
             </div>
 
-            <div className='cont-pasos-tasacion'>
-                <div className="item-tasacion">
-                    <h3>¿Cómo tasamos?</h3>
-                    <p className="texto-tasacion">
-                        Iniciamos el proceso con un análisis integral de la propiedad, considerando su ubicación, estado de conservación, antigüedad y características constructivas.
+            {/* CARDS */}
+            <div className="tasaciones-cards">
+
+                <div className="tasacion-card">
+                    <div className="icon-box">
+                        <TrendingUpIcon />
+                    </div>
+                    <h4>Valor de mercado real</h4>
+                    <p>
+                        Análisis basado en transacciones recientes y tendencias del mercado local
                     </p>
-                    <Flecha />
                 </div>
 
-                <div className="item-tasacion">
-                    <h3>Explicamos el mercado</h3>
-                    <p className="texto-tasacion">
-                        Brindamos un panorama actualizado sobre la situación del mercado inmobiliario, identificando la demanda real y el comportamiento de los valores en el área.
+                <div className="tasacion-card">
+                    <div className="icon-box">
+                        <AccessTimeIcon />
+                    </div>
+                    <h4>Respuesta en 48hs</h4>
+                    <p>
+                        Recibí tu tasación profesional en máximo 2 días hábiles
                     </p>
-                    <Flecha />
                 </div>
 
-                <div className="item-tasacion">
-                    <h3>Comparables por la zona</h3>
-                    <p className="texto-tasacion">
-                        Analizamos propiedades similares disponibles actualmente en la zona, lo que nos permite establecer un rango competitivo de precios de oferta.
+                <div className="tasacion-card">
+                    <div className="icon-box">
+                        <VerifiedUserIcon />
+                    </div>
+                    <h4>Sin compromiso</h4>
+                    <p>
+                        Tasación gratuita y sin ningún tipo de obligación de tu parte
                     </p>
-                    <Flecha />
                 </div>
 
-                <div className="item-tasacion">
-                    <h3>Comparables vendidos</h3>
-                    <p className="texto-tasacion">
-                        Contrastamos con operaciones ya concretadas en el último tiempo, obteniendo un valor real de cierre que refleja lo que los compradores efectivamente pagan.
+                <div className="tasacion-card">
+                    <div className="icon-box">
+                        <EmojiEventsIcon />
+                    </div>
+                    <h4>Expertos certificados</h4>
+                    <p>
+                        Tasadores con más de 15 años de experiencia en el mercado
                     </p>
-                    <Flecha />
                 </div>
 
-                <div className="item-tasacion">
-                    <h3>Visita personal</h3>
-                    <p className="texto-tasacion">
-                        Realizamos una visita presencial para corroborar detalles constructivos, terminaciones y particularidades únicas que impactan en la tasación final.
-                    </p>
-                </div>
             </div>
-        </div>
-    )
+
+        </section>
+    );
 }
+
 
 export default Tasaciones;

@@ -3,9 +3,9 @@
     max-width: 1100px;
     padding: 20px;
     border-radius: 16px;
-    background: rgba(255, 255, 255, 0.15);
+    /* background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(10px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3); */
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -70,9 +70,10 @@
 .titulo-filtros {
     font-size: 1.6rem;
     font-weight: 600;
-    color: #fff;
+    color: var(--fondo-navbar);
     letter-spacing: 1px;
     margin: 0;
+    margin-left: 20px;
 }
 
 /* para vistas Ventas y Alq */
@@ -170,8 +171,8 @@
 
 /* botón aplicar */
 .btn-aplicar-precio {
-    background: linear-gradient(135deg, #0077ff, #00bfff);
-    color: white;
+    background: var(--fondo-navbar);
+    color: black;
     border: none;
     padding: 8px 16px;
     border-radius: 10px;
@@ -181,7 +182,7 @@
 }
 
 .btn-aplicar-precio:hover {
-    background: linear-gradient(135deg, #0056b3, #0088cc);
+    background: linear-gradient(135deg, #f4f012, #ccc900);
     transform: translateY(-2px);
 }
 

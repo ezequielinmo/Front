@@ -1,10 +1,8 @@
-.contGralFormulario {
-    width: 100%;
-    min-height: 90vh;
-    height: auto;
+.contactanos {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
+    gap: 50px;
+    padding: 60px 8%;
     /* Fondo con degradado superpuesto */
     background-image: linear-gradient(to right, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0)), url('../../Images/img-3.jpg');
     background-size: cover;
@@ -12,93 +10,197 @@
     background-repeat: no-repeat;
 }
 
-.cont-info-ofi-Y-formulario{
-    width: 1000px;
-    height: 600px;
-    margin-top: 80px;
-    display: flex;
-    justify-content: start;
-    align-items: center;
-}
-.cont-info-ofi{
+/* cont sup */
+.cont-sup {
     width: 100%;
-    height: 550px;
-    display: flex;
-    justify-content: start;
-    align-items: start;
-    margin-top: 17px;
-    border-radius: 10px;
-    color: white;
-}
-.cont-dataOficina{
-    width: 50%;
-    height: 550px;
+    height: 30%;
     display: flex;
     flex-direction: column;
-    justify-content: start;
-    align-items: start;
-}
-.sub-cont-info-Contacto-1{
-    display: flex;
     justify-content: center;
     align-items: center;
 }
-.cont-mapa-contacto {
-    width: 98%;
-    height: 300px;
+.texto-1 {
+    border-radius: 10px;
+    padding: 10px 20px;
+    margin: 0;
+    background-color: var(--fondo-navbar);
+}
+.texto-2 {
+    font-size: 40px;
+    color: white;    
+}
+.texto-3 {
+    font-size: 22px;
+    color: white;
+    margin: 0;
+}
+/* cont inf */
+.cont-inf {
+    width: 100%;
     display: flex;
-    justify-content: start;
+    justify-content: space-around;
     align-items: start;
-    overflow: hidden; /* Previene que el contenido se desborde */
-    margin-top: 5px;
+}
+/* ================= FORM ================= */
+
+.contactanos-form {
+    background: #fff;
+    padding: 35px;
+    border-radius: 20px;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08);
 }
 
-.cont-mapa-contacto > * {
+.form-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.form-icon {
+    font-size: 26px;
+}
+
+.form-header h2 {
+    margin: 0;
+}
+
+.form-header p {
+    margin: 0;
+    color: #777;
+    font-size: 14px;
+}
+
+.formulario {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.form-row {
+    display: flex;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.form-group label {
+    font-size: 14px;
+    margin-bottom: 6px;
+}
+
+.form-group input,
+.form-group textarea {
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    outline: none;
+    font-size: 14px;
+}
+
+.form-group textarea {
+    resize: none;
+    height: 120px;
+}
+
+.btn-enviar {
+    background-color: var(--fondo-navbar);
+    border: none;
+    color: black;
+    padding: 14px;
+    border-radius: 12px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+/* ================= INFO ================= */
+
+.contactanos-info {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.info-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.info-card {
+    background: #fff;
+    padding: 22px;
+    border-radius: 18px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+}
+
+.info-card svg {
+    width: 20px;
+    height: 20px;
+    padding: 5px;
+    font-size: 26px;
+    color: var(--fondo-navbar);
+    background-color: #777;
+    border-radius: 50%;
+}
+
+.info-card h4 {
+    margin: 10px 0 5px;
+}
+
+.info-card span {
+    font-size: 13px;
+    color: #777;
+}
+
+/* ================= IMAGEN ================= */
+
+.contactanos-imagen {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    height: 300px;
+}
+
+.contactanos-imagen img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Si fuera una imagen o un iframe/mapa que lo respeta */
+    object-fit: cover;
 }
 
-.cont-formulario-page {
-    width: 50%;
-    height: 550px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.imagen-overlay {
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    background: #fff;
+    padding: 10px 15px;
+    border-radius: 14px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
 }
 
+.imagen-overlay span {
+    display: block;
+    font-size: 13px;
+    color: #666;
+}
 
-@media screen and (max-width: 1000px){
-    .cont-info-ofi-Y-formulario {
-        width: 90%;
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 900px) {
+    .contactanos {
+        grid-template-columns: 1fr;
     }
-}
-@media screen and (max-width: 550px){
-    .cont-formulario-page {
-        width: 95%;
+
+    .info-cards {
+        grid-template-columns: 1fr;
     }
-    .cont-info-ofi{
-        width: 90%;
-        height: auto;
-        display: flex;
+
+    .form-row {
         flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-    .cont-dataOficina{
-        width: 90%;
-        display: flex;
-        justify-content: start;
-    }
-
-    .cont-info-ofi-Y-formulario{
-        width: 100%;
-        height: auto;
-        display: flex;
-        flex-direction: column;
-    }
-
-    .cont-formulario-page {
-        width: 90%;
     }
 }

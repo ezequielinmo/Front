@@ -1,141 +1,118 @@
-.cont-gral-tasaciones {
-    width: 100%;
-    min-height: 90vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
-    align-items: center;
-    margin-top: 80px;
+.tasaciones-hero {
+    position: relative;
+    background-image: url('https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1920&q=80');
+    /* tu imagen */
+    background-size: cover;
+    background-position: center;
+    padding: 140px 8% 120px;
+    color: #fff;
 }
 
-.cont-titulos-tasaciones {
-    width: 100%;
-    height: 300px;
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
-    align-items: start;
-    background-color: #666;
+.tasaciones-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom,
+            rgba(0, 0, 0, 0.65),
+            rgba(0, 0, 0, 0.35),
+            rgba(255, 255, 255, 0.9));
 }
 
-.cont-mini-titulo-tasaciones {
-    width: 100%;
-    display: flex;
-    justify-content: start;
-    align-items: start;
+.hero-overlay {
+    position: relative;
+    max-width: 800px;
+    margin-bottom: 80px;
 }
 
-.titulo-tasaciones {
-    font-size: 30px;
-    font-weight: bold;
-    margin-left: 50px;
-    margin-bottom: 0;
-    color: white;
+.badge {
+    display: inline-block;
+    background: rgba(245, 162, 0, 0.85);
+    color: #fff;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    margin-bottom: 20px;
 }
 
-
-
-.cont-titulo-1-tasaciones {
-    width: 100%;
-    height: 40%;
-    display: flex;
-    justify-content: start;
-    align-items: end;
+.hero-overlay h1 {
+    font-size: 48px;
+    font-weight: 700;
+    margin: 0 0 15px;
 }
 
-.cont-titulo-2-tasaciones {
-    width: 100%;
-    height: 60%;
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
-    align-items: start;
+.hero-overlay h1 span {
+    color: #f5a200;
 }
 
-.titulo-1-tasaciones,
-.titulo-2-tasaciones,
-.titulo-3-tasaciones {
-    font-weight: bold;
-    margin-left: 50px;
-    margin-bottom: 0;
-    color: white;
-}
-
-.titulo-3-tasaciones {
-    font-size: 2rem;
-    font-weight: bold;
-}
-
-/* pasos tasacion */
-/* .cont-pasos-tasacion{
-
-} */
-.linea-titulo-tasacion {
-    width: 40%;
-    border-bottom: 1px solid black;
-}
-
-.item-tasacion {
-    display: flex;
-    flex-direction: column;
-    /* apila h3, texto y flecha */
-    align-items: center;
-    max-width: 700px;
-    text-align: center;
-}
-
-.item-tasacion h3 {
-    font-size: 1.5rem;
-    color: #444;
-    margin-bottom: 10px;
-}
-
-.texto-tasacion {
-    font-size: 1rem;
+.hero-overlay p {
+    font-size: 17px;
     line-height: 1.6;
-    color: #666;
-    padding: 0 15px;
+    max-width: 600px;
 }
 
-/* responsive */
-@media screen and (max-width: 500px) {
-    .cont-gral-tasaciones {
-        margin-top: 60px;
+/* ================= CARDS ================= */
+
+.tasaciones-cards {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+}
+
+.tasacion-card {
+    background: #fff;
+    color: #111;
+    padding: 30px 25px;
+    border-radius: 18px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+}
+
+.icon-box {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: rgba(245, 162, 0, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+    background-color: #555;
+}
+
+.icon-box svg {
+    color: var(--fondo-navbar);
+    font-size: 26px;
+}
+
+.tasacion-card h4 {
+    margin: 0 0 8px;
+    font-size: 16px;
+}
+
+.tasacion-card p {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.5;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 1100px) {
+    .tasaciones-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .tasaciones-hero {
+        padding: 100px 6% 80px;
     }
 
-    .cont-titulos-tasaciones {
-        width: 100%;
-        height: 200px;
+    .hero-overlay h1 {
+        font-size: 36px;
     }
 
-    .cont-titulo-1-tasaciones {
-        height: 25%;
-        justify-content: start;
-        align-items: center;
-    }
-
-    .titulo-tasaciones {
-        font-size: 25px;
-        margin: 0;
-        margin-left: 20px;
-    }
-
-    .cont-titulo-2-tasaciones {
-        width: 100%;
-        height: 75%;
-        display: flex;
-        justify-content: center;
-        align-items: start;
-    }
-
-    .titulo-2-tasaciones,
-    .titulo-3-tasaciones {
-        font-size: 20px;
-        margin: 0;
-        margin-left: 20px;
-    }
-
-    .titulo-3-tasaciones {
-        margin-top: 10px;
+    .tasaciones-cards {
+        grid-template-columns: 1fr;
     }
 }

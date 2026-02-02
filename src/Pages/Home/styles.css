@@ -5,16 +5,9 @@
     align-items: center;
 }
 
-/* emp */
-.cont-home-Emprendimientos,
-.cont-home-props {
+.section-props {
     width: 100%;
-    height: auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: rgb(229, 227, 229);
+    background-color: rgba(128, 128, 128, 0.481);
 }
 
 .cont-titulo-y-lista-emp {
@@ -43,11 +36,6 @@
     display: flex;
     justify-content: end;
     align-items: center;
-}
-
-/* lista props */
-.cont-home-props {
-    background-color: white;
 }
 
 /* cont mapa */

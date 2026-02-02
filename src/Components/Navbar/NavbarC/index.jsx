@@ -10,8 +10,7 @@ function NavbarC() {
     return (
         <div className='cont-navbar-C'>
             <ul className='ul-navbarInf'>
-                <li><NavLink to='/ventas' className='navlink-navbarInf'>Venta</NavLink></li>
-                <li><NavLink to='/alquiler' className='navlink-navbarInf'>Alquiler</NavLink></li>
+                <li><NavLink to='/propiedades' className='navlink-navbarInf'>Propiedades</NavLink></li>
                 <li><NavLink to='/emprendimientos' className='navlink-navbarInf'>Emprendimientos</NavLink></li>
                 <li><NavLink to='/tasaciones' className='navlink-navbarInf'>Tasaciones</NavLink></li>
                 <li><NavLink to='/nosotros' className='navlink-navbarInf'>La empresa</NavLink></li>

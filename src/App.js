@@ -5,8 +5,8 @@ import InmobiliariaProvider  from './Context';
 import Home from './Pages/Home';
 import Navbar from './Components/Navbar';
 import WhatsAppButton from './Components/Botones/BotonWhastApp';
-import PropsVenta from './Pages/PropsVenta';
-import PropsAlquiler from './Pages/PropsAlquiler';
+//import PropsVenta from './Pages/PropsVenta';
+//import PropsAlquiler from './Pages/PropsAlquiler';
 import Emprendimientos from './Pages/Emprendimientos';
 import Contactanos from './Pages/Contactanos';
 import FavoritosPage from './Pages/Favoritos';
@@ -21,6 +21,8 @@ import PropsInternacionales from './Pages/PropsInternacionales';
 import MapaPAge from './Pages/MapaPage'; */
 import './App.css';
 import Tasaciones from './Components/Tasaciones';
+import PageDestacadas from './Pages/PageDestacadas';
+import PropiedadesPage from './Pages/Propiedades';
 
 
 function App() {
@@ -38,15 +40,17 @@ function App() {
           <main className='cont-main'>
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path='/ventas' element={<PropsVenta />} />
-              <Route path='/alquiler' element={<PropsAlquiler />} />
+              {/* <Route path='/ventas' element={<PropsVenta />} />
+              <Route path='/alquiler' element={<PropsAlquiler />} /> */}
               <Route path='/emprendimientos' element={<Emprendimientos />} />
+              <Route path='/propiedades' element={<PropiedadesPage/>} /> 
               <Route path='/tasaciones' element={<Tasaciones />} />
               <Route path='/nosotros' element={<LaEmpresaPage />} />
               <Route path='/contacto' element={<Contactanos />} />
               <Route path='/detalle/:id' element={<DetalleProp />} />
               <Route path='/detalleEmp/:id' element={<DetalleEmp />} />
               <Route path='/favoritos' element={<FavoritosPage />} />
+              <Route path='/verDestacadas' element={<PageDestacadas/>} />
               {/* <Route path='/mapa' element={< MapaPAge/>}/> */} 
               <Route path='*' element={<Home />} />
             </Routes>

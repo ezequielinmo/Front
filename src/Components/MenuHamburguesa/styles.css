@@ -33,13 +33,13 @@
 }
 
 .cont-menuHamburguesa__menu {
-    position: absolute;
-    top: 50px;
+    position: relative;
+    top: 0;
     left: -300px; /* Inicialmente fuera de la vista */
     background-color: var(--fondo-navbar);
-    border-radius: 5px;
     overflow: hidden;
     transition: all 0.5s ease;
+    z-index: 999;
 }
 
 .cont-menuHamburguesa__menu.ocultar {
@@ -47,8 +47,8 @@
 }
 
 .cont-menuHamburguesa__menu.open {
-    width: 200px;
-    top: 48px;
+    width: 250px;
+    top: 8px;
     left: 0; /* Visible en la vista */
 }
 
@@ -80,15 +80,11 @@
 /* responsive */
 @media screen and (max-width: 885px) {
     .cont-menuHamburguesa__menu.open {
-        width: 300px;
-        top: 48px;
         left: -60px; /* Visible en la vista */
     }
 }
 @media screen and (max-width: 600px) {
     .cont-menuHamburguesa__menu.open {
-        width: 300px;
-        top: 48px;
         left: -50px; /* Visible en la vista */
     }
     .ul-menuHamburguesa li a {
@@ -98,7 +94,6 @@
 @media screen and (max-width: 300px) {
     .cont-menuHamburguesa__menu.open {
         width: 200px;
-        top: 48px;
         left: -40px; /* Visible en la vista */
     }
     .ul-menuHamburguesa li a {
