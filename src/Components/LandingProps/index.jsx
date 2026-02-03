@@ -8,7 +8,7 @@ const LandingProps = ({ allProps }) => {
 
     function cardVariant(i) {
         // 5 layouts distintos. Si solo hay 4, igual va joya.
-        const variants = ["hero", "tall", "wide", "small", "mid"];
+        const variants = ["hero", "tall", "wide", "small", "mid"]
         return variants[i % variants.length];
     }
 
