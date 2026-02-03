@@ -27,7 +27,7 @@ export default function PropertiesMap({
 }) {
     const { isLoaded } = useJsApiLoader({
         id: "google-map-script",
-        googleMapsApiKey: apiKey || import.meta?.env?.VITE_GOOGLE_MAPS_API_KEY || process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+        googleMapsApiKey: apiKey || process.env.REACT_APP_GOOGLE_MAPS_API_KEY, //la apiKey de googleMaps
     });
 
     const mapRef = useRef(null);
