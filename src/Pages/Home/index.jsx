@@ -17,10 +17,10 @@ function Home() {
 
     const loading = useSelector(state => state.loading);
     const allProps = useSelector(state => state.propiedades);
-    const allPropsMap = useSelector(state => state.propsMap);
-    const allPropsDestacadas = useSelector(state => state.propsDestacadas);
-    const allEmp = useSelector(state => state.emprendimientos);
-    const totalPropiedades = useSelector(state => state.totPropiedades);
+    //const allPropsMap = useSelector(state => state.propsMap);
+    //const allPropsDestacadas = useSelector(state => state.propsDestacadas);
+    //const allEmp = useSelector(state => state.emprendimientos);
+    //const totalPropiedades = useSelector(state => state.totPropiedades);
     //estados para las propiedades
     const [operacion, setOperacion] = useState(''); 
     const [tipoPropiedad, setTipoPropiedad] = useState([]);
@@ -29,8 +29,8 @@ function Home() {
     const [precioMin, setPrecioMin] = useState();
     const [precioMax, setPrecioMax] = useState();
     const [destacadas, /* setDestacadas */] = useState(false);
-    const [listaProps, setListaProps] = useState(true);
-    const [vistaMapa, setVistaMapa] = useState(false);
+    //const [listaProps, setListaProps] = useState(true);
+    //const [vistaMapa, setVistaMapa] = useState(false);
 
     //estados para paginación
     const [currentPage, setCurrentPage] = useState(1);
@@ -39,14 +39,14 @@ function Home() {
     const offset = (currentPage - 1) * limit;
     const dispatch = useDispatch();
 
-    const onClickListaProps = () => {
+    /* const onClickListaProps = () => {
         setListaProps(!listaProps);
         setVistaMapa(!vistaMapa);
     }
     const onClickMapaProps = () => {
         setVistaMapa(!vistaMapa);
         setListaProps(!listaProps);
-    }
+    } */
     //efecto para iniciar pag desde scroll 0
     useEffect(() => {
         requestAnimationFrame(() => {
