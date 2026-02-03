@@ -44,7 +44,7 @@ const LandingProps = ({ allProps }) => {
                         <article
                             key={id}
                             className={`pd-card pd-card--${cardVariant(i)}`}
-                            style={{ ["--delay"]: `${i * 70}ms` }}
+                            style={{ "--delay": `${i * 70}ms` }}
                             onClick={() => {
                                 // Si ya tenés ruta de detalle, conectalo acá:
                                 navigate(`/detalle/${id}`);
