@@ -51,4 +51,4 @@ function MeGusta({ id }) {
     );
 }
 
-export default MeGusta;
+export default MeGusta
