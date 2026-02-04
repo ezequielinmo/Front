@@ -15,8 +15,8 @@ const LandingProps = ({ allProps }) => {
     // Tomo 5 si hay, si no 4, si no lo que haya
     const destacadas = useMemo(() => {
         if (!Array.isArray(allProps)) return [];
-        const slice = allProps?.slice(0, 4);
-        return slice.length >= 3 ? slice : allProps?.slice(0, 3);
+        const slice = allProps?.slice(0, 5);
+        return slice.length >= 4 ? slice : allProps?.slice(0, 3);
     }, [allProps]);
 
     if (!destacadas?.length) return null;
