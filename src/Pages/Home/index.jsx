@@ -10,6 +10,7 @@ import Institucional from '../../Components/Institucional';
 //import BotonVerTodas from '../../Components/Botones/BotonVerTodas';
 import GoogleReviewsWidget from '../../Components/GoogleComentarios';
 import './styles.css';
+import LandingC from '../../Components/LandingC';
 
 
 
@@ -81,6 +82,7 @@ function Home() {
                     setPrecioMax={setPrecioMax}
                 />
 
+                <LandingC />
                 {/* Propiedades */}
                 <div className='section-props'>
                     <LandingProps allProps={allProps}/>

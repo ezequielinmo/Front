@@ -5,44 +5,48 @@ import './styles.css';
 
 function CardEmprendimiento({ id, imagenes, direccionF, locacion, tituloPublicacion, fechaEntrega, descripcion }) {
     const [showDetail, setShowDetail] = useState(false);
+    const img = imagenes?.[0]?.imagen;
 
     return (
-        <div className="card-horizontal">
-            {/* Imagen con hover */}
-            <NavLink to={`/detalleEmp/${id}`} className="card-horizontal-img-container">
-                <div
-                    onMouseEnter={() => setShowDetail(true)}
-                    onMouseLeave={() => setShowDetail(false)}
-                    className="img-wrapper"
-                >
-                    <img src={imagenes[0].imagen} alt="propiedad" className="card-horizontal-img" />
-                    {showDetail && <div className="detail-hover"><p data-translate>Detalle</p></div>}
+        <article className="emp-card">
+            <NavLink
+                to={`/detalleEmp/${id}`}
+                className="emp-card-media"
+                onMouseEnter={() => setShowDetail(true)}
+                onMouseLeave={() => setShowDetail(false)}
+            >
+                <img src={img} alt={tituloPublicacion || "Emprendimiento"} className="emp-card-img" />
+
+                <div className={`emp-card-overlay ${showDetail ? "is-visible" : ""}`}>
+                    <span className="emp-card-cta">Ver detalle</span>
                 </div>
             </NavLink>
 
-            {/* Info a la derecha */}
-            <div className="card-horizontal-content">
-                <div className='cont-info-1-card-horizontal'>
-                    <h3 className="card-horizontal-subtitulo">{tituloPublicacion}</h3>
+            <div className="emp-card-body">
+                <div className="emp-card-top">
+                    <h3 className="emp-card-title">{tituloPublicacion}</h3>
+                    {fechaEntrega ? (
+                        <span className="emp-card-chip">Entrega: {fechaEntrega}</span>
+                    ) : null}
                 </div>
 
-                <div className='cont-info-2-card-horizontal'>
-                    <div className="card-horizontal-ubicacion">
+                <div className="emp-card-loc">
+                    <div className="emp-card-address">
                         <img src={IconoUbicacion} alt="ubicación" />
                         <span>{direccionF}</span>
                     </div>
-
-                    <p className="card-horizontal-locacion">{locacion}</p>
-
-                    <p className="card-horizontal-locacion fechaEntrega">Fecha de entrega: {fechaEntrega}</p>
+                    <p className="emp-card-city">{locacion}</p>
                 </div>
-                
-                {/* descripción */}
-                <div className="cont-info-3-card-horizontal">
-                    <p className='p-card-horizontal-descrip-emp'>{descripcion}</p>
+
+                <p className="emp-card-desc">{descripcion}</p>
+
+                <div className="emp-card-actions">
+                    <NavLink to={`/detalleEmp/${id}`} className="emp-card-btn">
+                        Ver emprendimiento
+                    </NavLink>
                 </div>
             </div>
-        </div>
+        </article>
     );
 }
 

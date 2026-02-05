@@ -1,40 +1,59 @@
 .cont-lista-emprendimientos {
-    width: 80%; 
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+
     display: flex;
-    justify-content: center;
-    flex-wrap: wrap; /* importante si usás cards */
-    gap: 20px; /* separación entre cards */
+    flex-direction: column;
+    /* 👈 clave: lista vertical */
+    gap: 16px;
+    padding: 6px 0 0;
 }
+
+/* Header de la lista (si lo usás) */
 .cont-h1-listaEmp {
     width: 50%;
     display: flex;
-    justify-content: star;
+    justify-content: flex-start;
+    /* antes: star */
     align-items: center;
 }
 
 .cont-btn-verTodas-listaEmp {
     width: 50%;
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
+    /* antes: end */
     align-items: center;
 }
 
+/* Responsive */
 @media screen and (max-width: 1000px) {
+    .cont-lista-emprendimientos {
+        max-width: 100%;
+        gap: 14px;
+    }
+
     .cont-h1-listaEmp {
-    width: 70%;
-}
+        width: 70%;
+    }
+
     .h1-titulo-emp {
         font-size: 18px;
         margin-left: 3px;
     }
 }
+
 @media screen and (max-width: 500px) {
-.cont-lista-emprendimientos {
-    width: 100%;
-}
+    .cont-lista-emprendimientos {
+        width: 100%;
+        gap: 12px;
+    }
+
     .cont-h1-listaEmp {
-    width: 80%;
-}
+        width: 80%;
+    }
+
     .h1-titulo-emp {
         font-size: 15px;
         margin-left: 3px;
