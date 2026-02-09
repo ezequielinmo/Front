@@ -1,3 +1,7 @@
+/* =========================
+   ListaPropiedades - styles
+   ========================= */
+
 .contGralListaP {
     width: 80%;
     display: flex;
@@ -5,69 +9,82 @@
     justify-content: center;
     align-items: center;
 }
-.cont-titulo-listaProps{
+
+/* (Si tenés un header arriba de la lista, lo dejo listo) */
+.cont-titulo-listaProps {
     width: 100%;
     display: flex;
     justify-content: start;
     align-items: center;
 }
-.cont-h1-listaProps{
+
+.cont-h1-listaProps {
     width: 50%;
     height: 100%;
 }
-.cont-btns-listaProps{
+
+.cont-btns-listaProps {
     width: 50%;
     height: 100%;
     display: flex;
     justify-content: end;
     align-items: center;
 }
+
+/* ✅ CONTENEDOR DE TODAS LAS CARDS (GRILLA) */
 .contListaP {
     width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-items: center;
+    max-width: 1250px;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /* 3 columnas */
+    gap: 30px;
+
+    justify-content: center;
+    margin: 0 auto;
+    padding: 20px 10px;
 }
-.cont-card-listaProps{
-    margin-bottom: 20px;
-}
-.no-props{
+
+/* ✅ CADA ITEM (ENVOLTORIO DE CARD) */
+.cont-card-listaProps {
     width: 100%;
-    height: 663px;
+    /* NO grid acá */
+}
+
+/* fallback cuando no hay props */
+.no-props {
+    width: 100%;
+    min-height: 320px;
     display: flex;
     justify-content: center;
+    align-items: center;
 }
-/* responsive */
 
-@media screen and (max-width: 1000px) {
-    .contListaP{
-        width: 98%;
-        justify-content: space-around;
-        margin-top: 20px;
+/*Responsive*/
+
+/* En pantallas medianas: 2 columnas */
+@media (max-width: 1000px) {
+    .contGralListaP {
+        width: 95%;
+    }
+
+    .contListaP {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 22px;
+        padding: 18px 8px;
     }
 }
-@media screen and (max-width: 750px) {
-    .contListaP{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-    }
-    
-}
-@media screen and (max-width: 600px) {
-    .contGralListaP,
-    .cont-card-listaProps,
-    .contListaP,
-    .cont-mapa-props-home{
+
+/* Mobile: 1 columna */
+@media (max-width: 650px) {
+    .contGralListaP {
         width: 98%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
     }
-    .cont-mapa-props-home {
-        background-color: aqua;
+
+    .contListaP {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        padding: 14px 6px;
     }
 }

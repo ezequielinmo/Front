@@ -1,149 +1,133 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
-import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
-import "./styles.css";
+import React, { useEffect, useMemo, useRef } from "react";
+import { GoogleMap, Marker, InfoWindow } from "@react-google-maps/api";
 
-const containerStyle = {
-    width: "100%",
-    height: "100%",
+const containerStyle = { width: "100%", height: "100%" };
+
+const normalIcon = {
+    path: "M12 2C8.1 2 5 5.1 5 9c0 5.2 7 13 7 13s7-7.8 7-13c0-3.9-3.1-7-7-7z",
+    fillColor: "#cc0000",
+    fillOpacity: 0.9,
+    strokeWeight: 1,
+    scale: 1.1,
 };
 
-const defaultCenter = { lat: -38.0055, lng: -57.5426 }; // Mar del Plata aprox
+const hoveredIcon = {
+    path: "M12 2C8.1 2 5 5.1 5 9c0 5.2 7 13 7 13s7-7.8 7-13c0-3.9-3.1-7-7-7z",
+    fillColor: "#f3f78e",     // color navbar 👑
+    fillOpacity: 1,
+    strokeWeight: 2,
+    strokeColor: "#444",
+    scale: 1.6,                // 👈 agrandado
+};
 
-function toNumber(v) {
-    const n = Number(v);
-    return Number.isFinite(n) ? n : null;
+function parseLatLng(p) {
+    // Formatos posibles (adaptalos si tu API usa otros nombres)
+    const latRaw = p?.geoLat;
+
+    const lngRaw = p?.geoLong;
+
+    // Caso: coordenadas como array [lng, lat] (muy común en GeoJSON)
+    // Ej: p.coordenadas = [-57.55, -38.01]
+    if ((!latRaw || !lngRaw) && Array.isArray(p?.coordenadas) && p.coordenadas.length >= 2) {
+        const lngA = Number(p.coordenadas[0]);
+        const latA = Number(p.coordenadas[1]);
+        if (Number.isFinite(latA) && Number.isFinite(lngA)) return { lat: latA, lng: lngA };
+    }
+
+    const lat = Number(latRaw);
+    const lng = Number(lngRaw);
+
+    if (!Number.isFinite(lat) || !Number.isFinite(lng)) return null;
+    return { lat, lng };
 }
 
-function getId(p) {
-    return p?.id ?? p?._id ?? p?.codigoReferencia;
-}
-
-export default function PropertiesMap({
-    items = [],
-    selectedId,
-    onSelect,
-    onBoundsChange,
-    apiKey, // opcional: si querés pasarlo por props
-}) {
-    const { isLoaded } = useJsApiLoader({
-        id: "google-map-script",
-        googleMapsApiKey: apiKey || process.env.REACT_APP_GOOGLE_MAPS_API_KEY, //la apiKey de googleMaps
-    });
-
+export default function PropertiesMap({ items = [], selectedId, onSelect, hoveredId }) {
     const mapRef = useRef(null);
-    const [localBounds, setLocalBounds] = useState(null);
 
-    // Normalizo props -> markers
     const markers = useMemo(() => {
         return (items || [])
             .map((p) => {
-                const lat = toNumber(p?.geoLat);
-                const lng = toNumber(p?.geoLong);
-                if (lat === null || lng === null) return null;
-                return {
-                    id: getId(p),
-                    position: { lat, lng },
-                    raw: p,
-                };
+                const ll = parseLatLng(p);
+                if (!ll) return null;
+                return { ...p, ...ll };
             })
             .filter(Boolean);
     }, [items]);
 
-    // Centro inicial: si hay markers, centro en el primero
-    const initialCenter = useMemo(() => {
-        if (markers.length) return markers[0].position;
-        return defaultCenter;
+    // Center fallback (si no hay markers)
+    const fallbackCenter = useMemo(() => ({ lat: -38.0055, lng: -57.5426 }), []);
+
+    const selected = useMemo(
+        () => markers.find((m) => m.id === selectedId),
+        [markers, selectedId]
+    );
+
+    // ✅ Fit bounds para que se vean todos los pines
+    useEffect(() => {
+        if (!mapRef.current) return;
+        if (!window.google?.maps) return;
+        if (markers.length === 0) return;
+
+        const bounds = new window.google.maps.LatLngBounds();
+        markers.forEach((m) => bounds.extend({ lat: m.lat, lng: m.lng }));
+        mapRef.current.fitBounds(bounds);
+
+        // Si hay 1 solo marker, acercamos un poco
+        if (markers.length === 1) {
+            mapRef.current.setZoom(14);
+            mapRef.current.panTo({ lat: markers[0].lat, lng: markers[0].lng });
+        }
     }, [markers]);
 
-    // Cuando cambia selectedId: centro el mapa en esa propiedad
+    // ✅ debug: contá markers en consola
     useEffect(() => {
-        if (!selectedId || !mapRef.current) return;
-        const mk = markers.find((m) => String(m.id) === String(selectedId));
-        if (!mk) return;
-        mapRef.current.panTo(mk.position);
-        // un zoom suave si estás muy lejos
-        const z = mapRef.current.getZoom();
-        if (typeof z === "number" && z < 14) mapRef.current.setZoom(14);
-    }, [selectedId, markers]);
-
-    const onLoad = (map) => {
-        mapRef.current = map;
-
-        // Ajusto bounds para abarcar markers (si hay)
-        if (markers.length >= 2) {
-            const bounds = new window.google.maps.LatLngBounds();
-            markers.forEach((m) => bounds.extend(m.position));
-            map.fitBounds(bounds);
-        } else if (markers.length === 1) {
-            map.setCenter(markers[0].position);
-            map.setZoom(14);
-        } else {
-            map.setCenter(defaultCenter);
-            map.setZoom(12);
+        if (process.env.NODE_ENV !== "production") {
+            console.log("[PropertiesMap] items:", items?.length || 0, "markers:", markers.length);
+            if (items?.length && markers.length === 0) {
+                console.log("[PropertiesMap] No hay coordenadas válidas. Ejemplo item:", items[0]);
+            }
         }
-
-        // guardo bounds iniciales
-        const b = map.getBounds();
-        if (b) setLocalBounds(b);
-    };
-
-    const handleIdle = () => {
-        if (!mapRef.current) return;
-        const b = mapRef.current.getBounds();
-        if (b) setLocalBounds(b);
-    };
-
-    const handleZoneSearch = () => {
-        if (!localBounds || !onBoundsChange) return;
-
-        const ne = localBounds.getNorthEast();
-        const sw = localBounds.getSouthWest();
-
-        onBoundsChange({
-            ne: { lat: ne.lat(), lng: ne.lng() },
-            sw: { lat: sw.lat(), lng: sw.lng() },
-        });
-    };
-
-    if (!isLoaded) {
-        return (
-            <div className="map-wrap">
-                <div className="map-loading">Cargando mapa...</div>
-            </div>
-        );
-    }
+    }, [items, markers]);
 
     return (
-        <div className="map-wrap">
-            <GoogleMap
-                mapContainerStyle={containerStyle}
-                center={initialCenter}
-                zoom={13}
-                onLoad={onLoad}
-                onIdle={handleIdle}
-                options={{
-                    fullscreenControl: true,
-                    mapTypeControl: false,
-                    streetViewControl: false,
-                    clickableIcons: false,
-                    // estilos opcionales (si querés look más limpio)
-                    // styles: [],
-                }}
-            >
-                {markers.map((m) => (
-                    <Marker
-                        key={m.id}
-                        position={m.position}
-                        onClick={() => onSelect?.(m.id)}
-                    // Si querés diferenciar seleccionado:
-                    // icon={String(m.id) === String(selectedId) ? selectedIcon : defaultIcon}
-                    />
-                ))}
-            </GoogleMap>
+        <GoogleMap
+            mapContainerStyle={containerStyle}
+            center={selected ? { lat: selected.lat, lng: selected.lng } : fallbackCenter}
+            zoom={12}
+            onLoad={(map) => {
+                mapRef.current = map;
+            }}
+            options={{
+                streetViewControl: false,
+                mapTypeControl: false,
+                fullscreenControl: false,
+                clickableIcons: false,
+            }}
+        >
+            {markers.map((p) => (
+                <Marker
+                    key={p.id}
+                    position={{ lat: p.lat, lng: p.lng }}
+                    onClick={() => onSelect?.(p.id)}
+                    icon={p.id === hoveredId ? hoveredIcon : normalIcon}   // 👈 magia
+                />
+            ))}
 
-            <button className="map-zoneBtn" onClick={handleZoneSearch}>
-                Ver resultados en esta zona
-            </button>
-        </div>
+            {selected && (
+                <InfoWindow
+                    position={{ lat: selected.lat, lng: selected.lng }}
+                    onCloseClick={() => onSelect?.(null)}
+                >
+                    <div style={{ maxWidth: 240 }}>
+                        <div style={{ fontWeight: 800, marginBottom: 6 }}>
+                            {selected.tituloPublicacion}
+                        </div>
+                        <div style={{ opacity: 0.75, fontSize: 13 }}>
+                            {selected.direccionF}
+                        </div>
+                    </div>
+                </InfoWindow>
+            )}
+        </GoogleMap>
     );
 }

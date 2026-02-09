@@ -1,0 +1,47 @@
+.pp-listwrap {
+    width: 100%;
+    height: 100%;
+}
+
+.pp-empty {
+    padding: 18px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.pp-cards {
+    display: grid;
+    gap: 14px;
+}
+
+/* LISTA: 1 columna, cards grandes */
+.pp-cards--list {
+    grid-template-columns: 1fr;
+}
+
+/* SPLIT: 1 o 2 columnas según ancho */
+.pp-cards--split {
+    grid-template-columns: 1fr;
+}
+
+@media (min-width: 900px) {
+    .pp-cards--split {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.pp-carditem {
+    border-radius: 16px;
+    transition: transform 120ms ease, box-shadow 120ms ease;
+}
+
+.pp-carditem:hover {
+    transform: translateY(-1px);
+}
+
+/* resaltado cuando coincide con el marcador del mapa */
+.pp-carditem.is-selected {
+    outline: 2px solid rgba(0, 0, 0, 0.18);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.10);
+}

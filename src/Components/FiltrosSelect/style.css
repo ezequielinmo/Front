@@ -333,11 +333,52 @@
         /* background-color: var(--fondo-navbar); */
     }
 
-    .cont-filtro-titulo-Venta{
+    .cont-filtro-titulo-Venta {
         height: 30px;
     }
 
-    .titulo-filtros-Venta{
+    .titulo-filtros-Venta {
         color: white;
+    }
+}
+
+/* =========================================================
+   SOLO DESKTOP: “TODO EN UNA SOLA LÍNEA”
+   (Mobile queda igual porque esto corre desde 861px en adelante)
+   ========================================================= */
+@media screen and (min-width: 861px) {
+    .cont-selects-filtros {
+        flex-wrap: nowrap;
+        /* una línea */
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .cont-items-noPrecio {
+        width: auto;
+        flex-wrap: nowrap;
+        /* una línea */
+        gap: 10px;
+    }
+
+    .cont-op-tipoP,
+    .cont-tipo-prop,
+    .cont-amb-barrio,
+    .cont-amb {
+        width: auto;
+        /* evita 45% y que rompa línea */
+    }
+
+    .select-tipoProp {
+        width: 190px;
+        /* ajustá a gusto */
+        margin-bottom: 0;
+    }
+
+    .cont-filtro-precioMaxMin {
+        flex-wrap: nowrap;
+        /* precio + inputs + botón en una línea */
+        white-space: nowrap;
     }
 }

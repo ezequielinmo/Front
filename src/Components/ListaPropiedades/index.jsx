@@ -1,47 +1,76 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import Card from '../Card';
 import NoHayProps from '../NoHayProps';
 import Paginacion from '../../Components/Paginacion';
 import './styles.css';
 
 function ListaPropiedades({
-    allProps, vista,  currentPage, onPageChange, 
-    totalPropiedades, propiedadesPorPagina,
+    allProps = [],
+    vista,
+    currentPage,
+    onPageChange,
+    totalPropiedades = 0,
+    propiedadesPorPagina = 12,
+    variant = "page",        // "home" | "page"
+    showPagination = true,   // ✅ controla si se muestra paginación
+    hoveredId,
+    setHoveredId
 }) {
+    const propsToRender = useMemo(() => {
+        if (!Array.isArray(allProps) || allProps.length === 0) return [];
+        if (variant === "home") return allProps.slice(0, propiedadesPorPagina);
+        return allProps;
+    }, [allProps, variant, propiedadesPorPagina]);
+
+    const canPaginate =
+        variant === "page" &&
+        showPagination &&
+        propsToRender.length > 0 &&
+        typeof currentPage === "number" &&
+        typeof onPageChange === "function";
+
     return (
         <div className='contGralListaP'>
             <div className='contListaP'>
-                {
-                    allProps && allProps.length > 0 ? (
-                        allProps.map(p => (
+                {propsToRender.length > 0 ? (
+                    propsToRender.map((p, idx) => {
+                        const id = String(p?.id ?? idx); 
+                        const titulo = p?.tituloPublicacion ?? "";
+                        const direccion = p?.direccionF ?? "";
+
+                        // imagen meta (si existe)
+                        const metaImg =
+                            Array.isArray(p?.imagenes) && p.imagenes.length > 0
+                                ? (p.imagenes[0]?.original || p.imagenes[0]?.url || p.imagenes[0])
+                                : null;
+
+                        return (
                             <div
-                                className='cont-card-listaProps'
-                                key={p.id}
+                                className={`cont-card-listaProps ${hoveredId === id ? "is-hovered" : ""}`}
+                                key={id}
                                 itemScope
                                 itemType="https://schema.org/SingleFamilyResidence"
+                                onMouseEnter={() => setHoveredId?.(id)}   // ✅ usar id
+                                onMouseLeave={() => setHoveredId?.(null)}
                             >
                                 {/* Datos estructurados para SEO */}
-                                <meta itemProp="name" content={p.tituloPublicacion} />
-                                <meta itemProp="description" content={`${p.tipo} en ${p.operacion}. ${p.ambientes} ambientes, ${p.dormitorios} dormitorios, ${p.cantCocheras || 0} cocheras. Superficie total ${p.supTotal} ${p.unidadMedida}.`} />
+                                <meta itemProp="name" content={titulo} />
+                                <meta
+                                    itemProp="description"
+                                    content={`${p?.tipo ?? ""} en ${p?.operacion ?? ""}. ${p?.ambientes ?? ""} ambientes, ${p?.dormitorios ?? ""} dormitorios, ${(p?.cantCocheras ?? 0)} cocheras. Superficie total ${p?.supTotal ?? ""} ${p?.unidadMedida ?? ""}.`}
+                                />
 
-                                {/* Imagen principal */}
-                                {p.imagenes && p.imagenes[0] && (
-                                    <meta itemProp="image" content={p.imagenes[0]} />
-                                )}
+                                {metaImg && <meta itemProp="image" content={metaImg} />}
 
-                                {/* Dirección */}
                                 <div itemProp="address" itemScope itemType="https://schema.org/PostalAddress">
-                                    <meta itemProp="streetAddress" content={p.direccionF || ''} />
-                                    {/* Si tenés ciudad y provincia, las podés agregar aquí */}
+                                    <meta itemProp="streetAddress" content={direccion} />
                                     <meta itemProp="addressLocality" content="Mar del Plata" />
                                     <meta itemProp="addressRegion" content="Buenos Aires" />
                                     <meta itemProp="addressCountry" content="AR" />
                                 </div>
 
-                                {/* Oferta */}
                                 <div itemProp="offers" itemScope itemType="https://schema.org/Offer">
-                                    {/* No me pasaste precio, pero si lo tenés en p.precio, lo incluyo */}
-                                    {p.precio && (
+                                    {p?.precio && (
                                         <>
                                             <meta itemProp="price" content={p.precio} />
                                             <meta itemProp="priceCurrency" content="USD" />
@@ -50,46 +79,44 @@ function ListaPropiedades({
                                     <link itemProp="availability" href="https://schema.org/InStock" />
                                 </div>
 
-                                {/* URL de detalle */}
-                                <meta itemProp="url" content={`/propiedad/${p.id}`} />
+                                <meta itemProp="url" content={`/propiedad/${id}`} />
 
-                                {/* Tu componente Card */}
+                                {/* Card */}
                                 <Card
-                                    id={p.id}
-                                    direccionF={p.direccionF}
-                                    operacion={p.operacion}
-                                    imagenes={p.imagenes}
-                                    tituloPublicacion={p.tituloPublicacion}
-                                    ambientes={p.ambientes}
-                                    dormitorios={p.dormitorios}
-                                    unidadMedida={p.unidadMedida}
-                                    cantCocheras={p.cantCocheras}
-                                    supTotal={p.supTotal}
-                                    tipo={p.tipo}
-                                    destacadaEnWeb={p.destacadaEnWeb}
+                                    id={id}
+                                    direccionF={direccion}
+                                    operacion={p?.operacion}
+                                    imagenes={p?.imagenes}
+                                    tituloPublicacion={titulo}
+                                    ambientes={p?.ambientes}
+                                    dormitorios={p?.dormitorios}
+                                    unidadMedida={p?.unidadMedida}
+                                    cantCocheras={p?.cantCocheras}
+                                    supTotal={p?.supTotal}
+                                    tipo={p?.tipo}
+                                    destacadaEnWeb={p?.destacadaEnWeb}
                                     vista={vista}
                                 />
                             </div>
-                        ))
-                    ) : (
-                        <div className='no-props'>
-                            <NoHayProps />
-                        </div>
-                    )
-                }
+                        );
+                    })
+                ) : (
+                    <div className='no-props'>
+                        <NoHayProps />
+                    </div>
+                )}
             </div>
-            {/* Paginación */}
-            {
-                allProps.length > 0 && (
-                    <Paginacion
-                        allProps={allProps}
-                        currentPage={currentPage}
-                        onPageChange={onPageChange}
-                        totalPropiedades={totalPropiedades}
-                        propiedadesPorPagina={propiedadesPorPagina}
-                    />
-                )
-            }
+
+            {/* ✅ paginación solo si corresponde */}
+            {canPaginate && (
+                <Paginacion
+                    allProps={allProps}
+                    currentPage={currentPage}
+                    onPageChange={onPageChange}
+                    totalPropiedades={totalPropiedades}
+                    propiedadesPorPagina={propiedadesPorPagina}
+                />
+            )}
         </div>
     );
 }

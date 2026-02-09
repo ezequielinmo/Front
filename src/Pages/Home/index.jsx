@@ -1,104 +1,122 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProps, getPropsDestacadas, getPropsMap, getEmprendimientos } from '../../Redux/Actions';
 import Loading from '../../Components/Loading';
 import LandigA from '../../Components/LandingA';
 import LandingB from '../../Components/LandingB';
-import LandingProps from '../../Components/LandingProps';
 import Institucional from '../../Components/Institucional';
-//import MapaPropiedades from '../../Components/MapProps';
-//import BotonVerTodas from '../../Components/Botones/BotonVerTodas';
 import GoogleReviewsWidget from '../../Components/GoogleComentarios';
-import './styles.css';
 import LandingC from '../../Components/LandingC';
-
+import ListaPropiedades from '../../Components/ListaPropiedades';
+import { NavLink } from 'react-router-dom';
+import { PAGINATION } from "../../Helps/paginacion";
+import './styles.css';
 
 
 function Home() {
+    const dispatch = useDispatch();
 
-    const loading = useSelector(state => state.loading);
-    const allProps = useSelector(state => state.propiedades);
-    //const allPropsMap = useSelector(state => state.propsMap);
-    //const allPropsDestacadas = useSelector(state => state.propsDestacadas);
-    //const allEmp = useSelector(state => state.emprendimientos);
-    //const totalPropiedades = useSelector(state => state.totPropiedades);
-    //estados para las propiedades
-    const [operacion, setOperacion] = useState(''); 
+    const loading = useSelector((state) => state.loading);
+    const allProps = useSelector((state) => state.propiedades) || [];
+    //const totalPropiedades = useSelector((state) => state.totPropiedades) || 0;
+
+    // filtros
+    const [operacion, setOperacion] = useState('');
     const [tipoPropiedad, setTipoPropiedad] = useState([]);
-    const [ambientes, setAmbientes] = useState(); //en el back lo convierto a int
+    const [ambientes, setAmbientes] = useState();
     const [barrios, setBarrios] = useState([]);
     const [precioMin, setPrecioMin] = useState();
     const [precioMax, setPrecioMax] = useState();
-    const [destacadas, /* setDestacadas */] = useState(false);
-    //const [listaProps, setListaProps] = useState(true);
-    //const [vistaMapa, setVistaMapa] = useState(false);
+    const [destacadas] = useState(false);
 
-    //estados para paginación
-    const [currentPage, setCurrentPage] = useState(1);
-    const propiedadesPorPagina = 12;
+    // paginación
+    const propiedadesPorPagina = PAGINATION.HOME;
+    const [, setCurrentPage] = useState(1);
     const limit = propiedadesPorPagina;
-    const offset = (currentPage - 1) * limit;
-    const dispatch = useDispatch();
+    //const offset = 0;
 
-    /* const onClickListaProps = () => {
-        setListaProps(!listaProps);
-        setVistaMapa(!vistaMapa);
-    }
-    const onClickMapaProps = () => {
-        setVistaMapa(!vistaMapa);
-        setListaProps(!listaProps);
-    } */
-    //efecto para iniciar pag desde scroll 0
+    /* const onPageChange = (page) => {
+        setCurrentPage(page);
+    }; */
+
+    //esto define qué precio mostrar en Card según el filtro elegido
+    const vistaCards = useMemo(() => {
+        if (operacion === 'Venta') return 'Venta';
+        if (operacion === 'Alquiler') return 'Alquiler';
+        return 'ambas'; // cuando no filtrás operación (o "Todas")
+    }, [operacion]);
+
+    // scroll inicial
     useEffect(() => {
         requestAnimationFrame(() => {
             window.scrollTo(0, 0);
         });
     }, []);
-    //vuelve el scroll hacia arriba
-    useEffect(() => {
-        window.scrollTo(0, 600);
-    }, [currentPage]);
 
+    // data
     useEffect(() => {
         dispatch(getPropsDestacadas());
         dispatch(getEmprendimientos());
-        dispatch(getPropsMap(limit, offset, operacion, tipoPropiedad, barrios, precioMin, precioMax, ambientes, destacadas));
-        dispatch(getProps(limit, offset, operacion, tipoPropiedad, barrios, precioMin, precioMax, ambientes, destacadas));
-    }, [dispatch, limit, offset, operacion, tipoPropiedad, ambientes, barrios, precioMin, precioMax, destacadas]);
 
-    return (
-        loading ? (
-            <Loading />
-        ) : (
-            <div className='cont-home'>
-                {/* Landing A */}
-                <LandigA
-                    setCurrentPage={setCurrentPage}
-                    setOperacion={setOperacion}
-                    setTipoPropiedad={setTipoPropiedad}
-                    setBarrios={setBarrios}
-                    setAmbientes={setAmbientes}
-                    setPrecioMin={setPrecioMin}
-                    setPrecioMax={setPrecioMax}
-                />
+        dispatch(getPropsMap(limit, 0, operacion, tipoPropiedad, barrios, precioMin, precioMax, ambientes, destacadas));
+        dispatch(getProps(limit, 0, operacion, tipoPropiedad, barrios, precioMin, precioMax, ambientes, destacadas));
+    }, [dispatch, limit, operacion, tipoPropiedad, ambientes, barrios, precioMin, precioMax, destacadas]);
 
-                <LandingC />
-                {/* Propiedades */}
-                <div className='section-props'>
-                    <LandingProps allProps={allProps}/>
+    return loading ? (
+        <Loading />
+    ) : (
+        <div className="cont-home">
+            <LandigA
+                setCurrentPage={setCurrentPage}
+                setOperacion={setOperacion}
+                setTipoPropiedad={setTipoPropiedad}
+                setBarrios={setBarrios}
+                setAmbientes={setAmbientes}
+                setPrecioMin={setPrecioMin}
+                setPrecioMax={setPrecioMax}
+            />
+
+            <LandingC />
+
+            <div className="section-props">
+                <div className="section-props__container">
+                    <header className="props-hero">
+                        <div className="props-hero__left">
+
+                            <h2 className="props-heading">
+                                Propiedades que valen la pena
+                            </h2>
+
+                            <p className="props-lead">
+                                Explorá en nuestra sección PROPIEDADES oportunidades en Mar del Plata y alrededores.
+                                Filtrá, compará y guardá favoritas.
+                            </p>
+
+                            <div className="props-chips">
+                                <NavLink to="/propiedades" className="btn-ir-props">
+                                    IR A PROPIEDADES
+                                </NavLink>
+                            </div>
+                        </div>
+                    </header>
+
+                    <div className="props-listWrap">
+                        <ListaPropiedades
+                            variant="home"
+                            showPagination={false}
+                            allProps={allProps}
+                            vista={vistaCards}
+                            propiedadesPorPagina={6}
+                        />
+                    </div>
                 </div>
-
-                {/* Tasación */}
-                <LandingB />
-
-                {/* Institucional 2*/}
-                <Institucional />
-
-                {/* comentarios Google */}
-                <GoogleReviewsWidget />
             </div>
-        )
-    )
+
+            <LandingB />
+            <Institucional />
+            <GoogleReviewsWidget />
+        </div>
+    );
 }
 
-export default Home
+export default Home;
