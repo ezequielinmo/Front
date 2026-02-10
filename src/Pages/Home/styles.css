@@ -148,12 +148,27 @@
 
 @media (max-width: 520px) {
     .props-hero {
+        width: 98%;
         padding: 16px;
         border-radius: 20px;
+    }
+
+    .section-props {
+        width: 90%;
     }
 
     .chip {
         width: fit-content;
         font-size: .9rem;
+    }
+
+    .section-props__container {
+        width: 100%;
+    }
+    .props-listWrap {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 }
