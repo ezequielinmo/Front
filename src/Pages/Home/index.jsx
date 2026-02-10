@@ -84,7 +84,7 @@ function Home() {
                         <div className="props-hero__left">
 
                             <h2 className="props-heading">
-                                Propiedades que valen la pena
+                                Algunas de nuestras propiedades
                             </h2>
 
                             <p className="props-lead">

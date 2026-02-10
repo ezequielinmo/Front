@@ -126,7 +126,6 @@ function Contactanos() {
                             Enviar mensaje
                         </button>
                     </form>
-
                 </div>
 
                 {/* COLUMNA DERECHA */}

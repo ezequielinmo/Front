@@ -5,10 +5,10 @@ import Loading from "../../Components/Loading";
 import FiltersBar from "../../Components/FiltrosPropiedadesPage";
 import ViewToggle from "../../Components/BotonesVistas";
 import PropertiesMap from "../../Components/GoogleMapsB";
-import Pagination from "../../Components/PaginacionB";
 import { PAGINATION } from "../../Helps/paginacion";
 import ListaPropiedades from "../../Components/ListaPropiedades"; // ✅ ESTE
 import "./styles.css";
+import Paginacion from "../../Components/Paginacion";
 
 function PropiedadesPage() {
     const dispatch = useDispatch();
@@ -134,10 +134,12 @@ function PropiedadesPage() {
                     </div>
 
                     <div className="pp-footer">
-                        <Pagination
-                            page={currentPage}
+                        <Paginacion
+                            currentPage={currentPage}
                             totalPages={totalPages}
-                            onChange={setCurrentPage}
+                            onPageChange={setCurrentPage}
+                            totalPropiedades={totalPropiedades}
+                            propiedadesPorPagina={totalPages}
                         />
                     </div>
                 </div>

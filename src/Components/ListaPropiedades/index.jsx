@@ -1,18 +1,13 @@
 import React, { useMemo } from 'react';
 import Card from '../Card';
 import NoHayProps from '../NoHayProps';
-import Paginacion from '../../Components/Paginacion';
 import './styles.css';
 
 function ListaPropiedades({
     allProps = [],
     vista,
-    currentPage,
-    onPageChange,
-    totalPropiedades = 0,
     propiedadesPorPagina = 12,
     variant = "page",        // "home" | "page"
-    showPagination = true,   // ✅ controla si se muestra paginación
     hoveredId,
     setHoveredId
 }) {
@@ -22,12 +17,6 @@ function ListaPropiedades({
         return allProps;
     }, [allProps, variant, propiedadesPorPagina]);
 
-    const canPaginate =
-        variant === "page" &&
-        showPagination &&
-        propsToRender.length > 0 &&
-        typeof currentPage === "number" &&
-        typeof onPageChange === "function";
 
     return (
         <div className='contGralListaP'>
@@ -107,16 +96,6 @@ function ListaPropiedades({
                 )}
             </div>
 
-            {/* ✅ paginación solo si corresponde */}
-            {canPaginate && (
-                <Paginacion
-                    allProps={allProps}
-                    currentPage={currentPage}
-                    onPageChange={onPageChange}
-                    totalPropiedades={totalPropiedades}
-                    propiedadesPorPagina={propiedadesPorPagina}
-                />
-            )}
         </div>
     );
 }

@@ -1,52 +1,71 @@
-import React from 'react';
-import { ezequiel } from '../../Helps/ArrayEquipo';
-import Video from '../../Images/videoLand.mp4';
-import ListaEquipo from '../ListaEquipo';
-import CardPersona from '../CardPersona';
-import './styles.css';
+import React from "react";
+import { ezequiel } from "../../Helps/ArrayEquipo";
+import Video from "../../Images/videoLand.mp4";
+import ListaEquipo from "../ListaEquipo";
+import CardPersona from "../CardPersona";
+import "./styles.css";
 
 function LaEmpresa() {
     const eze = ezequiel;
 
     return (
-        <div className='cont-principal-laEmp'>
-            {/* oscurece el video */}
-            <div className='overlay-video-laEmp'></div>
-            <div className='cont-secundario-laEmp'>
-                {/* video con overlay */}
-                <div className='cont-video-laEmp'>
-                    <video className='cont-video' autoPlay muted loop>
-                        <source src={Video} type="video/mp4" />
-                        Tu navegador no soporta la etiqueta de video.
-                    </video>
+        <section className="laemp">
+            {/* HERO */}
+            <header className="laemp__hero">
+                <video className="laemp__video" autoPlay muted loop playsInline>
+                    <source src={Video} type="video/mp4" />
+                    Tu navegador no soporta la etiqueta de video.
+                </video>
+
+                {/* overlays (degradado + textura suave) */}
+                <div className="laemp__overlay" aria-hidden="true" />
+                <div className="laemp__grain" aria-hidden="true" />
+
+                <div className="laemp__heroContent">
+                    <p className="laemp__eyebrow">Estudio inmobiliario</p>
+
+                    <h1 className="laemp__title">Ezequiel Jose Estudio Inmobiliario</h1>
+
+                    <p className="laemp__subtitle">
+                        Hacemos foco en lo que el cliente nos pide.
+                    </p>
+
+                    <p className="laemp__desc">
+                        Acompañamos cada operación con cercanía, estrategia y claridad para que
+                        tomes decisiones seguras.
+                    </p>
+
+                    {/* chips decorativos */}
+                    <div className="laemp__chips">
+                        <span className="laemp__chip">Transparencia</span>
+                        <span className="laemp__chip">Gestión integral</span>
+                        <span className="laemp__chip">Asesoramiento</span>
+                    </div>
+                </div>
+            </header>
+
+            {/* CONTENIDO */}
+            <main className="laemp__container">
+                {/* título sección */}
+                <div className="laemp__sectionTitle">
+                    <div className="laemp__line" />
+                    <h2 className="laemp__h2">Nuestro Staff</h2>
+                    <div className="laemp__line" />
                 </div>
 
-                {/* textos sobre el video */}
-                <div className='cont-texto-LaEmp'>
-                    <h1 className='texto-h1-LaEmp'>Ezequiel Jose Estudio Inmobiliario</h1>
-                    <h2 className='texto-h2-LaEmp'>Hacemos foco en lo que el cliente nos pide</h2>
-                    <h3 className='texto-h3-LaEmp'>TEXTO......</h3>
-                    {/* <h3 className='texto-h3-LaEmp'>de Ortiz Lizmar propiedades y él nos consigue todo!!</h3> */}
-                </div>
+                {/* destacado */}
+                <section className="laemp__featured">
+                    <div className="laemp__featuredCard">
+                        <CardPersona {...eze} />
+                    </div>
+                </section>
 
-                {/* título decorado */}
-                <div className="cont-titulos">
-                    <div className="linea-destacadas "></div>
-                        <h2 className="titulo-props-destacadas" >Nuestro Staff</h2>
-                    <div className="linea-destacadas "></div>
-                </div>
-
-                {/* primera card separada */}
-                <div className='cont-LaEmp-Ezequiel'>
-                    <CardPersona {...eze} />
-                </div>
-
-                {/* resto del equipo */}
-                <div className='cont-LaEmp-Equipo'>
+                {/* equipo */}
+                <section className="laemp__team">
                     <ListaEquipo />
-                </div>
-            </div>
-        </div>
+                </section>
+            </main>
+        </section>
     );
 }
 

@@ -343,8 +343,8 @@
 }
 
 /* =========================================================
-   SOLO DESKTOP: “TODO EN UNA SOLA LÍNEA”
-   (Mobile queda igual porque esto corre desde 861px en adelante)
+SOLO DESKTOP: “TODO EN UNA SOLA LÍNEA”
+(Mobile queda igual porque esto corre desde 861px en adelante)
    ========================================================= */
 @media screen and (min-width: 861px) {
     .cont-selects-filtros {
