@@ -40,14 +40,18 @@
     display: flex;
     justify-content: space-around;
     align-items: start;
+    gap: 30px;
 }
 /* ================= FORM ================= */
 
 .contactanos-form {
-    height: 630px;
+    width: 100%;
+    max-width: 620px;
+    height: auto;
     background: #fff;
     padding: 35px;
     box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08);
+    box-sizing: border-box;
 }
 
 .form-header {
@@ -121,6 +125,8 @@
 /* ================= INFO ================= */
 
 .contactanos-info {
+    width: 100%;
+    max-width: 620px;
     display: flex;
     flex-direction: column;
     gap: 30px;
@@ -162,7 +168,8 @@
 .contactanos-imagen {
     position: relative;
     overflow: hidden;
-    height: 300px;
+    height: 280px;
+    width: 100%;
 }
 
 .contactanos-imagen img {
@@ -188,16 +195,86 @@
 
 /* ================= RESPONSIVE ================= */
 
-@media (max-width: 900px) {
+@media (max-width: 1200px) {
     .contactanos {
-        grid-template-columns: 1fr;
+        padding: 50px 5%;
     }
 
-    .info-cards {
-        grid-template-columns: 1fr;
+    .texto-3 {
+        text-align: center;
+    }
+}
+
+@media (max-width: 900px) {
+    .contactanos {
+        padding: 40px 20px;
+        gap: 35px;
+    }
+
+    .cont-inf {
+        flex-direction: column;
+        align-items: stretch;
     }
 
     .form-row {
         flex-direction: column;
+    }
+
+    .contactanos-form {
+        height: auto;
+        padding: 24px;
+    }
+
+    .form-group textarea {
+        height: 180px;
+    }
+
+    .contactanos-info {
+        gap: 20px;
+    }
+}
+
+@media (max-width: 600px) {
+    .texto-1 {
+        font-size: 14px;
+        padding: 8px 14px;
+    }
+
+    .texto-2 {
+        margin: 12px 0 8px;
+        font-size: 32px;
+    }
+
+    .texto-3 {
+        font-size: 18px;
+    }
+
+    .contactanos-form {
+        padding: 18px;
+    }
+
+    .form-header {
+        gap: 10px;
+        margin-bottom: 18px;
+    }
+
+    .info-cards {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    .info-card {
+        padding: 18px;
+    }
+
+    .contactanos-imagen {
+        height: 240px;
+    }
+
+    .imagen-overlay {
+        left: 10px;
+        right: 10px;
+        bottom: 10px;
+        padding: 10px;
     }
 }
