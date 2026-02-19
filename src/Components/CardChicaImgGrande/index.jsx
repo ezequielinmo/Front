@@ -1,126 +1,118 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { capitalizar, formatMoney } from '../../Helps';
 import { NavLink } from 'react-router-dom';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import './styles.css';
 
 const CardChicaImagenGrande = ({
     id,
     direccionF,
-    cantCocheras,
-    operacion,
+    operacion = [],
     imagenes = [],
     tituloPublicacion,
-    ambientes,
-    dormitorios,
-    supTotal,
-    supCubierta,
-    supDescubierta,
-    unidadMedida,
-    tipo,
-    vista
+    vista,
 }) => {
     const [imgIndex, setImgIndex] = useState(0);
     const [showDetail, setShowDetail] = useState(false);
 
-    const venta = operacion.find(op => op.operacion === "Venta");
-    const alquiler = operacion.find(op => op.operacion === "Alquiler");
+    const venta = useMemo(
+        () => operacion.find((op) => op?.operacion === 'Venta'),
+        [operacion]
+    );
+    const alquiler = useMemo(
+        () => operacion.find((op) => op?.operacion === 'Alquiler'),
+        [operacion]
+    );
+
+    const operacionLabel = useMemo(() => {
+        if (operacion.length > 1) return 'Venta / Alquiler';
+        if (operacion[0]?.operacion === 'Venta') return 'Venta';
+        if (operacion[0]?.operacion === 'Alquiler') return 'Alquiler';
+        return 'Propiedad';
+    }, [operacion]);
+
+    const precioLabel = useMemo(() => {
+        if (vista === 'Venta' && venta?.precios?.[0]) {
+            return `${venta.precios[0].moneda} ${formatMoney(venta.precios[0].precio)}`;
+        }
+        if (vista === 'Alquiler' && alquiler?.precios?.[0]) {
+            return `${alquiler.precios[0].moneda} ${formatMoney(alquiler.precios[0].precio)}`;
+        }
+        if (vista === 'ambas' && venta?.precios?.[0] && alquiler?.precios?.[0]) {
+            return `${venta.precios[0].moneda} ${formatMoney(venta.precios[0].precio)} / ${alquiler.precios[0].moneda} ${formatMoney(alquiler.precios[0].precio)}`;
+        }
+        if (vista === 'ambas' && venta?.precios?.[0]) {
+            return `${venta.precios[0].moneda} ${formatMoney(venta.precios[0].precio)}`;
+        }
+        if (vista === 'ambas' && alquiler?.precios?.[0]) {
+            return `${alquiler.precios[0].moneda} ${formatMoney(alquiler.precios[0].precio)}`;
+        }
+        return 'Consultar precio';
+    }, [vista, venta, alquiler]);
 
     const handleNext = (e) => {
-        e.stopPropagation();
         e.preventDefault();
+        e.stopPropagation();
+        if (imagenes.length <= 1) return;
         setImgIndex((prev) => (prev + 1) % imagenes.length);
     };
 
     const handlePrev = (e) => {
-        e.stopPropagation();
         e.preventDefault();
+        e.stopPropagation();
+        if (imagenes.length <= 1) return;
         setImgIndex((prev) => (prev - 1 + imagenes.length) % imagenes.length);
     };
 
+    const imgSrc = imagenes[imgIndex]?.original || imagenes[imgIndex]?.url || '';
+
     return (
-        <div className="cards-scroll-wrapper">
-            <div className="cont-card-imgGrande">
-                <div className="cont-imgG">
-                    {/* NavLink que solo cubre la imagen */}
-                    <NavLink to={`/detalle/${id}`} className='navLink-car'>
-                        <div
-                            onMouseEnter={() => setShowDetail(true)}
-                            onMouseLeave={() => setShowDetail(false)}
-                        >
-                            <div className='card-image-chica'>
-                                <img
-                                    src={imagenes[imgIndex]?.original}
-                                    alt='not found'
-                                    className='card-imgGrande'
-                                />
-                            </div>
-
-                            <div className={`detail-chica ${showDetail ? 'show-chica' : ''}`}>
-                                <p className='palabra-abre-detalle' data-translate>Detalle</p>
-                            </div>
-                        </div>
-                    </NavLink>
-
-                    {/* Badges sobre la imagen */}
-                    <div className="badge operacionCG">
-                        {operacion.length > 1 ? (
-                            "Venta/Alq"
-                        ) : operacion[0]?.operacion === 'Venta' ? (
-                            "Venta"
-                        ) : operacion[0]?.operacion === 'Alquiler' ? (
-                            "Alquiler"
-                        ) : null}
-                    </div>
-
-                    <div className="badge precioCG">
-                        {vista === "Venta" && venta && (
-                            <p className='precio-cardG'>
-                                {venta.precios[0]?.moneda} {formatMoney(venta.precios[0]?.precio)}
-                            </p>
-                        )}
-                        {vista === "Alquiler" && alquiler && (
-                            <p className='precio-cardG'>
-                                {alquiler.precios[0]?.moneda} {formatMoney(alquiler.precios[0]?.precio)}
-                            </p>
-                        )}
-                        {vista === "ambas" && venta && alquiler && (
-                            <p className='precio-cardG'>
-                                {venta.precios[0]?.moneda} {formatMoney(venta.precios[0]?.precio)} / {alquiler.precios[0]?.moneda} {formatMoney(alquiler.precios[0]?.precio)}
-                            </p>
-                        )}
-                        {vista === "ambas" && venta && !alquiler && (
-                            <p className='precio-cardG'>
-                                {venta.precios[0]?.moneda} {formatMoney(venta.precios[0]?.precio)}
-                            </p>
-                        )}
-                        {vista === "ambas" && alquiler && !venta && (
-                            <p className='precio-cardG'>
-                                {alquiler.precios[0]?.moneda} {formatMoney(alquiler.precios[0]?.precio)}
-                            </p>
-                        )}
-                    </div>
-
-                    {/* Flechas fuera del NavLink */}
-                    {imagenes.length > 1 && (
-                        <>
-                            <button className="img-nav left" onClick={handlePrev}>‹</button>
-                            <button className="img-nav right" onClick={handleNext}>›</button>
-                        </>
+        <article className='cg-card'>
+            <div className='cg-media'>
+                <NavLink
+                    to={`/detalle/${id}`}
+                    className='cg-link'
+                    onMouseEnter={() => setShowDetail(true)}
+                    onMouseLeave={() => setShowDetail(false)}
+                >
+                    {imgSrc ? (
+                        <img src={imgSrc} alt={tituloPublicacion || 'propiedad'} className='cg-image' />
+                    ) : (
+                        <div className='cg-image cg-image--empty'>Sin imagen</div>
                     )}
-                </div>
 
-                <div className='cont-titulo-publicacion-cardIG'>
-                    <div className='cont-titulo-card'>
-                        <h3 className='tituloPublicacion-cardIG' data-translate>{capitalizar(tituloPublicacion)}</h3>
+                    <div className={`cg-overlay ${showDetail ? 'is-visible' : ''}`}>
+                        <span>Ver detalle</span>
                     </div>
-                    <div className='cont-direcc-icono-card'>
-                        <LocationOnIcon sx={{ color: 'grey' }} />
-                        <p className='direcc-card' data-translate>{direccionF}</p>
-                    </div>
-                </div>
+                </NavLink>
+
+                <div className='cg-badge cg-badge--op'>{operacionLabel}</div>
+                <div className='cg-badge cg-badge--price'>{precioLabel}</div>
+
+                {imagenes.length > 1 && (
+                    <>
+                        <button className='cg-nav cg-nav--left' onClick={handlePrev} aria-label='Imagen anterior'>
+                            <ArrowBackIosNewIcon sx={{ fontSize: 16 }} />
+                        </button>
+                        <button className='cg-nav cg-nav--right' onClick={handleNext} aria-label='Imagen siguiente'>
+                            <ArrowForwardIosIcon sx={{ fontSize: 16 }} />
+                        </button>
+                    </>
+                )}
             </div>
-        </div>
+
+            <div className='cg-content'>
+                <h3 className='cg-title' data-translate>
+                    {capitalizar(tituloPublicacion || '')}
+                </h3>
+                <p className='cg-address' data-translate>
+                    <LocationOnIcon sx={{ color: '#9aa3b4', fontSize: 16 }} />
+                    <span>{direccionF || 'Direccion no disponible'}</span>
+                </p>
+            </div>
+        </article>
     );
 };
 

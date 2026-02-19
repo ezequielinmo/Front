@@ -1,10 +1,9 @@
-import React, { useContext, useEffect, useMemo, useState, useCallback } from "react";
+import React, { useContext, useEffect, useMemo, useState, useCallback, useRef } from "react";
 import { useNavigate, useParams, useLocation, } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getProperty, resetProperty } from "../../Redux/Actions";
 import { InmobiliariaContext } from "../../Context";
 import { capitalizar, formatMoney } from "../../Helps";
-import {  } from "react-router-dom";
 import Carrusel from "../../Components/Carrusel";
 import MapProp from "../../Components/MapaProp";
 import ModalVideo from "../../Components/ModalVideo";
@@ -25,6 +24,7 @@ function DetalleProp() {
     const navigate = useNavigate();
     const location = useLocation();
     const contexto = useContext(InmobiliariaContext);
+    const backNavigationRef = useRef(false);
 
     const [copiado, setCopiado] = useState(false);
 
@@ -64,23 +64,38 @@ function DetalleProp() {
 
     // ✅ Volver SIN perder filtros: si venís desde listado con search, volvemos ahí
     const handleClickAtras = () => {
+        if (backNavigationRef.current) return;
+        backNavigationRef.current = true;
+
         const backTo = location.state?.backTo;
 
         if (backTo) {
-            navigate(backTo);
+            navigate(backTo, { replace: true });
+            setTimeout(() => {
+                backNavigationRef.current = false;
+            }, 250);
             return;
         }
 
-        // fallback: si hay historial real, volvemos
+        const currentPath = `${location.pathname}${location.search}`;
         if (window.history.length > 1) {
             navigate(-1);
+
+            setTimeout(() => {
+                const updatedPath = `${window.location.pathname}${window.location.search}`;
+                if (updatedPath === currentPath) {
+                    navigate("/propiedades", { replace: true });
+                }
+                backNavigationRef.current = false;
+            }, 120);
             return;
         }
 
-        // fallback final: ruta del listado
-        navigate("/propiedades");
+        navigate("/propiedades", { replace: true });
+        setTimeout(() => {
+            backNavigationRef.current = false;
+        }, 250);
     };
-
 
     useEffect(() => {
         window.scrollTo(0, 0);

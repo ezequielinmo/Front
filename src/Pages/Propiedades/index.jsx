@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getProps } from "../../Redux/Actions";
 import Loading from "../../Components/Loading";
@@ -12,6 +13,7 @@ import Paginacion from "../../Components/Paginacion";
 
 function PropiedadesPage() {
     const dispatch = useDispatch();
+    const location = useLocation();
 
     const loading = useSelector((state) => state.loading);
     const allProps = useSelector((state) => state.propiedades) || [];
@@ -58,6 +60,11 @@ function PropiedadesPage() {
     useEffect(() => {
         dispatch(getProps(limit, offset, operacion, tipoPropiedad, barrios, precioMin, precioMax, ambientes));
     }, [dispatch, limit, offset, operacion, tipoPropiedad, barrios, ambientes, precioMin, precioMax]);
+
+    useEffect(() => {
+        setSelectedId(null);
+        setHoveredId(null);
+    }, [location.key]);
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -124,6 +131,7 @@ function PropiedadesPage() {
                         {(viewMode === "split" || viewMode === "map") && (
                             <div className="pp-map">
                                 <PropertiesMap
+                                    key={`pp-map-${location.key}-${currentPage}-${allProps.length}`}
                                     items={allProps}
                                     selectedId={selectedId}
                                     onSelect={setSelectedId}

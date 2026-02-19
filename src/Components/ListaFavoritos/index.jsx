@@ -8,42 +8,62 @@ const arrayFiltrosOperacion = ['Venta', 'Alquiler'];
 function ListaFavoritos({ allProps = [] }) {
     const [filtroTipo, setFiltroTipo] = useState('');
     const [filtroOperacion, setFiltroOperacion] = useState('');
+    const totalFavoritos = Array.isArray(allProps) ? allProps.length : 0;
 
-    // 🔹 Obtener solo los tipos que existen en las favoritas
     const tiposDisponibles = useMemo(() => {
         if (!Array.isArray(allProps)) return [];
-        const tipos = new Set(allProps.map(p => p.tipo?.nombre).filter(Boolean));
+        const tipos = new Set(allProps.map((p) => p.tipo?.nombre).filter(Boolean));
         return Array.from(tipos);
     }, [allProps]);
 
-    // 🔹 Filtrar propiedades
     const propsFiltrados = useMemo(() => {
         if (!Array.isArray(allProps)) return [];
-        return allProps.filter(p => {
+        return allProps.filter((p) => {
             const matchTipo = filtroTipo ? p.tipo?.nombre === filtroTipo : true;
             const matchOperacion = filtroOperacion
-                ? p.operacion?.some(op => op.operacion === filtroOperacion)
+                ? p.operacion?.some((op) => op.operacion === filtroOperacion)
                 : true;
             return matchTipo && matchOperacion;
         });
     }, [allProps, filtroTipo, filtroOperacion]);
 
+    const hayFiltrosActivos = Boolean(filtroTipo || filtroOperacion);
+
+    const limpiarFiltros = () => {
+        setFiltroTipo('');
+        setFiltroOperacion('');
+    };
+
     return (
         <div className='cont-listaProps-fav'>
             <div className="cont-titulos">
-                <div className="linea-destacadas"></div>
-                <h2 className="titulo-props-destacadas">Tus propiedades favoritas</h2>
-                <div className="linea-destacadas"></div>
+                <h1 className="titulo-props-destacadas">Tus propiedades favoritas</h1>
+                <p className="subtitulo-props-fav">
+                    Guarda, filtra y compara tus propiedades en un solo lugar.
+                </p>
+                <div className="meta-favoritos">
+                    <span className="badge-fav">Total: {totalFavoritos}</span>
+                    <span className="badge-fav">Resultados: {propsFiltrados.length}</span>
+                </div>
             </div>
 
             <div className="layout-favoritos">
-                {/* Barra lateral solo visible en pantallas grandes */}
                 <aside className="barra-filtros-fav">
+                    <div className="cabecera-filtros">
+                        <h3>Filtros</h3>
+                        <p>Refina tus favoritos segun lo que buscas.</p>
+                        {hayFiltrosActivos && (
+                            <button onClick={limpiarFiltros} className="btn-reset-filtros">
+                                Limpiar filtros
+                            </button>
+                        )}
+                    </div>
+
                     <div className="bloque-filtro">
-                        <h3>Operación</h3>
+                        <h4>Operacion</h4>
                         <button
                             onClick={() => setFiltroOperacion('')}
-                            className={filtroOperacion === '' ? 'activo' : ''}
+                            className={`filter-btn ${filtroOperacion === '' ? 'activo' : ''}`}
                         >
                             Ambas
                         </button>
@@ -51,7 +71,7 @@ function ListaFavoritos({ allProps = [] }) {
                             <button
                                 key={op}
                                 onClick={() => setFiltroOperacion(op)}
-                                className={filtroOperacion === op ? 'activo' : ''}
+                                className={`filter-btn ${filtroOperacion === op ? 'activo' : ''}`}
                             >
                                 {op}
                             </button>
@@ -59,10 +79,10 @@ function ListaFavoritos({ allProps = [] }) {
                     </div>
 
                     <div className="bloque-filtro">
-                        <h3>Tipo de propiedad</h3>
+                        <h4>Tipo de propiedad</h4>
                         <button
                             onClick={() => setFiltroTipo('')}
-                            className={filtroTipo === '' ? 'activo' : ''}
+                            className={`filter-btn ${filtroTipo === '' ? 'activo' : ''}`}
                         >
                             Todas
                         </button>
@@ -70,7 +90,7 @@ function ListaFavoritos({ allProps = [] }) {
                             <button
                                 key={tipo}
                                 onClick={() => setFiltroTipo(tipo)}
-                                className={filtroTipo === tipo ? 'activo' : ''}
+                                className={`filter-btn ${filtroTipo === tipo ? 'activo' : ''}`}
                             >
                                 {tipo}
                             </button>
@@ -78,8 +98,16 @@ function ListaFavoritos({ allProps = [] }) {
                     </div>
                 </aside>
 
-                {/* Filtros superiores solo en móviles */}
                 <div className="filtros-superiores">
+                    <div className="cabecera-filtros cabecera-filtros-mobile">
+                        <h3>Filtros rapidos</h3>
+                        {hayFiltrosActivos && (
+                            <button onClick={limpiarFiltros} className="btn-reset-filtros">
+                                Limpiar
+                            </button>
+                        )}
+                    </div>
+
                     <div className="cont-filtros-fav">
                         <button
                             onClick={() => setFiltroTipo('')}
@@ -117,10 +145,9 @@ function ListaFavoritos({ allProps = [] }) {
                     </div>
                 </div>
 
-                {/* Lista de propiedades */}
                 <div className='cont-card-lista-props-fav'>
                     {propsFiltrados.length ? (
-                        propsFiltrados.map(p => (
+                        propsFiltrados.map((p) => (
                             <div className='cont-card-Fav-listaProps' key={p.id}>
                                 <Card
                                     id={p.id}
@@ -135,12 +162,12 @@ function ListaFavoritos({ allProps = [] }) {
                                     supTotal={p.supTotal}
                                     tipo={p.tipo}
                                     destacadaEnWeb={p.destacadaEnWeb}
-                                    vista={"ambas"}
+                                    vista={'ambas'}
                                 />
                             </div>
                         ))
                     ) : (
-                        <div className='no-props'>
+                        <div className='no-props no-props-fav'>
                             <NoHayProps />
                         </div>
                     )}

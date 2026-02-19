@@ -18,7 +18,7 @@ function CardEmprendimiento({ id, imagenes, direccionF, locacion, tituloPublicac
                 <img src={img} alt={tituloPublicacion || "Emprendimiento"} className="emp-card-img" />
 
                 <div className={`emp-card-overlay ${showDetail ? "is-visible" : ""}`}>
-                    <span className="emp-card-cta">Ver detalle</span>
+                    {/* <span className="emp-card-cta">Ver detalle</span> */}
                 </div>
             </NavLink>
 

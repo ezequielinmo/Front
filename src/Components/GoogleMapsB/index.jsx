@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { GoogleMap, Marker, InfoWindow } from "@react-google-maps/api";
 
 const containerStyle = { width: "100%", height: "100%" };
@@ -43,13 +43,16 @@ function parseLatLng(p) {
 
 export default function PropertiesMap({ items = [], selectedId, onSelect, hoveredId }) {
     const mapRef = useRef(null);
+    const [mapLoadedTick, setMapLoadedTick] = useState(0);
+    const hoveredIdStr = hoveredId != null ? String(hoveredId) : null;
+    const selectedIdStr = selectedId != null ? String(selectedId) : null;
 
     const markers = useMemo(() => {
         return (items || [])
             .map((p) => {
                 const ll = parseLatLng(p);
                 if (!ll) return null;
-                return { ...p, ...ll };
+                return { ...p, ...ll, idStr: String(p?.id) };
             })
             .filter(Boolean);
     }, [items]);
@@ -58,12 +61,12 @@ export default function PropertiesMap({ items = [], selectedId, onSelect, hovere
     const fallbackCenter = useMemo(() => ({ lat: -38.0055, lng: -57.5426 }), []);
 
     const selected = useMemo(
-        () => markers.find((m) => m.id === selectedId),
-        [markers, selectedId]
+        () => markers.find((m) => m.idStr === selectedIdStr),
+        [markers, selectedIdStr]
     );
 
     // ✅ Fit bounds para que se vean todos los pines
-    useEffect(() => {
+    const fitMapToMarkers = useCallback(() => {
         if (!mapRef.current) return;
         if (!window.google?.maps) return;
         if (markers.length === 0) return;
@@ -78,6 +81,22 @@ export default function PropertiesMap({ items = [], selectedId, onSelect, hovere
             mapRef.current.panTo({ lat: markers[0].lat, lng: markers[0].lng });
         }
     }, [markers]);
+
+    useEffect(() => {
+        fitMapToMarkers();
+    }, [fitMapToMarkers, mapLoadedTick]);
+
+    // Hover en lista => resalta y centra en mapa
+    useEffect(() => {
+        if (!mapRef.current || !hoveredIdStr) return;
+        const hovered = markers.find((m) => m.idStr === hoveredIdStr);
+        if (!hovered) return;
+
+        mapRef.current.panTo({ lat: hovered.lat, lng: hovered.lng });
+
+        const currentZoom = mapRef.current.getZoom?.() || 0;
+        if (currentZoom < 14) mapRef.current.setZoom(14);
+    }, [hoveredIdStr, markers]);
 
     // ✅ debug: contá markers en consola
     useEffect(() => {
@@ -96,6 +115,14 @@ export default function PropertiesMap({ items = [], selectedId, onSelect, hovere
             zoom={12}
             onLoad={(map) => {
                 mapRef.current = map;
+                // fuerza un recálculo de layout y bounds al volver desde otra ruta
+                setTimeout(() => {
+                    if (window.google?.maps && mapRef.current) {
+                        window.google.maps.event.trigger(mapRef.current, "resize");
+                    }
+                    fitMapToMarkers();
+                    setMapLoadedTick((v) => v + 1);
+                }, 0);
             }}
             options={{
                 streetViewControl: false,
@@ -106,10 +133,10 @@ export default function PropertiesMap({ items = [], selectedId, onSelect, hovere
         >
             {markers.map((p) => (
                 <Marker
-                    key={p.id}
+                    key={p.idStr}
                     position={{ lat: p.lat, lng: p.lng }}
-                    onClick={() => onSelect?.(p.id)}
-                    icon={p.id === hoveredId ? hoveredIcon : normalIcon}   // 👈 magia
+                    onClick={() => onSelect?.(p.idStr)}
+                    icon={p.idStr === hoveredIdStr ? hoveredIcon : normalIcon}
                 />
             ))}
 
