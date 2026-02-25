@@ -11,28 +11,61 @@ import ListaPropiedades from "../../Components/ListaPropiedades"; // ✅ ESTE
 import "./styles.css";
 import Paginacion from "../../Components/Paginacion";
 
+const parseCsvParam = (searchParams, key) => {
+    const value = searchParams.get(key);
+    if (!value) return [];
+    return value
+        .split(",")
+        .map((item) => item.trim())
+        .filter(Boolean);
+};
+
+const getFiltersFromSearch = (search) => {
+    const searchParams = new URLSearchParams(search);
+    const operacion = searchParams.get("operacion") || "Todas";
+    const tipoPropiedad = parseCsvParam(searchParams, "tipo");
+    const barriosFromPlural = parseCsvParam(searchParams, "barrios");
+    const barrios = barriosFromPlural.length ? barriosFromPlural : parseCsvParam(searchParams, "barrio");
+    const ambientes = searchParams.get("ambientes") || "";
+    const precioMin = searchParams.get("precioMin") || "";
+    const precioMax = searchParams.get("precioMax") || "";
+    const page = Number(searchParams.get("page")) || 1;
+
+    return {
+        operacion,
+        tipoPropiedad,
+        barrios,
+        ambientes,
+        precioMin,
+        precioMax,
+        page: page > 0 ? page : 1,
+    };
+};
+
 function PropiedadesPage() {
     const dispatch = useDispatch();
     const location = useLocation();
+    const filtersFromSearch = getFiltersFromSearch(location.search);
 
     const loading = useSelector((state) => state.loading);
     const allProps = useSelector((state) => state.propiedades) || [];
     const totalPropiedades = useSelector((state) => state.totPropiedades) || 0;
 
     // filtros
-    const [operacion, setOperacion] = useState("Todas");
-    const [tipoPropiedad, setTipoPropiedad] = useState([]);
-    const [barrios, setBarrios] = useState([]);
-    const [ambientes, setAmbientes] = useState("");
-    const [precioMin, setPrecioMin] = useState("");
-    const [precioMax, setPrecioMax] = useState("");
+    const [operacion, setOperacion] = useState(filtersFromSearch.operacion);
+    const [tipoPropiedad, setTipoPropiedad] = useState(filtersFromSearch.tipoPropiedad);
+    const [barrios, setBarrios] = useState(filtersFromSearch.barrios);
+    const [ambientes, setAmbientes] = useState(filtersFromSearch.ambientes);
+    const [precioMin, setPrecioMin] = useState(filtersFromSearch.precioMin);
+    const [precioMax, setPrecioMax] = useState(filtersFromSearch.precioMax);
 
     // vistas
     const [viewMode, setViewMode] = useState("split");
+    const [isMobile, setIsMobile] = useState(() => window.innerWidth <= 980);
 
     // paginación
     const propiedadesPorPagina = PAGINATION.PROPIEDADES;
-    const [currentPage, setCurrentPage] = useState(1);
+    const [currentPage, setCurrentPage] = useState(filtersFromSearch.page);
     const limit = propiedadesPorPagina;
     const offset = (currentPage - 1) * limit;
 
@@ -52,14 +85,34 @@ function PropiedadesPage() {
         const pages = Math.ceil(totalPropiedades / propiedadesPorPagina);
         return pages > 0 ? pages : 1;
     }, [totalPropiedades, propiedadesPorPagina]);
+    const effectiveViewMode = isMobile ? "list" : viewMode;
 
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
 
     useEffect(() => {
+        const media = window.matchMedia("(max-width: 980px)");
+        const onChange = (e) => setIsMobile(e.matches);
+        setIsMobile(media.matches);
+        media.addEventListener("change", onChange);
+        return () => media.removeEventListener("change", onChange);
+    }, []);
+
+    useEffect(() => {
         dispatch(getProps(limit, offset, operacion, tipoPropiedad, barrios, precioMin, precioMax, ambientes));
     }, [dispatch, limit, offset, operacion, tipoPropiedad, barrios, ambientes, precioMin, precioMax]);
+
+    useEffect(() => {
+        const nextFilters = getFiltersFromSearch(location.search);
+        setOperacion(nextFilters.operacion);
+        setTipoPropiedad(nextFilters.tipoPropiedad);
+        setBarrios(nextFilters.barrios);
+        setAmbientes(nextFilters.ambientes);
+        setPrecioMin(nextFilters.precioMin);
+        setPrecioMax(nextFilters.precioMax);
+        setCurrentPage(nextFilters.page);
+    }, [location.search]);
 
     useEffect(() => {
         setSelectedId(null);
@@ -100,10 +153,11 @@ function PropiedadesPage() {
                                 setPrecioMax("");
                             }}
                         />
-                        {/* Btn Vistas */}
-                        <div className="pp-topbar-right">
-                            <ViewToggle value={viewMode} onChange={setViewMode} />
-                        </div>
+                        {!isMobile && (
+                            <div className="pp-topbar-right">
+                                <ViewToggle value={viewMode} onChange={setViewMode} />
+                            </div>
+                        )}
                     </div>
 
                     {/* muestra total de props en número */}
@@ -113,8 +167,8 @@ function PropiedadesPage() {
                         </div>
                     </div>
 
-                    <div className={`pp-layout pp-layout--${viewMode}`}>
-                        {(viewMode === "split" || viewMode === "list") && (
+                    <div className={`pp-layout pp-layout--${effectiveViewMode}`}>
+                        {(effectiveViewMode === "split" || effectiveViewMode === "list") && (
                             <div className="pp-list">
                                 <ListaPropiedades
                                     variant="page"
@@ -128,7 +182,7 @@ function PropiedadesPage() {
                             </div>
                         )}
 
-                        {(viewMode === "split" || viewMode === "map") && (
+                        {!isMobile && (effectiveViewMode === "split" || effectiveViewMode === "map") && (
                             <div className="pp-map">
                                 <PropertiesMap
                                     key={`pp-map-${location.key}-${currentPage}-${allProps.length}`}

@@ -49,28 +49,22 @@ function MenuHamburguesa() {
             <div className={`cont-menuHamburguesa__menu ${menu ? 'open' : 'ocultar'}`}>
                 <ul className='ul-menuHamburguesa'>
                     <li onClick={toggleMenu}>
-                        <Link to='/' ref={el => menuItemsRef.current[0] = el} data-translate>Inicio</Link>
+                        <Link to='/propiedades' ref={el => menuItemsRef.current[0] = el} data-translate>Propiedades</Link>
                     </li>
                     <li onClick={toggleMenu}>
-                        <Link to='/ventas' ref={el => menuItemsRef.current[1] = el} data-translate>Ventas</Link>
+                        <Link to='/emprendimientos' ref={el => menuItemsRef.current[1] = el} data-translate>Emprendimientos</Link>
                     </li>
                     <li onClick={toggleMenu}>
-                        <Link to='/alquiler' ref={el => menuItemsRef.current[2] = el} data-translate>Alquileres</Link>
+                        <Link to='/tasaciones' ref={el => menuItemsRef.current[2] = el} data-translate>Tasaciones</Link>
                     </li>
                     <li onClick={toggleMenu}>
-                        <Link to='/emprendimientos' ref={el => menuItemsRef.current[3] = el} data-translate>Emprendimientos</Link>
+                        <Link to='/nosotros' ref={el => menuItemsRef.current[3] = el} data-translate>La Empresa</Link>
                     </li>
                     <li onClick={toggleMenu}>
-                        <Link to='/tasaciones' ref={el => menuItemsRef.current[4] = el} data-translate>Tasaciones</Link>
+                        <Link to='/contacto' ref={el => menuItemsRef.current[4] = el} data-translate>Contacto</Link>
                     </li>
-                    <li data-translate>
-                        <Link to='/favoritos' className={'navlink-navbarInf'} data-translate>Favoritos</Link>
-                    </li>
-                    <li onClick={toggleMenu}>
-                        <Link to='/nosotros' ref={el => menuItemsRef.current[5] = el} data-translate>La Empresa</Link>
-                    </li>
-                    <li onClick={toggleMenu}>
-                        <Link to='/contacto' ref={el => menuItemsRef.current[6] = el} data-translate>Contacto</Link>
+                    <li onClick={toggleMenu} data-translate>
+                        <Link to='/favoritos' ref={el => menuItemsRef.current[5] = el} className={'navlink-navbarInf'} data-translate>Favoritos</Link>
                     </li>
                 </ul>
             </div>

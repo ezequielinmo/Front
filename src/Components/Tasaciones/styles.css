@@ -24,16 +24,6 @@
     margin-bottom: 80px;
 }
 
-.badge {
-    display: inline-block;
-    background: rgba(245, 162, 0, 0.85);
-    color: #fff;
-    padding: 6px 14px;
-    border-radius: 20px;
-    font-size: 13px;
-    margin-bottom: 20px;
-}
-
 .hero-overlay h1 {
     font-size: 48px;
     font-weight: 700;
@@ -41,7 +31,7 @@
 }
 
 .hero-overlay h1 span {
-    color: #f5a200;
+    color: var(--fondo-navbar);
 }
 
 .hero-overlay p {
@@ -63,7 +53,6 @@
     background: #fff;
     color: #111;
     padding: 30px 25px;
-    border-radius: 18px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
 }
 

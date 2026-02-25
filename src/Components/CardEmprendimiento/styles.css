@@ -1,5 +1,7 @@
 .emp-card {
     width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
     display: grid;
     grid-template-columns: 420px 1fr;
     overflow: hidden;
@@ -64,6 +66,9 @@
 }
 
 .emp-card-body {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
     padding: 16px 16px 14px;
     display: flex;
     flex-direction: column;
@@ -72,12 +77,15 @@
 
 .emp-card-top {
     display: flex;
+    flex-wrap: wrap;
     align-items: flex-start;
     justify-content: space-between;
     gap: 12px;
 }
 
 .emp-card-title {
+    min-width: 0;
+    overflow-wrap: anywhere;
     margin: 0;
     font-size: 18px;
     line-height: 1.2;
@@ -111,6 +119,11 @@
     font-size: 13px;
 }
 
+.emp-card-address span {
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
 .emp-card-address img {
     width: 18px;
     height: 18px;
@@ -125,6 +138,7 @@
 
 .emp-card-desc {
     margin: 4px 0 0;
+    overflow-wrap: anywhere;
     color: rgba(0, 0, 0, .72);
     font-size: 13px;
     line-height: 1.45;
