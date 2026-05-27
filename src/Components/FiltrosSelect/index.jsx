@@ -220,22 +220,22 @@ function FiltrosSelect({
                     {/* precios */}
                     <div className="cont-primario-precio">
                         <div className="cont-filtro-precioMaxMin">
-                            <label>Precio</label>
+                            {/* <label>Precio</label> */}
                             <input
                                 type="number"
                                 value={localMin}
                                 onChange={(e) => setLocalMin(e.target.value)}
-                                placeholder="Desde"
+                                placeholder="Precio min"
                                 className="input-precioMin"
                             />
                             <input
                                 type="number"
                                 value={localMax}
                                 onChange={(e) => setLocalMax(e.target.value)}
-                                placeholder="Hasta"
+                                placeholder="Precio max"
                                 className="input-precioMin"
                             />
-                            <button className="btn-aplicar-precio" onClick={aplicarRangoPrecios}>
+                            <button className="btn-aplicar-Precio" onClick={aplicarRangoPrecios}>
                                 Aplicar Filtros
                             </button>
                         </div>

@@ -14,10 +14,17 @@
 }
 
 .tasacion-pretitle {
-    width: 260px;
-    padding: 5px 8px;
-    font-size: 12px;
-    letter-spacing: 1px;
+    width: fit-content;
+    min-height: 34px;
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 18px;
+    border-top-right-radius: 999px;
+    border-bottom-right-radius: 999px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 500;
     text-transform: uppercase;
     color: #111;
     background-color: var(--fondo-navbar);
@@ -37,12 +44,17 @@
 .tasacion-btn {
     width: fit-content;
     margin-top: 20px;
-    padding: 14px 28px;
+    min-height: 42px;
+    box-sizing: border-box;
+    padding: 9px 30px;
+    border-top-right-radius: 999px;
+    border-bottom-right-radius: 999px;
     background: var(--fondo-navbar);
     color: #111;
     border: none;
-    font-size: 14px;
-    font-weight: 600;
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 500;
     cursor: pointer;
     transition: all 0.3s ease;
 }
@@ -86,5 +98,17 @@
 
     .tasacion-texto h1 {
         font-size: 34px;
+    }
+
+    .tasacion-pretitle {
+        min-height: 32px;
+        padding: 7px 16px;
+        font-size: 12px;
+    }
+
+    .tasacion-btn {
+        min-height: 38px;
+        padding: 8px 24px;
+        font-size: 14px;
     }
 }

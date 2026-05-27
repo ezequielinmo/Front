@@ -132,6 +132,7 @@
     pointer-events: none;
     transform: translate(-50%, 20px); /* arranca un poco más abajo */
     transition: all 1s ease;
+    /* background-color: var(--fondo-navbar); */
 }
 
 /* cuando se activa */
@@ -159,6 +160,61 @@
 
 
 /* estilos flecha que señala hacia abajo compuesta por dos palitos blancos con movimiento hacia arriba y abjo */
+@media screen and (min-width: 861px) {
+    .cont-filtros-landing {
+        border-top-right-radius: 999px;
+        border-bottom-right-radius: 999px;
+    }
+
+    .cont-filtros-landing .cont-selects-filtros,
+    .cont-filtros-landing .cont-items-noPrecio,
+    .cont-filtros-landing .cont-filtro-precioMaxMin {
+        gap: 0;
+    }
+
+    .cont-filtros-landing .select-tipoProp,
+    .cont-filtros-landing .input-precioMin,
+    .cont-filtros-landing .btn-aplicar-Precio,
+    .cont-filtros-landing .cont-filtro-precioMaxMin {
+        border: 0;
+        box-shadow: none;
+    }
+
+    .cont-filtros-landing .select-tipoProp,
+    .cont-filtros-landing .input-precioMin {
+        border-radius: 0;
+        background: var(--fondo-navbar);
+    }
+
+    .cont-filtros-landing .cont-filtro-precioMaxMin {
+        height: 46px;
+        padding: 0;
+        align-items: center;
+        background: var(--fondo-navbar);
+        border-top-right-radius: 999px;
+        border-bottom-right-radius: 999px;
+    }
+
+    .cont-filtros-landing .input-precioMin,
+    .cont-filtros-landing .btn-aplicar-Precio {
+        height: 46px;
+        box-sizing: border-box;
+    }
+
+    .cont-filtros-landing .btn-aplicar-Precio {
+        background: var(--fondo-navbar);
+        color: rgb(20, 20, 20);
+        border-top-right-radius: 999px;
+        border-bottom-right-radius: 999px;
+    }
+
+    .cont-filtros-landing .select-tipoProp:hover,
+    .cont-filtros-landing .select-tipoProp:focus {
+        background: var(--fondo-navbar);
+        transform: none;
+    }
+}
+
 .cont-flecha-home {
     position: absolute;
     bottom: 20px;
@@ -204,6 +260,11 @@
 /* responsive */
 
 @media screen and (max-width: 500px) {
+    .cont-filtros-landing {
+        bottom: 120px;
+        width: 82%;
+    }
+
     .cont-textosLanding {
         width: 100%;
         display: flex;

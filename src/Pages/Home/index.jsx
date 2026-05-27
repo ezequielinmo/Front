@@ -94,7 +94,7 @@ function Home() {
 
                             <div className="props-chips">
                                 <NavLink to="/propiedades" className="btn-ir-props">
-                                    IR A PROPIEDADES
+                                    Ir a propiedades
                                 </NavLink>
                             </div>
                         </div>

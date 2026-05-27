@@ -101,18 +101,29 @@
 }
 
 .btn-fila-3 {
-    font-weight: 400;
-    color: var(--fondo-navbar);
-    background-color: #3AE7F000;
-    transition-duration: 0.1s;
-    border-style: solid;
-    border-width: 1px 1px 1px 1px;
-    border-color: var(--color-blanco);
-    /* border-radius: 10px 10px 10px 10px; */
+    min-height: 42px;
+    box-sizing: border-box;
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 9px 30px;
+    border: none;
     border-top-right-radius: 999px;
     border-bottom-right-radius: 999px;
-    padding: 15px 50px 15px 50px;
+    background: var(--fondo-navbar, #f3f78e);
+    color: #111;    
     cursor: pointer;
+    transition: transform .15s ease, box-shadow .15s ease, filter .15s ease;
+}
+.btn-fila-3:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 34px rgba(0, 0, 0, .14);
+    filter: brightness(1.02);
+}
+
+.btn-fila-3:active {
+    transform: translateY(0);
+    box-shadow: 0 10px 26px rgba(0, 0, 0, .10);
 }
 
 .icono-landing-c {
@@ -157,6 +168,9 @@
     }
 
     .btn-fila-3 {
+        min-height: 38px;
+        padding: 8px 24px;
+        font-size: 14px;
         margin-bottom: 10px;
     }
 }

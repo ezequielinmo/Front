@@ -7,6 +7,17 @@ import reportWebVitals from './reportWebVitals';
 import store from '../src/Redux/Store';
 import './index.css';
 
+const resizeObserverMessages = [
+  'ResizeObserver loop limit exceeded',
+  'ResizeObserver loop completed with undelivered notifications.',
+];
+
+window.addEventListener('error', (event) => {
+  if (resizeObserverMessages.includes(event.message)) {
+    event.stopImmediatePropagation();
+  }
+});
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
