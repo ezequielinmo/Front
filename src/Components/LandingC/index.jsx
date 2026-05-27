@@ -3,8 +3,8 @@ import GroupIcon from '@mui/icons-material/Group';
 import MapsHomeWorkIcon from '@mui/icons-material/MapsHomeWork';
 import CampaignIcon from '@mui/icons-material/Campaign';
 import BalanceIcon from '@mui/icons-material/Balance';
-import './estilos.css';
 import { Link } from 'react-router-dom';
+import './estilos.css';
 
 function LandingC() {
     return (
@@ -15,19 +15,19 @@ function LandingC() {
             </div>
             <div className='cont-fila-2'>
                 <div className='col-1'>
-                    <GroupIcon sx={{'fontSize':'60px'}}/>
+                    <GroupIcon sx={{'fontSize':'60px'}} className= "icono-landing-c"/>
                     <p className='texto-fila-2'>Asesoría personalizada en Bienes Raíces</p>
                 </div>
                 <div className='col-2'>
-                    <MapsHomeWorkIcon sx={{'fontSize':'60px'}}/>
+                    <MapsHomeWorkIcon sx={{'fontSize':'60px'}} className= "icono-landing-c"/>
                     <p className='texto-fila-2'>Valoración de propiedades</p>
                 </div>
                 <div className='col-3'>
-                    <CampaignIcon sx={{'fontSize':'60px'}}/>
+                    <CampaignIcon sx={{'fontSize':'60px'}} className= "icono-landing-c"/>
                     <p className='texto-fila-2'>Marketing de propiedades</p>
                 </div>
                 <div className='col-4'>
-                    <BalanceIcon sx={{'fontSize':'60px'}}/>
+                    <BalanceIcon sx={{'fontSize':'60px'}} className= "icono-landing-c"/>
                     <p className='texto-fila-2'>Asesoría legal y gestión de transacciones</p>
                 </div>
             </div>

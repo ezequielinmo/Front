@@ -1,3 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+@font-face {
+  font-family: 'Kurdis';
+  src: url('https://vapropiedades.com.ar/wp-content/uploads/2024/10/Kurdis-WideSemiBold.ttf') format('truetype');
+  font-display: swap;
+}
+
 body, html, #root {
   height: 100%;
   display: flex;
@@ -7,6 +15,12 @@ body, html, #root {
 }
 
 body {
-  font-family: "Basis Grotesque Pro", Sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
+h1, h2, h3, h4, h5, h6,
+.main-nav,
+.navbar,
+.item-title {
+  font-family: 'Kurdis', 'Montserrat', sans-serif;
+}
