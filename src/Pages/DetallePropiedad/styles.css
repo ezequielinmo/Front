@@ -12,6 +12,7 @@
 
 .dp-page {
     min-height: 100vh;
+    padding-bottom: 60px;
     background: radial-gradient(1100px 600px at 20% 0%, rgba(255, 255, 255, 0.10), transparent 55%),
         radial-gradient(900px 520px at 80% 10%, rgba(255, 255, 255, 0.08), transparent 50%),
         var(--dp-bg);
@@ -131,7 +132,7 @@
 
 .dp-container {
     width: min(1080px, 90vw);
-    margin: 20px auto 60px;
+    margin: 20px auto 0;
 }
 
 .dp-grid {

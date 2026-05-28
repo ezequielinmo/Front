@@ -10,6 +10,28 @@
     padding: 6px 0 0;
 }
 
+.emp-empty {
+    width: min(900px, 92vw);
+    padding: 28px 22px;
+    border: 1px dashed rgba(216, 180, 92, 0.35);
+    background: rgba(255, 255, 255, 0.06);
+    color: rgba(255, 255, 255, 0.92);
+    text-align: center;
+}
+
+.emp-empty-title {
+    margin: 0;
+    color: #d8b45c;
+    font-size: clamp(20px, 2.6vw, 28px);
+}
+
+.emp-empty-sub {
+    margin: 10px auto 0;
+    max-width: 58ch;
+    color: rgba(255, 255, 255, 0.68);
+    line-height: 1.5;
+}
+
 /* Header de la lista (si lo usás) */
 .cont-h1-listaEmp {
     width: 50%;
