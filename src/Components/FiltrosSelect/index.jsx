@@ -14,6 +14,7 @@ function FiltrosSelect({
     scrollToLista,
 }) {
     const navigate = useNavigate();
+    const syncOnChange = verTipoOperacion !== true;
 
     const operacion = ["Todas", "Venta", "Alquiler", "Emprendimiento"];
     const tipoProp = [
@@ -87,7 +88,7 @@ function FiltrosSelect({
     const onChangeTipoOp = (e) => {
         const v = e.target.value;
         setOperacionSel(v);
-        setOperacion(v);
+        if (syncOnChange && setOperacion) setOperacion(v);
     };
 
     const onChangeTipoProp = (e) => {
@@ -95,14 +96,14 @@ function FiltrosSelect({
         if (value !== "TipoProp" && !tipoPropSeleccionada.includes(value)) {
             const propsSeleccionadas = [...tipoPropSeleccionada, value];
             setTipoPropSeleccionada(propsSeleccionadas);
-            setTipoPropiedad(propsSeleccionadas);
+            if (syncOnChange && setTipoPropiedad) setTipoPropiedad(propsSeleccionadas);
         }
     };
 
     const onChangeAmb = (e) => {
         const v = e.target.value;
         setAmbSel(v);
-        setAmbientes(v);
+        if (syncOnChange && setAmbientes) setAmbientes(v);
     };
 
     const onChangeBarrio = (e) => {
@@ -110,26 +111,30 @@ function FiltrosSelect({
         if (value !== "Barrio" && !barriosSeleccionados.includes(value)) {
             const nuevosBarrios = [...barriosSeleccionados, value];
             setBarriosSeleccionados(nuevosBarrios);
-            setBarrios(nuevosBarrios);
+            if (syncOnChange && setBarrios) setBarrios(nuevosBarrios);
         }
     };
 
     const eliminarTipoPropSel = (tipoP) => {
         const nuevosTipoProp = tipoPropSeleccionada.filter((p) => p !== tipoP);
         setTipoPropSeleccionada(nuevosTipoProp);
-        setTipoPropiedad(nuevosTipoProp);
+        if (syncOnChange && setTipoPropiedad) setTipoPropiedad(nuevosTipoProp);
     };
 
     const eliminarBarrio = (barrio) => {
         const nuevosBarrios = barriosSeleccionados.filter((b) => b !== barrio);
         setBarriosSeleccionados(nuevosBarrios);
-        setBarrios(nuevosBarrios);
+        if (syncOnChange && setBarrios) setBarrios(nuevosBarrios);
     };
 
     const aplicarRangoPrecios = () => {
         // sincronizo con el padre (por si se usa dentro de /propiedades también)
-        setPrecioMin(localMin);
-        setPrecioMax(localMax);
+        if (syncOnChange && setOperacion) setOperacion(operacionSel);
+        if (syncOnChange && setTipoPropiedad) setTipoPropiedad(tipoPropSeleccionada);
+        if (syncOnChange && setBarrios) setBarrios(barriosSeleccionados);
+        if (syncOnChange && setAmbientes) setAmbientes(ambSel);
+        if (syncOnChange && setPrecioMin) setPrecioMin(localMin);
+        if (syncOnChange && setPrecioMax) setPrecioMax(localMax);
         if (setCurrentPage) setCurrentPage(1);
 
         // armo query params (arrays como CSV)

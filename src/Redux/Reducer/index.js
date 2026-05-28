@@ -25,7 +25,7 @@ export default function rootReducer (state = initialState, action) {
         case LOADING:
             return{
                 ...state,
-                loading: false
+                loading: true
             };
         case GET_PROPS:
             return {
@@ -45,6 +45,7 @@ export default function rootReducer (state = initialState, action) {
             return{
                 ...state,
                 propiedad: action.payload,
+                loading: false,
             };
         case RESET_PROPERTY:
             return{
@@ -54,7 +55,7 @@ export default function rootReducer (state = initialState, action) {
         case GET_PROPS_MAP:
             return {
                 ...state,
-                propsMap: action.payload,
+                propsMap: action.payload.propiedades || [],
             }
         
         case IS_OPEN_MODAL_PICTURE:

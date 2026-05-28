@@ -7,9 +7,9 @@
 }
 
 .paginacion-button {
-    background-color: var(--color-negro-logo);
-    color: var(--primary-color);
-    border: none;
+    background-color: rgba(255, 255, 255, 0.10);
+    color: #d8b45c;
+    border: 1px solid rgba(216, 180, 92, 0.35);
     padding: 10px 20px;
     margin: 0 5px;
     cursor: pointer;
@@ -18,8 +18,9 @@
 }
 
 .paginacion-button:disabled {
-    background-color: #ccc;
-    color: black;
+    background-color: rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.35);
+    border-color: rgba(255, 255, 255, 0.10);
     cursor: not-allowed;
 }
 
@@ -31,8 +32,9 @@
 }
 
 .paginacion-numero {
-    background-color: white;
-    border: 1px solid var(--color-negro-logo);
+    background-color: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    color: rgba(255, 255, 255, 0.82);
     padding: 8px 14px;
     cursor: pointer;
     border-radius: 5px;
@@ -40,20 +42,20 @@
 }
 
 .paginacion-numero:hover {
-    background-color: var(--color-negro-logo);
-    color: var(--primary-color);
+    background-color: rgba(216, 180, 92, 0.18);
+    color: #d8b45c;
 }
 
 .paginacion-numero.activo {
-    background-color: var(--color-negro-logo);
-    color: var(--primary-color);
+    background-color: #d8b45c;
+    color: #111;
     font-weight: bold;
 }
 
 .paginacion-ellipsis {
     padding: 8px 14px;
     font-size: 14px;
-    color: gray;
+    color: rgba(255, 255, 255, 0.55);
 }
 
 @media screen and (max-width: 530px) {

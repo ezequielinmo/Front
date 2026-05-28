@@ -8,10 +8,10 @@
 .fb-wrap select,
 .fb-wrap input {
     height: 34px;
-    border: 1px solid #ddd;
+    border: 1px solid rgba(255, 255, 255, 0.16);
     border-radius: 6px;
     padding: 0 10px;
-    background: #fff;
+    background: rgba(255, 255, 255, 0.92);
     font-size: 13px;
 }
 
@@ -22,6 +22,8 @@
 
 /* ===== FiltersBar ===== */
 .fb {
+    position: relative;
+    z-index: 90;
     display: grid;
     gap: 10px;
     width: 100%;
@@ -37,14 +39,19 @@
 /* Dropdown wrapper */
 .fb-dd {
     position: relative;
+    z-index: 1;
+}
+
+.fb-dd.is-open {
+    z-index: 100;
 }
 
 .fb-btn {
     height: 38px;
     padding: 0 12px;
-    border: 1px solid #e3e3e3;
+    border: 1px solid rgba(255, 255, 255, 0.16);
     border-radius: 8px;
-    background: #fff;
+    background: rgba(255, 255, 255, 0.92);
     cursor: pointer;
     display: inline-flex;
     align-items: center;
@@ -53,8 +60,8 @@
 }
 
 .fb-btn:hover {
-    border-color: #cfcfcf;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+    border-color: rgba(216, 180, 92, 0.55);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
 }
 
 .fb-btn-text {
@@ -74,11 +81,12 @@
     position: absolute;
     top: calc(100% + 8px);
     left: 0;
-    z-index: 20;
+    z-index: 1000;
     min-width: 240px;
     padding: 10px;
     border-radius: 12px;
     background: #fff;
+    color: #202020;
     border: 1px solid #e6e6e6;
     box-shadow: 0 18px 50px rgba(0, 0, 0, 0.12);
     display: none;
@@ -103,6 +111,11 @@
     border-radius: 10px;
     cursor: pointer;
     user-select: none;
+    color: #202020;
+}
+
+.fb-item span {
+    color: #202020;
 }
 
 .fb-item:hover {
@@ -129,6 +142,7 @@
     padding: 0 10px;
     outline: none;
     margin-bottom: 8px;
+    color: #202020;
 }
 
 .fb-search:focus {
@@ -154,6 +168,7 @@
     border-radius: 10px;
     padding: 0 10px;
     outline: none;
+    color: #202020;
 }
 
 .fb-price input:focus {
@@ -181,15 +196,15 @@
     height: 38px;
     padding: 0 14px;
     border-radius: 8px;
-    border: 1px solid var(--fondo-navbar);
-    background: var(--fondo-navbar);
+    border: 1px solid #d8b45c;
+    background: #d8b45c;
     color: black;
     font-weight: 600;
     cursor: pointer;
 }
 
 .fb-clear:hover {
-    background: #fff7ee;
+    background: #e8c66f;
 }
 
 /* Chips */

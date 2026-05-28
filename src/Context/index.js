@@ -1,12 +1,8 @@
 import React, { createContext, useState, useEffect } from 'react';
-import { userData } from '../localStorage';
 
 export const InmobiliariaContext = createContext();
 
 const InmobiliariaProvider = ({ children }) => {
-  const [userLog, setUserLog] = useState(null);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [nombreUser, setNombreUser] = useState('');
   const [isOpenModalVideo, setisOpenModalVideo] = useState(false);
 
   // Inicializa favoritos leyendo directamente de localStorage una sola vez
@@ -20,23 +16,9 @@ const InmobiliariaProvider = ({ children }) => {
     }
   });
 
-  // Login / Logout
-  const login = () => setIsAuthenticated(true);
-  const logout = () => setIsAuthenticated(false);
-
   // Modal video
   const handleIsOpen = () => setisOpenModalVideo(true);
   const handleIsClose = () => setisOpenModalVideo(false);
-
-  // Cargar usuario si hay uno guardado
-  useEffect(() => {
-    const userLogin = userData();
-    if (userLogin) {
-      setUserLog(userLogin);
-      setIsAuthenticated(true);
-      setNombreUser(userLogin.user);
-    }
-  }, []);
 
   // Guardar favoritos en localStorage cada vez que cambian
   useEffect(() => {
@@ -62,10 +44,6 @@ const InmobiliariaProvider = ({ children }) => {
   return (
     <InmobiliariaContext.Provider
       value={{
-        userLog, setUserLog,
-        isAuthenticated,
-        nombreUser,
-        login, logout,
         isOpenModalVideo,
         handleIsOpen, handleIsClose,
         favoritos,

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { LoadScript } from '@react-google-maps/api';
+import { useSelector } from 'react-redux';
 import InmobiliariaProvider  from './Context';
 import Home from './Pages/Home';
 import Navbar from './Components/Navbar';
@@ -28,14 +29,17 @@ import PropiedadesPage from './Pages/Propiedades';
 function App() {
 
   const passGoogle = process.env.REACT_APP_API_GOOGLE_MAP;
+  const isOpenModalPicture = useSelector((state) => state.isOpenModalPicture);
 
   return (
     <LoadScript googleMapsApiKey={passGoogle}> {/* cambié aca por el string */}
       <InmobiliariaProvider>
         <div className="App">
-          <header className="App-header">
-            <Navbar/>
-          </header>
+          {!isOpenModalPicture && (
+            <header className="App-header">
+              <Navbar/>
+            </header>
+          )}
 
           <main className='cont-main'>
             <Routes>

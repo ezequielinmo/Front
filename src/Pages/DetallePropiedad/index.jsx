@@ -181,9 +181,9 @@ function DetalleProp() {
                                     type="button"
                                     className="dp-videoBtn"
                                     onClick={() => contexto.handleIsOpen()}
+                                    aria-label="Ver video"
                                 >
-                                    <VideocamIcon sx={{ fontSize: 18 }} />
-                                    Ver video
+                                    <VideocamIcon sx={{ fontSize: 22 }} />
                                 </button>
                             </div>
                         )}
@@ -270,6 +270,8 @@ function DetalleProp() {
                         <ListaPropsSimilares
                             precioProp={precioRef?.precio}
                             tipoProp={tipoProp}
+                            barrio={barrio}
+                            operacionProp={propiedad?.operacion?.[0]?.operacion}
                             vista={"ambas"}
                             idProp={id}
                         />
