@@ -3,6 +3,9 @@
     --fondo-navbar: #f3f78e; /* mismo q el del logo */
     --color-fuente: black;
     --gris-fondo: white;
+    --background-page: radial-gradient(1100px 600px at 20% 0%, rgba(255, 255, 255, 0.10), transparent 55%),
+        radial-gradient(900px 520px at 80% 10%, rgba(255, 255, 255, 0.08), transparent 50%),
+        #0b0f19;
 }
 
 .App {

@@ -114,8 +114,7 @@ function Contactanos() {
                                 value={mensaje}
                                 name="msj"
                                 onChange={(e) => setMensaje(e.target.value)}
-                                placeholder='mesaje'
-                                style={{ overflow: 'hidden', fontSize: '16px' }}  // Ajusta el tamaño de fuente
+                                placeholder='Mensaje'
                             />
                         </div>
 
@@ -134,7 +133,7 @@ function Contactanos() {
                         <div className="info-card">
                             <RoomIcon />
                             <h4>Dirección</h4>
-                            <p>Mar del Plata, Argentina</p>
+                            <p>Viamonte 3084, Mar del Plata, Provincia de Buenos Aires</p>
                             <span>Buenos Aires</span>
                         </div>
 
@@ -155,7 +154,7 @@ function Contactanos() {
                         <div className="info-card">
                             <AccessTimeIcon />
                             <h4>Horario</h4>
-                            <p>9:00 - 18:00</p>
+                            <p>9:00 - 17:00</p>
                             <span>Lunes a Viernes</span>
                         </div>
 

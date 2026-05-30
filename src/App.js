@@ -15,16 +15,13 @@ import Footer from './Components/Footer';
 import LaEmpresaPage from './Pages/LaEmpresa';
 import DetalleProp from './Pages/DetallePropiedad';
 import DetalleEmp from './Pages/DetalleEmprendimiento';
-/* 
-import NosotrosPage from './Pages/Nosotros';
+/* import NosotrosPage from './Pages/Nosotros';
 import PropsInternacionales from './Pages/PropsInternacionales';
-
 import MapaPAge from './Pages/MapaPage'; */
-import './App.css';
 import Tasaciones from './Components/Tasaciones';
 import PageDestacadas from './Pages/PageDestacadas';
 import PropiedadesPage from './Pages/Propiedades';
-
+import './App.css';
 
 function App() {
 
