@@ -14,9 +14,10 @@ const resizeObserverMessages = [
 
 window.addEventListener('error', (event) => {
   if (resizeObserverMessages.includes(event.message)) {
+    event.preventDefault();
     event.stopImmediatePropagation();
   }
-});
+}, true);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

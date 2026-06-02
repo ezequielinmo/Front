@@ -1,11 +1,5 @@
 import axios from "axios";
 
-const API_KEY = process.env.REACT_APP_TOKKO_API_KEY || "1fa6028de7df18808d1d4c40f7e48e51f79d31a3";
-const PROPERTIES_URL = process.env.REACT_APP_TOKKO_PROPERTIES_URL || "https://www.tokkobroker.com/api/v1/property/?lang=es_ar&format=json";
-const DEVELOPMENTS_URL = process.env.REACT_APP_TOKKO_DEVELOPMENTS_URL || "https://www.tokkobroker.com/api/v1/development?lang=es_ar&format=json";
-
-const PROPERTY_DETAIL_URL = "https://www.tokkobroker.com/api/v1/property";
-const DEVELOPMENT_DETAIL_URL = "https://www.tokkobroker.com/api/v1/development";
 const FETCH_LIMIT = 20;
 const MAX_PAGES = 200;
 
@@ -18,23 +12,6 @@ const splitCsv = (value) => {
 const normalizaMetrosCuadrados = (metros) => {
     if (metros === null || metros === undefined) return "";
     return String(metros).split(".")[0];
-};
-
-const assertConfig = () => {
-    if (!API_KEY || !PROPERTIES_URL || !DEVELOPMENTS_URL) {
-        throw new Error("Faltan variables REACT_APP_TOKKO_* en el .env del front.");
-    }
-};
-
-const withTokkoParams = (baseUrl, params = {}) => {
-    const url = new URL(baseUrl);
-    Object.entries(params).forEach(([key, value]) => {
-        if (value !== undefined && value !== null && value !== "") {
-            url.searchParams.set(key, value);
-        }
-    });
-    url.searchParams.set("key", API_KEY);
-    return url.toString();
 };
 
 export const normalizaPropiedad = (p = {}, useRealAddress = false) => ({
@@ -140,8 +117,6 @@ export const normalizaEmprendimientos = (emprendimientos = []) =>
     emprendimientos.map(normalizaEmprendimiento);
 
 const getAllProperties = async () => {
-    assertConfig();
-
     let propiedades = [];
     let currentOffset = 0;
     let fetchedCount = 0;
@@ -153,10 +128,12 @@ const getAllProperties = async () => {
             throw new Error("MAX_PAGES alcanzado al consultar propiedades Tokko.");
         }
 
-        const resp = await axios.get(withTokkoParams(PROPERTIES_URL, {
-            limit: FETCH_LIMIT,
-            offset: currentOffset,
-        }));
+        const resp = await axios.get("/api/tokko/properties", {
+            params: {
+                limit: FETCH_LIMIT,
+                offset: currentOffset,
+            },
+        });
         const objects = Array.isArray(resp?.data?.objects) ? resp.data.objects : [];
         const normalized = normalizaProps(objects);
 
@@ -260,20 +237,12 @@ export const fetchFeaturedProperties = async () => {
 };
 
 export const fetchProperty = async (id) => {
-    assertConfig();
-    const resp = await axios.get(withTokkoParams(`${PROPERTY_DETAIL_URL}/${id}`, {
-        lang: "es_ar",
-        format: "json",
-    }));
+    const resp = await axios.get("/api/tokko/property", { params: { id } });
     return normalizaPropiedad(resp.data, false);
 };
 
 export const fetchDevelopments = async () => {
-    assertConfig();
-    const resp = await axios.get(withTokkoParams(DEVELOPMENTS_URL, {
-        limit: 10,
-        offset: 0,
-    }));
+    const resp = await axios.get("/api/tokko/developments");
     const empNormalizados = normalizaEmprendimientos(resp?.data?.objects || []);
 
     return {
@@ -283,10 +252,17 @@ export const fetchDevelopments = async () => {
 };
 
 export const fetchDevelopment = async (id) => {
-    assertConfig();
-    const resp = await axios.get(withTokkoParams(`${DEVELOPMENT_DETAIL_URL}/${id}/`, {
-        lang: "es_ar",
-        format: "json",
-    }));
+    const resp = await axios.get("/api/tokko/development", { params: { id } });
     return normalizaEmprendimiento(resp.data);
+};
+
+export const sendTokkoContact = async ({ name, email, phone, tags }) => {
+    const resp = await axios.post("/api/tokko/contact", {
+        name,
+        email,
+        phone,
+        tags,
+    });
+
+    return resp.data;
 };

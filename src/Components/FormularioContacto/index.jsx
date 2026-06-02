@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { sendTokkoContact } from '../../api/tokko';
 import './styles.css';
 
 const FormularioContacto = ({ tituloPublicacion, codigoReferencia }) => { 
@@ -11,41 +12,12 @@ const FormularioContacto = ({ tituloPublicacion, codigoReferencia }) => {
 
     //funcion envio de email [cambiar API TOKKO]
     const sendTokkoApi = async (nombre, email, telefono, mensaje) => {
-
-        const apiKey = "1fa6028de7df18808d1d4c40f7e48e51f79d31a3"; //api de tokko
-        const url = `https://tokkobroker.com/api/v1/webcontact/?key=${apiKey}`
-        
-        const payload = {        
-            api_key: apiKey,
+        return sendTokkoContact({
             name: nombre,
-            email: email,
+            email,
             phone: telefono,
-            tags: mensaje
-        };
-        
-        try {
-            const response = await fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(payload),
-            });
-            if (response.ok) {
-                const text = await response.text();
-                if (text) {
-                    const jsonResponse = JSON.parse(text)
-                    return jsonResponse;
-                } else {
-                    console.warn('La respuesta no contiene un cuerpo JSON.')
-                    return {}; 
-                }        
-            } else {
-                console.error('Error al enviar los datos a la API de Tokko')
-            }
-        } catch (error) {
-            console.error('Error:', error);
-        }
+            tags: mensaje,
+        });
     }
 
     const handleSubmit = (e) => {
